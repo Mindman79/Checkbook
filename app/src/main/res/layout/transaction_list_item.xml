@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/transaction_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:backgroundTint="@color/design_default_color_primary"
+            app:fabSize="mini" />
+
+    <TextView
+            android:text="Payee"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:id="@+id/payee"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/trans_list_text_size"
+            android:textColor="@color/trans_list_text_color"
+            app:layout_constraintStart_toEndOf="@+id/transaction_fab"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/transAmount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.113" />
+
+    <TextView
+            android:text="Amnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/transAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="36dp" />
+
+    <TextView
+            android:text="Date"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@+id/payee"
+            android:layout_marginStart="9dp"
+            app:layout_constraintStart_toEndOf="@+id/transaction_fab"
+            android:id="@+id/date"
+            android:layout_marginEnd="86dp"
+            app:layout_constraintVertical_bias="0.545"
+            app:layout_constraintHorizontal_bias="0.017" />
+
+    <TextView
+            android:text="Balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/balance"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            android:layout_marginEnd="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/transAmount" />
+
+<!--    <TextView-->
+<!--            android:text="Category"-->
+<!--            android:id="@+id/category"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/payee"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:layout_marginBottom="4dp"-->
+<!--            app:layout_constraintVertical_bias="1.0"-->
+<!--            tools:layout_editor_absoluteX="220dp" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
