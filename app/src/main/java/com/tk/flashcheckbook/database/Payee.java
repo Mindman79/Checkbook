@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "payee")
@@ -15,6 +16,7 @@ public class Payee {
         this.name = name;
     }
 
+    @Ignore
     public Payee(String name) {
         this.name = name;
     }
