@@ -10,6 +10,11 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.FlashCheckbook">
         <activity
+                android:name=".TransactionEditorActivity"
+                android:label="@string/title_activity_transaction_editor"
+                android:parentActivityName=".MainActivity"
+                android:theme="@style/Theme.FlashCheckbook.NoActionBar"></activity>
+        <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.FlashCheckbook.NoActionBar">

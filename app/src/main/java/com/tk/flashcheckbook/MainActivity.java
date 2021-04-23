@@ -1,5 +1,6 @@
 package com.tk.flashcheckbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -27,12 +28,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView rv;
 
+    @OnClick(R.id.newtransfab)
+    void fabClickHandler() {
+
+        Intent intent = new Intent(this, TransactionEditorActivity.class);
+        startActivity(intent);
+    }
 
     //private RecyclerView rv;
     private AppBarConfiguration mAppBarConfiguration;
@@ -61,14 +69,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(transAdapter);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Yo ho!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
 
         //Sample data
