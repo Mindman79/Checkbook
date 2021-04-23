@@ -1,10 +1,17 @@
 package com.tk.flashcheckbook.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Entity(tableName = "transaction")
+
 public class Transaction {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private BigDecimal amount;
     private Date date;
@@ -25,6 +32,9 @@ public class Transaction {
         this.cleared = cleared;
     }
 
+    @Ignore
+    public Transaction() {
+    }
 
     public int getId() {
         return id;

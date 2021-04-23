@@ -1,7 +1,12 @@
 package com.tk.flashcheckbook.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "payee")
 public class Payee {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
 

@@ -1,7 +1,13 @@
 package com.tk.flashcheckbook.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "category")
 public class Category {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
 
@@ -11,6 +17,7 @@ public class Category {
         this.name = name;
     }
 
+    @Ignore
     public Category(String name) {
 
         this.name = name;
