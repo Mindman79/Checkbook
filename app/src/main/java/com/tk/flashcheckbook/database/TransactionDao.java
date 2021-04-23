@@ -31,7 +31,8 @@ public interface TransactionDao {
     int deleteAllTransactions();
 
     @Query("SELECT COUNT(*) FROM `transaction`")
-    int getCount();
+    int getTransactionCount();
+
 
 
 }
