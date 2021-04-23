@@ -1,12 +1,10 @@
 package com.tk.flashcheckbook.util;
 
-import com.tk.flashcheckbook.model.Category;
-import com.tk.flashcheckbook.model.Payee;
-import com.tk.flashcheckbook.model.Transaction;
+import com.tk.flashcheckbook.database.Category;
+import com.tk.flashcheckbook.database.Payee;
+import com.tk.flashcheckbook.database.Transaction;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

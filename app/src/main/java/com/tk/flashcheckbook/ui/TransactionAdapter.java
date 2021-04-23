@@ -9,9 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tk.flashcheckbook.R;
-import com.tk.flashcheckbook.model.Transaction;
+import com.tk.flashcheckbook.database.Transaction;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;

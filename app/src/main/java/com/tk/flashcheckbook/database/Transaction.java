@@ -1,4 +1,4 @@
-package com.tk.flashcheckbook.model;
+package com.tk.flashcheckbook.database;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
