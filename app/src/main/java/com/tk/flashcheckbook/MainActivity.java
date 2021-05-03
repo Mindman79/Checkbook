@@ -8,7 +8,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.util.SampleData;
+import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Transaction> sampleTransactionData = new ArrayList<>();
     private TransactionAdapter transAdapter;
+    private MainViewModel mainViewModel;
+
 
 
     @Override
@@ -57,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //ViewModel stuff
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+
         //RecyclerView stuff
         rv.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -68,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Sample data
-        sampleTransactionData.addAll(SampleData.getTestTransactions());
+        //Get Sample data
+        sampleTransactionData.addAll(mainViewModel.transactions);
 
 
 
