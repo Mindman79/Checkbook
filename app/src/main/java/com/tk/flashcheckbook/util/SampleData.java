@@ -11,19 +11,30 @@ import java.util.List;
 
 public class SampleData {
 
+    public static List<Payee> getPayees() {
+
+        List<Payee> payees = new ArrayList<>();
+
+        payees.add(new Payee(1, 1, "McDonald's"));
+        payees.add(new Payee(2, 2, "Arby's"));
+
+
+        return payees;
+    }
+
     public static List<Transaction> getTestTransactions() {
 
 
+        getPayees();
 
 
 
         List<Transaction> transactions = new ArrayList<>();
 
-        transactions.add(new Transaction(1, BigDecimal.valueOf(20.40), new Date(2019, 12, 5), new Payee("McDonald's"), new Category("Eating Out"), 1, "It was delish!", true));
-        transactions.add(new Transaction(2, BigDecimal.valueOf(10.00), new Date(2018, 7, 5), new Payee("Arby's"), new Category("Eating Out"), 0, "It was delish!", true));
-        transactions.add(new Transaction(3, BigDecimal.valueOf(1.50), new Date(2017, 1, 5), new Payee("Wendy's"), new Category("Eating Out"), 55, "It was delish!", false));
 
 
+        transactions.add(new Transaction(1, BigDecimal.valueOf(20.40), new Date(2019, 12, 5), new Date(2019, 12, 5), 1, 1, 1, "Note1", 1));
+        transactions.add(new Transaction(1, BigDecimal.valueOf(188.60), new Date(2018, 7, 5), new Date(2018, 7, 5), 2, 2, 1, "Note asdhjkasd", 1));
 
         return transactions;
 

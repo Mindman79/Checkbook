@@ -9,15 +9,12 @@ public class Payee {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    private int categoryId;
     private String name;
 
-    public Payee(int id, String name) {
+    public Payee(int id, int categoryId, String name) {
         this.id = id;
-        this.name = name;
-    }
-
-    @Ignore
-    public Payee(String name) {
+        this.categoryId = categoryId;
         this.name = name;
     }
 
@@ -27,6 +24,14 @@ public class Payee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

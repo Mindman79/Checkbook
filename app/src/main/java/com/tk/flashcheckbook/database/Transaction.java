@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 @Entity(tableName = "transaction")
 
 public class Transaction {
@@ -15,25 +16,24 @@ public class Transaction {
     private int id;
     private BigDecimal amount;
     private Date date;
-    private Payee payee;
-    private Category category;
+    private Date clearedDate;
+    private int payeeId;
+    private int categoryId;
     private int number;
     private String note;
-    private boolean cleared;
+    private int cleared;
 
-    public Transaction(int id, BigDecimal amount, Date date, Payee payee, Category category, int number, String note, boolean cleared) {
+
+    public Transaction(int id, BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, int number, String note, int cleared) {
         this.id = id;
         this.amount = amount;
         this.date = date;
-        this.payee = payee;
-        this.category = category;
+        this.clearedDate = clearedDate;
+        this.payeeId = payeeId;
+        this.categoryId = categoryId;
         this.number = number;
         this.note = note;
         this.cleared = cleared;
-    }
-
-    @Ignore
-    public Transaction() {
     }
 
     public int getId() {
@@ -60,20 +60,28 @@ public class Transaction {
         this.date = date;
     }
 
-    public Payee getPayee() {
-        return payee;
+    public Date getClearedDate() {
+        return clearedDate;
     }
 
-    public void setPayee(Payee payee) {
-        this.payee = payee;
+    public void setClearedDate(Date clearedDate) {
+        this.clearedDate = clearedDate;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getPayeeId() {
+        return payeeId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPayeeId(int payeeId) {
+        this.payeeId = payeeId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public int getNumber() {
@@ -92,11 +100,11 @@ public class Transaction {
         this.note = note;
     }
 
-    public boolean isCleared() {
+    public int getCleared() {
         return cleared;
     }
 
-    public void setCleared(boolean cleared) {
+    public void setCleared(int cleared) {
         this.cleared = cleared;
     }
 }

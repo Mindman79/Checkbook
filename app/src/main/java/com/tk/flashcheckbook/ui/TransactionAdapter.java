@@ -62,7 +62,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
         //Bindings
-        holder.payee.setText(transaction.getPayee().getName());
+        holder.payee.setText("Test Payee");
         //holder.balance.setText(transaction.);
         holder.date.setText(date);
         holder.transAmount.setText(amount);

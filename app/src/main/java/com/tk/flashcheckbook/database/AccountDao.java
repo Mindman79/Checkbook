@@ -26,7 +26,7 @@ public interface AccountDao {
     @Query("SELECT * FROM `account` WHERE id = :id")
     Account getAccountById(int id);
 
-    @Query("SELECT * FROM `account` ORDER BY date desc")
+    @Query("SELECT * FROM `account` ORDER BY name desc")
     LiveData<List<Account>> getAllAccounts();
 
     @Query("DELETE FROM `account`")

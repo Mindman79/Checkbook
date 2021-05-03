@@ -24,8 +24,8 @@ public interface CategoryDao {
     @Query("SELECT * FROM `category` WHERE id = :id")
     Category getCategoryById(int id);
 
-    @Query("SELECT * FROM `category` ORDER BY date desc")
-    LiveData<List<Category>> getAllcategorys();
+    @Query("SELECT * FROM `category` ORDER BY name desc")
+    LiveData<List<Category>> getAllCategories();
 
     @Query("DELETE FROM `category`")
     int deleteAllCategories();

@@ -3,6 +3,7 @@ package com.tk.flashcheckbook.database;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(tableName = "account")
@@ -11,11 +12,10 @@ public class Account {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
-    private int startBal;
+    private BigDecimal startBal;
     private Date startDate;
 
-
-    public Account(int id, String name, int startBal, Date startDate) {
+    public Account(int id, String name, BigDecimal startBal, Date startDate) {
         this.id = id;
         this.name = name;
         this.startBal = startBal;
@@ -38,11 +38,11 @@ public class Account {
         this.name = name;
     }
 
-    public int getStartBal() {
+    public BigDecimal getStartBal() {
         return startBal;
     }
 
-    public void setStartBal(int startBal) {
+    public void setStartBal(BigDecimal startBal) {
         this.startBal = startBal;
     }
 
