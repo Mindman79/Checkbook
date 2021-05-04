@@ -25,7 +25,6 @@ public class SampleData {
     public static List<Transaction> getTestTransactions() {
 
 
-        getPayees();
 
 
 

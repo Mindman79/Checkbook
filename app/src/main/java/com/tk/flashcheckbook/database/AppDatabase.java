@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, version = 1)
+@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, version = 2)
 @TypeConverters({DateConverter.class, CurrencyConverter.class})
 
 public abstract class AppDatabase extends RoomDatabase {
@@ -36,7 +36,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (instance == null) {
 
                     instance = Room.databaseBuilder(context.getApplicationContext(),
-                        AppDatabase.class, DATABASE_NAME).build();
+                        AppDatabase.class, DATABASE_NAME).fallbackToDestructiveMigration().build();
                 }
         }
 

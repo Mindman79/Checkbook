@@ -31,7 +31,7 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        repository = AppRepository.getInstance();
+        repository = AppRepository.getInstance(application.getApplicationContext());
         transactions = repository.transactions;
 
     }
@@ -39,6 +39,7 @@ public class MainViewModel extends AndroidViewModel {
     public void addSampleData() {
 
 
+        repository.addSampleData();
 
 
     }
