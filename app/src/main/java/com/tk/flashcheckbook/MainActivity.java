@@ -3,6 +3,7 @@ package com.tk.flashcheckbook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tk.flashcheckbook.database.Transaction;
@@ -102,6 +103,41 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_add_sample_data) {
+
+            addSampleData();
+            return true;
+//
+//        } else if (id == R.id.action_delete_all) {
+//
+//            deleteAllData();
+//
+//            return true;
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addSampleData() {
+
+
+        mainViewModel.addSampleData();
+
+
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
