@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.tk.flashcheckbook.database.AppDatabase;
+import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.util.SampleData;
 
@@ -16,7 +17,12 @@ import java.util.concurrent.Executors;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<Transaction>  transactions = SampleData.getTestTransactions();
+    public List<Transaction>  transactions;
+    private AppRepository repository;
+
+
+
+
 
 
 
@@ -24,6 +30,10 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+
+        repository = AppRepository.getInstance();
+        transactions = repository.transactions;
+
     }
 
     public void addSampleData() {
