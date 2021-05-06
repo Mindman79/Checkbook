@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<Transaction>  transactionsList;
+    public List<Transaction> transactionsList;
     private AppRepository repository;
 
 

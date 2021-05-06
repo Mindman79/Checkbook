@@ -69,8 +69,12 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
 
 
-        //Get Sample data
-        //sampleTransactionData.addAll(mainViewModel.transactions);
+        //View Sample data. Actual data displayed is configured below in the initRecyclerView
+        sampleTransactionData.addAll(mainViewModel.transactionsList);
+
+
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

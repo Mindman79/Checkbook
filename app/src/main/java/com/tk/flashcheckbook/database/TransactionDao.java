@@ -16,7 +16,7 @@ public interface TransactionDao {
     void insertTransaction(Transaction transaction);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAllTransactions(List<Transaction> transactions);
+    void insertAllTransactions(List<Transaction> transactionsList);
 
     @Delete
     void deleteTransaction(Transaction transaction);
