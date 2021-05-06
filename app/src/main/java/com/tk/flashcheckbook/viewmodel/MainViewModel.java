@@ -21,13 +21,6 @@ public class MainViewModel extends AndroidViewModel {
     private AppRepository repository;
 
 
-
-
-
-
-
-
-
     public MainViewModel(@NonNull Application application) {
         super(application);
 
