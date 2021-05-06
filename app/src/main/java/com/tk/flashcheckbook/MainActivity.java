@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Get Sample data
-        sampleTransactionData.addAll(mainViewModel.transactions);
+        //sampleTransactionData.addAll(mainViewModel.transactions);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

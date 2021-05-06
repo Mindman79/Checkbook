@@ -11,40 +11,28 @@ import java.util.concurrent.Executors;
 public class AppRepository {
 
 
-    private static AppRepository ourInstance;
+    private static final AppRepository ourInstance = new AppRepository();
 
-    public List<Transaction> transactions;
+
+    public List<Transaction> transactionList;
     private AppDatabase db;
-    private Executor executor = Executors.newSingleThreadExecutor();
 
+    public static AppRepository getInstance() {
 
-    public static AppRepository getInstance(Context context) {
-
-        if (ourInstance == null ) {
-
-            ourInstance = new AppRepository(context);
-        }
 
         return  ourInstance;
     }
 
-    private AppRepository(Context context) {
+    private AppRepository() {
 
-        transactions = SampleData.getTestTransactions();
-        db = AppDatabase.getInstance(context);
+        transactionList = SampleData.getTestTransactions();
 
     }
+
 
     public void addSampleData() {
 
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                db.transactionDao().insertAllTransactions(SampleData.getTestTransactions());
-            }
-        });
 
     }
 }

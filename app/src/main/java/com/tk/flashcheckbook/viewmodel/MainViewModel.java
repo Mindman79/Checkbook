@@ -17,25 +17,24 @@ import java.util.concurrent.Executors;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<Transaction>  transactions;
+    public List<Transaction>  transactionsList;
     private AppRepository repository;
 
 
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        repository = AppRepository.getInstance(application.getApplicationContext());
-        transactions = repository.transactions;
+        repository = AppRepository.getInstance();
+        transactionsList = repository.transactionList;
 
     }
+
 
     public void addSampleData() {
-
-
         repository.addSampleData();
 
-
     }
+
 
 
 }
