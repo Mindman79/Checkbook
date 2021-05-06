@@ -59,28 +59,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        //Binding
         ButterKnife.bind(this);
 
-        //ViewModel stuff
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-
         //RecyclerView stuff
-        rv.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(layoutManager);
-        transAdapter = new TransactionAdapter(sampleTransactionData, this);
-        rv.setAdapter(transAdapter);
+        initRecyclerView();
 
-
-
+        //ViewModel stuff
+        initViewModel();
 
 
         //Get Sample data
         sampleTransactionData.addAll(mainViewModel.transactions);
-
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -95,6 +85,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private void initViewModel() {
+
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+
+    }
+
+    private void initRecyclerView() {
+
+        rv.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(layoutManager);
+        transAdapter = new TransactionAdapter(sampleTransactionData, this);
+        rv.setAdapter(transAdapter);
+
+    }
 
 
     @Override
