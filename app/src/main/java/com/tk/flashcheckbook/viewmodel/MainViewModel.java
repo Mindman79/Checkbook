@@ -24,7 +24,7 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        repository = AppRepository.getInstance();
+        repository = AppRepository.getInstance(application.getApplicationContext());
         transactionsList = repository.transactionList;
 
     }
