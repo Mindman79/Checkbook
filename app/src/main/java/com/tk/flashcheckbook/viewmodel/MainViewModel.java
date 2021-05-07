@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.tk.flashcheckbook.database.AppDatabase;
 import com.tk.flashcheckbook.database.AppRepository;
@@ -17,7 +18,7 @@ import java.util.concurrent.Executors;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<Transaction> transactionsList;
+    public LiveData<List<Transaction>> transactionsList;
     private AppRepository repository;
 
 
@@ -36,5 +37,9 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    public void deleteAllNotes() {
 
+        repository.deleteAllNotes();
+
+    }
 }

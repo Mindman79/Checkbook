@@ -102,4 +102,5 @@
     </string>
     <string name="enter_transaction_details">Enter transaction details</string>
     <string name="action_add_sample_data">Add Sample Data</string>
+    <string name="action_delete_sample_data">Delete Sample Data</string>
 </resources>

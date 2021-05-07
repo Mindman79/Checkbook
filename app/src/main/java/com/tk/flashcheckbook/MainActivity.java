@@ -11,6 +11,7 @@ import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.util.SampleData;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     //private RecyclerView rv;
     private AppBarConfiguration mAppBarConfiguration;
 
-    private List<Transaction> sampleTransactionData = new ArrayList<>();
+    private List<Transaction> transactionData = new ArrayList<>();
     private TransactionAdapter transAdapter;
     private MainViewModel mainViewModel;
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
-        sampleTransactionData.addAll(mainViewModel.transactionsList);
+        //transactionData.addAll(mainViewModel.transactionsList);
 
 
 
@@ -91,7 +92,30 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
+        final Observer<List<Transaction>> transactionObserver = new Observer<List<Transaction>>() {
+            @Override
+            public void onChanged(List<Transaction> transactions) {
+
+                transactionData.clear();
+                transactionData.addAll(transactions);
+
+                if (transAdapter == null) {
+
+                    transAdapter = new TransactionAdapter(transactionData, MainActivity.this);
+                    rv.setAdapter(transAdapter);
+
+                } else {
+
+                    transAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+        };
+
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.transactionsList.observe(this, transactionObserver);
+
 
 
     }
@@ -101,8 +125,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
-        transAdapter = new TransactionAdapter(sampleTransactionData, this);
-        rv.setAdapter(transAdapter);
+
 
     }
 
@@ -127,17 +150,24 @@ public class MainActivity extends AppCompatActivity {
 
             addSampleData();
             return true;
-//
-//        } else if (id == R.id.action_delete_all) {
-//
-//            deleteAllData();
-//
-//            return true;
+
+        } else if (id == R.id.action_delete_sample_data) {
+
+            deleteAllData();
+
+            return true;
         }
 
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //This is a good example of the chain of calls using the repository
+    private void deleteAllData() {
+
+        mainViewModel.deleteAllNotes();
+
     }
 
     private void addSampleData() {
