@@ -71,6 +71,12 @@ public class AppRepository {
         });
 
     }
+
+    public Transaction getTransById(int transId) {
+
+        return db.transactionDao().getTransactionById(transId);
+
+    }
 }
 
 

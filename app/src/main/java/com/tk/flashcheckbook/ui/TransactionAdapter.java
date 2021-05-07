@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.TransactionEditorActivity;
 import com.tk.flashcheckbook.database.Transaction;
 
 import java.text.NumberFormat;
@@ -19,6 +22,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
@@ -67,6 +72,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.date.setText(date);
         holder.transAmount.setText(amount);
         //holder.category.setText(transaction.getAmount().toString());
+        holder.transFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(tContext, TransactionEditorActivity.class);
+                intent.putExtra(TRANSACTION_ID_KEY, transaction.getId());
+                tContext.startActivity(intent);
+            }
+        });
 
 
 
@@ -91,6 +105,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         @BindView(R.id.balance)
         TextView balance;
+
+        @BindView(R.id.transaction_fab)
+        FloatingActionButton transFab;
 //
 //        @BindView(R.id.category)
 //        TextView category;

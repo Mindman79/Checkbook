@@ -20,12 +20,15 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
+
 public class TransactionEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.transaction_detail)
     TextView tempTransView;
 
     private TransactionEditorViewModel transViewModel;
+    private boolean tNewTrans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,22 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+
+            setTitle("New transaction");
+            tNewTrans = true;
+
+        } else {
+
+            setTitle("Edit Transaction");
+            int transId = extras.getInt(TRANSACTION_ID_KEY);
+            transViewModel.loadData(transId);
+
+        }
+
 
 
     }
