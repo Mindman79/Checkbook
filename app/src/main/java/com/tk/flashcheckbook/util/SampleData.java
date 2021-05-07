@@ -32,24 +32,14 @@ public class SampleData {
 
 
 
-        transactions.add(new Transaction(1, BigDecimal.valueOf(20.40), new Date(2019, 12, 5), new Date(2019, 12, 5), 1, 1, 1, "Note1", 1));
-        transactions.add(new Transaction(1, BigDecimal.valueOf(188.60), new Date(2018, 7, 5), new Date(2018, 7, 5), 2, 2, 1, "Note asdhjkasd", 1));
+        transactions.add(new Transaction(BigDecimal.valueOf(20.40), new Date(2019, 12, 5), new Date(2019, 12, 5), 1, 1, 1, "Note1", 1));
+        transactions.add(new Transaction(BigDecimal.valueOf(188.60), new Date(2018, 7, 5), new Date(2018, 7, 5), 2, 2, 1, "Note asdhjkasd", 1));
 
         return transactions;
 
     }
 
 
-//    public static LocalDateTime dateTimeConverter(LocalDateTime ldt) {
-//
-//
-//
-//        String convertedDateTime = ldt.toString()w
-//
-//    }
-//    LocalDateTime currentDateTime = LocalDateTime.parse(LocalDateTime.now(), DateTimeFormatter);
-//        currentDateTime.parse()
-//    SimpleDateFormat hs = new SimpleDateFormat("dd/mm/YYYY");
 
 
 }

@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.math.BigDecimal;
@@ -20,6 +21,17 @@ public class Account {
         this.name = name;
         this.startBal = startBal;
         this.startDate = startDate;
+    }
+
+    @Ignore
+    public Account(String name, BigDecimal startBal, Date startDate) {
+        this.name = name;
+        this.startBal = startBal;
+        this.startDate = startDate;
+    }
+
+    @Ignore
+    public Account() {
     }
 
     public int getId() {

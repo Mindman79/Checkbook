@@ -36,6 +36,22 @@ public class Transaction {
         this.cleared = cleared;
     }
 
+    @Ignore
+    public Transaction(BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, int number, String note, int cleared) {
+        this.amount = amount;
+        this.date = date;
+        this.clearedDate = clearedDate;
+        this.payeeId = payeeId;
+        this.categoryId = categoryId;
+        this.number = number;
+        this.note = note;
+        this.cleared = cleared;
+    }
+
+    @Ignore
+    public Transaction() {
+    }
+
     public int getId() {
         return id;
     }

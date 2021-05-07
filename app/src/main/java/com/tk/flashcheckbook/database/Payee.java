@@ -18,6 +18,16 @@ public class Payee {
         this.name = name;
     }
 
+    @Ignore
+    public Payee(int categoryId, String name) {
+        this.categoryId = categoryId;
+        this.name = name;
+    }
+
+    @Ignore
+    public Payee() {
+    }
+
     public int getId() {
         return id;
     }

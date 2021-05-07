@@ -19,9 +19,15 @@ public class Category {
 
     @Ignore
     public Category(String name) {
-
         this.name = name;
     }
+
+
+    @Ignore
+    public Category() {
+    }
+
+
 
     public int getId() {
         return id;
