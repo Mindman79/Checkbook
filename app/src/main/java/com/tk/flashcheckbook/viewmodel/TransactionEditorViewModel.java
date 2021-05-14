@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.viewmodel;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -46,10 +47,23 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             if (transaction == null) {
 
+                if (TextUtils.isEmpty(transactionText.trim())) {
+
+                    return;
+
+                }
+
+                transaction = new Transaction();
+
+                transaction.setNote(transactionText.trim());
+
+                //TODO: Add other fields to be captured and saved
+
         } else {
 
 
-                transaction.setNote(transactionText);
+                transaction.setNote(transactionText.trim());
+                //transaction.setAmount()
 
 
             }

@@ -52,6 +52,9 @@ public class Transaction {
     public Transaction() {
     }
 
+    public Transaction(String trim) {
+    }
+
     public int getId() {
         return id;
     }

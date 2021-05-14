@@ -71,12 +71,12 @@ public class TransactionEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
 
-            setTitle("New transaction");
+            setTitle(getString(R.string.new_transaction));
             tNewTrans = true;
 
         } else {
 
-            setTitle("Edit Transaction");
+            setTitle(getString(R.string.edit_transaction));
             int transId = extras.getInt(TRANSACTION_ID_KEY);
             transViewModel.loadData(transId);
 
