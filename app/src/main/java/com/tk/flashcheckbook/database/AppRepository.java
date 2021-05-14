@@ -77,6 +77,17 @@ public class AppRepository {
         return db.transactionDao().getTransactionById(transId);
 
     }
+
+    public void insertTransaction(final Transaction transaction) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.transactionDao().insertTransaction(transaction);
+            }
+        });
+
+    }
 }
 
 

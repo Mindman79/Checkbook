@@ -40,4 +40,21 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
+    public void saveTransaction(String transactionText) {
+
+        Transaction transaction = tLiveTransaction.getValue();
+
+            if (transaction == null) {
+
+        } else {
+
+
+                transaction.setNote(transactionText);
+
+
+            }
+
+            repository.insertTransaction(transaction);
+
+    }
 }
