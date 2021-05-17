@@ -111,6 +111,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
 
         transViewModel.saveTransaction(tempTransView.getText().toString());
+        //transViewModel.saveTransaction(tempTransView.);
         finish();
 
     }
