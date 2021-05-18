@@ -3,10 +3,7 @@ package com.tk.flashcheckbook;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.tk.flashcheckbook.database.Transaction;
-import com.tk.flashcheckbook.viewmodel.MainViewModel;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
@@ -16,7 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -26,8 +23,26 @@ import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionEditorActivity extends AppCompatActivity {
 
-    @BindView(R.id.transaction_detail)
-    TextView tempTransView;
+    @BindView(R.id.transaction_detail_note)
+    TextView transactionNote;
+
+    @BindView(R.id.transaction_detail_amount)
+    TextView transactionAmount;
+
+    @BindView(R.id.transaction_detail_date)
+    TextView transactionDate;
+
+    @BindView(R.id.transaction_detail_number)
+    TextView transactionNumber;
+
+    @BindView(R.id.transaction_detail_payee)
+    TextView transactionPayee;
+
+    @BindView(R.id.transaction_detail_category)
+    TextView transactionCategory;
+
+    @BindView(R.id.transaction_detail_cleared)
+    Switch transactionCleared;
 
     private TransactionEditorViewModel transViewModel;
     private boolean tNewTrans;
@@ -62,7 +77,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(Transaction transaction) {
 
-                tempTransView.setText(transaction.getNote());
+                transactionNote.setText(transaction.getNote());
 
             }
         });
@@ -110,7 +125,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
 
-        transViewModel.saveTransaction(tempTransView.getText().toString());
+        transViewModel.saveTransaction(transactionNote.getText().toString());
         //transViewModel.saveTransaction(tempTransView.);
         finish();
 
