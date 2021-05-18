@@ -55,7 +55,15 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
                 transaction = new Transaction();
 
+
+                transaction.setAmount(transaction.getAmount());
+                transaction.setDate(transaction.getDate());
+                transaction.setClearedDate(transaction.getClearedDate());
+                transaction.setPayeeId(transaction.getPayeeId());
+                transaction.setCategoryId(transaction.getCategoryId());
+                transaction.setNumber(transaction.getNumber());
                 transaction.setNote(transactionText.trim());
+                transaction.setCleared(transaction.getCleared());
 
                 //TODO: Add other fields to be captured and saved
 
