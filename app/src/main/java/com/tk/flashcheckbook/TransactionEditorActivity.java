@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -77,7 +79,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(Transaction transaction) {
 
+
+                transactionAmount.setText(transaction.getAmount().toString());
                 transactionNote.setText(transaction.getNote());
+
 
             }
         });
@@ -125,7 +130,19 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
 
-        transViewModel.saveTransaction(transactionNote.getText().toString());
+
+        String amount;
+        String note;
+
+
+
+
+
+        amount = transactionAmount.getText().toString();
+        note = transactionNote.getText().toString();
+
+
+        transViewModel.saveTransaction(amount, note);
         //transViewModel.saveTransaction(tempTransView.);
         finish();
 

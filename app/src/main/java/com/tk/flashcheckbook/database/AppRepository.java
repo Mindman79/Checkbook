@@ -83,7 +83,7 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                db.transactionDao().insertTransaction(transaction);
+                db.transactionDao(). insertTransaction(transaction);
             }
         });
 

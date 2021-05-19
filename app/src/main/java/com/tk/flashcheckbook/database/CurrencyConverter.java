@@ -14,14 +14,14 @@ public class CurrencyConverter {
 
         BigDecimal bd = new BigDecimal(integer);
 
-        return bd.scaleByPowerOfTen(-4) ;
+        return bd.scaleByPowerOfTen(-2) ;
 
     }
 
     @TypeConverter
     public static Integer toInteger(BigDecimal bd) {
 
-        Integer integer = bd.scaleByPowerOfTen(4).intValue();
+        Integer integer = bd.scaleByPowerOfTen(2).intValue();
 
         return integer;
 

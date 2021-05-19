@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Transaction;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -41,13 +43,15 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
-    public void saveTransaction(String transactionText) {
+    //Convert strings to appropriate Entity types in this method
+    public void saveTransaction(String amount, String note) {
 
         Transaction transaction = tLiveTransaction.getValue();
 
+
             if (transaction == null) {
 
-                if (TextUtils.isEmpty(transactionText.trim())) {
+                if (TextUtils.isEmpty(transaction.getNote().trim())) {
 
                     return;
 
@@ -62,17 +66,24 @@ public class TransactionEditorViewModel extends AndroidViewModel {
                 transaction.setPayeeId(transaction.getPayeeId());
                 transaction.setCategoryId(transaction.getCategoryId());
                 transaction.setNumber(transaction.getNumber());
-                transaction.setNote(transactionText.trim());
+                transaction.setNote(transaction.getNote().trim());
                 transaction.setCleared(transaction.getCleared());
 
                 //TODO: Add other fields to be captured and saved
 
         } else {
 
+                //TODO: convert amount to a BigDecimal at this stage
 
-                transaction.setNote(transactionText.trim());
-                //transaction.setAmount()
-
+                BigDecimal amount2 = new BigDecimal(amount);
+                transaction.setAmount(amount2);
+                //transaction.setDate(transaction.getDate());
+                //transaction.setClearedDate(transaction.getClearedDate());
+                //transaction.setPayeeId(transaction.getPayeeId());
+                //transaction.setCategoryId(transaction.getCategoryId());
+                //transaction.setNumber(transaction.getNumber());
+                transaction.setNote(note.trim());
+                //transaction.setCleared(transaction.getCleared());
 
             }
 
