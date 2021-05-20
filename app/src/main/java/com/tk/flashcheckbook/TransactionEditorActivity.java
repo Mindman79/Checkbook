@@ -1,5 +1,6 @@
 package com.tk.flashcheckbook;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -8,22 +9,31 @@ import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionEditorActivity extends AppCompatActivity {
+
 
     @BindView(R.id.transaction_detail_note)
     TextView transactionNote;
@@ -49,6 +59,13 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private TransactionEditorViewModel transViewModel;
     private boolean tNewTrans;
 
+    DatePickerDialog picker;
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,17 +79,27 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         toolBarLayout.setTitle(getTitle());
 
         ButterKnife.bind(this);
 
+
         initViewModel();
 
+    }
 
-        }
 
-    private void initViewModel() {
+
+
+
+        private void initViewModel() {
 
         transViewModel = new ViewModelProvider(this).get(TransactionEditorViewModel.class);
         transViewModel.tLiveTransaction.observe(this, new Observer<Transaction>() {
@@ -88,6 +115,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         });
 
 
+
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
 
@@ -100,12 +128,41 @@ public class TransactionEditorActivity extends AppCompatActivity {
             int transId = extras.getInt(TRANSACTION_ID_KEY);
             transViewModel.loadData(transId);
 
+
+
         }
+
 
 
 
     }
 
+
+    //TODO: Resume here, see how to make the OnClick do something
+    @OnClick(R.id.transaction_detail_date)
+    public void submitClick(View view) {
+
+
+        //Toast.makeText(this, "Click", Toast.LENGTH_LONG).show();
+
+
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        // date picker dialog
+        picker = new DatePickerDialog(TransactionEditorActivity.this,
+                (view1, year1, monthOfYear, dayOfMonth) -> {
+
+                    transactionDate.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
+
+                }, year, month, day);
+        picker.show();
+
+
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -35,12 +35,14 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
+            android:clickable="true"
+
+            android:ems="17"
             android:id="@+id/transaction_detail_date"
             tools:layout_editor_absoluteX="0dp"
             android:hint="@string/enter_date"
-            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_category" />
+            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_category"
+            android:focusable="true" />
 
     <EditText
             android:layout_width="match_parent"
