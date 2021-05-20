@@ -62,10 +62,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
     DatePickerDialog picker;
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,13 +72,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         //Change graphic for back button
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_gallery);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-
-
-
 
 
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -96,10 +85,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     }
 
 
-
-
-
-        private void initViewModel() {
+    private void initViewModel() {
 
         transViewModel = new ViewModelProvider(this).get(TransactionEditorViewModel.class);
         transViewModel.tLiveTransaction.observe(this, new Observer<Transaction>() {
@@ -115,7 +101,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         });
 
 
-
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
 
@@ -129,10 +114,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transViewModel.loadData(transId);
 
 
-
         }
-
-
 
 
     }
@@ -158,8 +140,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
                 }, year, month, day);
         picker.show();
-
-
 
 
     }
@@ -190,9 +170,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         String amount;
         String note;
-
-
-
 
 
         amount = transactionAmount.getText().toString();
