@@ -15,10 +15,10 @@
             android:inputType="textAutoComplete|textCapWords"
             android:ems="10"
             android:id="@+id/transaction_detail_category"
-            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteX="0dp"
             android:hint="Enter category"
             app:layout_constraintBottom_toTopOf="@+id/transaction_detail_date"
-            android:layout_marginBottom="84dp" />
+            android:layout_marginBottom="12dp" />
 
     <EditText
             android:layout_width="match_parent"
@@ -28,21 +28,20 @@
             android:id="@+id/transaction_detail_amount"
             tools:layout_editor_absoluteX="0dp"
             android:hint="@string/enter_amount"
-
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/transaction_detail_payee" />
 
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-
-            android:ems="17"
+            android:ems="10"
             android:id="@+id/transaction_detail_date"
             tools:layout_editor_absoluteX="0dp"
             android:hint="@string/enter_date"
             app:layout_constraintTop_toBottomOf="@+id/transaction_detail_category"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:layout_width="match_parent"
@@ -53,7 +52,8 @@
             tools:layout_editor_absoluteX="-16dp"
             android:hint="Enter payee"
             app:layout_constraintBottom_toTopOf="@+id/transaction_detail_category"
-            android:layout_marginBottom="96dp" />
+            android:layout_marginBottom="12dp"
+            />
 
     <EditText
             android:layout_width="match_parent"
@@ -63,7 +63,8 @@
             android:id="@+id/transaction_detail_number"
             tools:layout_editor_absoluteX="0dp"
             android:hint="Enter check number"
-            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_date" />
+            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_date"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:layout_width="match_parent"
@@ -73,7 +74,8 @@
             android:id="@+id/transaction_detail_note"
             tools:layout_editor_absoluteX="0dp"
             android:hint="Enter note"
-            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_number" />
+            app:layout_constraintTop_toBottomOf="@+id/transaction_detail_number"
+            android:layout_marginTop="16dp" />
 
     <Switch
             android:text="Switch"
@@ -83,7 +85,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/transaction_detail_note"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="28dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
