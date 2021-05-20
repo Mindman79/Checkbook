@@ -69,7 +69,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Change graphic for back button
+        //TODO: Change graphic for back button
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_gallery);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
