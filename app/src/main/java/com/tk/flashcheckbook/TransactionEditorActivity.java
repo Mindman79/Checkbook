@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.tk.flashcheckbook.database.Transaction;
+import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
@@ -24,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,9 +95,11 @@ public class TransactionEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(Transaction transaction) {
 
+                String formattedDate = Formatters.dateToString(transaction.getDate());
 
                 transactionAmount.setText(transaction.getAmount().toString());
                 transactionNote.setText(transaction.getNote());
+                transactionDate.setText(formattedDate);
 
 
             }
@@ -120,7 +125,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     }
 
 
-    //TODO: Resume here, see how to make the OnClick do something
+
     @OnClick(R.id.transaction_detail_date)
     public void submitClick(View view) {
 
@@ -149,7 +154,11 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         if (item.getItemId() == android.R.id.home) {
 
-            saveAndReturn();
+            try {
+                saveAndReturn();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return true;
 
         }
@@ -160,23 +169,33 @@ public class TransactionEditorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        saveAndReturn();
+        try {
+            saveAndReturn();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         super.onBackPressed();
     }
 
-    private void saveAndReturn() {
+    private void saveAndReturn() throws ParseException {
 
 
         String amount;
         String note;
+        Date date;
+
+
 
 
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
+        date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
 
 
-        transViewModel.saveTransaction(amount, note);
+
+
+        transViewModel.saveTransaction(amount, note, date);
         //transViewModel.saveTransaction(tempTransView.);
         finish();
 

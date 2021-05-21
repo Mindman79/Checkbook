@@ -103,7 +103,7 @@
     <string name="enter_transaction_details">Enter transaction details</string>
     <string name="action_add_sample_data">Add Sample Data</string>
     <string name="action_delete_sample_data">Delete Sample Data</string>
-    <string name="new_transaction">New transaction</string>
+    <string name="new_transaction">New Transaction</string>
     <string name="edit_transaction">Edit Transaction</string>
     <string name="enter_amount">Enter amount</string>
     <string name="enter_date">Enter date</string>

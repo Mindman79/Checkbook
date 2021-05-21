@@ -10,9 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Transaction;
+import com.tk.flashcheckbook.util.Formatters;
+import com.tk.flashcheckbook.util.SampleData;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.text.ParseException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -44,10 +47,9 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
     //Convert strings to appropriate Entity types in this method
-    public void saveTransaction(String amount, String note) {
+    public void saveTransaction(String amount, String note, Date date) throws ParseException {
 
         Transaction transaction = tLiveTransaction.getValue();
-
 
             if (transaction == null) {
 
@@ -73,11 +75,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         } else {
 
-                //TODO: convert amount to a BigDecimal at this stage
 
                 BigDecimal amount2 = new BigDecimal(amount);
                 transaction.setAmount(amount2);
-                //transaction.setDate(transaction.getDate());
+                transaction.setDate(date);
                 //transaction.setClearedDate(transaction.getClearedDate());
                 //transaction.setPayeeId(transaction.getPayeeId());
                 //transaction.setCategoryId(transaction.getCategoryId());
