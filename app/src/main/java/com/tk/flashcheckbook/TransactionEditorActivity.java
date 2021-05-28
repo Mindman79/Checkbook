@@ -100,6 +100,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
                 transactionAmount.setText(transaction.getAmount().toString());
                 transactionNote.setText(transaction.getNote());
                 transactionDate.setText(formattedDate);
+                transactionNumber.setText(String.valueOf(transaction.getNumber()));
 
 
             }
@@ -184,6 +185,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
         String amount;
         String note;
         Date date;
+        String number;
+
 
 
 
@@ -191,11 +194,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
+        number = transactionNumber.getText().toString();
 
 
-
-
-        transViewModel.saveTransaction(amount, note, date);
+        transViewModel.saveTransaction(amount, note, date, number);
         //transViewModel.saveTransaction(tempTransView.);
         finish();
 
