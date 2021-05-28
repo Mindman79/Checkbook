@@ -99,12 +99,25 @@ public class TransactionEditorActivity extends AppCompatActivity {
             public void onChanged(Transaction transaction) {
 
                 String formattedDate = Formatters.dateToString(transaction.getDate());
+                boolean switchCleared;
+
+                if (transaction.getCleared() == 1) {
+
+                    switchCleared = true;
+
+
+                } else {
+
+                    switchCleared = false;
+                }
+
+
 
                 transactionAmount.setText(transaction.getAmount().toString());
                 transactionNote.setText(transaction.getNote());
                 transactionDate.setText(formattedDate);
                 transactionNumber.setText(String.valueOf(transaction.getNumber()));
-                //transactionDate.setText(String.valueOf(transaction.getDate()));
+                transactionCleared.setChecked(switchCleared);
 
 
             }
@@ -161,7 +174,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         Toast.makeText(this, "The Switch is " + (isChecked ? "on" : "off"),
                 Toast.LENGTH_SHORT).show();
         if(isChecked) {
-            //do stuff when Switch is ON
+
             isCleared = true;
         } else {
             isCleared = false;
@@ -218,7 +231,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             cleared = 0;
 
         }
-        //checkClearedSwitch(transactionCleared, cleared);
+
 
 
         amount = transactionAmount.getText().toString();
@@ -229,7 +242,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
         transViewModel.saveTransaction(amount, note, date, number, cleared);
-        //transViewModel.saveTransaction(tempTransView.);
+
         finish();
 
     }

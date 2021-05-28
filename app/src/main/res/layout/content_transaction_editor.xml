@@ -78,7 +78,7 @@
             android:layout_marginTop="16dp" />
 
     <Switch
-            android:text="Switch"
+            android:text="Cleared"
             android:layout_width="201dp"
             android:layout_height="55dp"
             android:id="@+id/transaction_detail_cleared"
