@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -31,6 +32,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
@@ -61,6 +63,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
     private TransactionEditorViewModel transViewModel;
     private boolean tNewTrans;
+    private boolean isCleared;
 
     DatePickerDialog picker;
 
@@ -101,6 +104,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
                 transactionNote.setText(transaction.getNote());
                 transactionDate.setText(formattedDate);
                 transactionNumber.setText(String.valueOf(transaction.getNumber()));
+                //transactionDate.setText(String.valueOf(transaction.getDate()));
 
 
             }
@@ -150,6 +154,22 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
     }
 
+    @OnCheckedChanged(R.id.transaction_detail_cleared)
+    public void checkClearedSwitch(CompoundButton buttonView, boolean isChecked) {
+
+
+        Toast.makeText(this, "The Switch is " + (isChecked ? "on" : "off"),
+                Toast.LENGTH_SHORT).show();
+        if(isChecked) {
+            //do stuff when Switch is ON
+            isCleared = true;
+        } else {
+            isCleared = false;
+        }
+
+
+
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -186,9 +206,19 @@ public class TransactionEditorActivity extends AppCompatActivity {
         String note;
         Date date;
         String number;
+        Integer cleared;
 
 
+        if (isCleared == true) {
 
+            cleared = 1;
+
+        } else {
+
+            cleared = 0;
+
+        }
+        //checkClearedSwitch(transactionCleared, cleared);
 
 
         amount = transactionAmount.getText().toString();
@@ -197,7 +227,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
         number = transactionNumber.getText().toString();
 
 
-        transViewModel.saveTransaction(amount, note, date, number);
+
+        transViewModel.saveTransaction(amount, note, date, number, cleared);
         //transViewModel.saveTransaction(tempTransView.);
         finish();
 
