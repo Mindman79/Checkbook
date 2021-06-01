@@ -10,8 +10,6 @@ import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,13 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,9 +30,12 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
+import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
+import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionEditorActivity extends AppCompatActivity {
+
 
 
     @BindView(R.id.transaction_detail_note)
@@ -94,33 +92,45 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private void initViewModel() {
 
         transViewModel = new ViewModelProvider(this).get(TransactionEditorViewModel.class);
-        transViewModel.tLiveTransaction.observe(this, new Observer<Transaction>() {
-            @Override
-            public void onChanged(Transaction transaction) {
+        transViewModel.liveTransaction.observe(this, transaction -> {
 
-                String formattedDate = Formatters.dateToString(transaction.getDate());
-                boolean switchCleared;
+            String formattedDate = Formatters.dateToString(transaction.getDate());
+            //String payee = transViewModel.;
+            String category;
 
-                if (transaction.getCleared() == 1) {
+            boolean switchCleared;
 
-                    switchCleared = true;
+            if (transaction.getCleared() == 1) {
 
-
-                } else {
-
-                    switchCleared = false;
-                }
+                switchCleared = true;
 
 
+            } else {
 
-                transactionAmount.setText(transaction.getAmount().toString());
-                transactionNote.setText(transaction.getNote());
-                transactionDate.setText(formattedDate);
-                transactionNumber.setText(String.valueOf(transaction.getNumber()));
-                transactionCleared.setChecked(switchCleared);
-
-
+                switchCleared = false;
             }
+
+
+            transactionAmount.setText(transaction.getAmount().toString());
+            transactionNote.setText(transaction.getNote());
+            transactionDate.setText(formattedDate);
+            transactionNumber.setText(String.valueOf(transaction.getNumber()));
+            transactionCleared.setChecked(switchCleared);
+
+        });
+
+        transViewModel.livePayee.observe(this, payee -> {
+
+            transactionPayee.setText(payee.getName());
+
+        });
+
+        transViewModel.liveCategory.observe(this, category -> {
+
+            transactionCategory.setText(category.getName());
+
+
+
         });
 
 
@@ -132,9 +142,12 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         } else {
 
+          
             setTitle(getString(R.string.edit_transaction));
             int transId = extras.getInt(TRANSACTION_ID_KEY);
-            transViewModel.loadData(transId);
+            int payeeId = extras.getInt(PAYEE_ID_KEY);
+            int categoryId = extras.getInt(CATEGORY_ID_KEY);
+            transViewModel.loadData(transId, payeeId, categoryId);
 
 
         }
@@ -220,6 +233,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
         Date date;
         String number;
         Integer cleared;
+        Integer payeeId;
+        String payee;
+        Integer categoryId;
+        String category;
 
 
         if (isCleared == true) {
@@ -234,14 +251,22 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
 
+
+
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
         number = transactionNumber.getText().toString();
 
 
+        payee = transactionPayee.getText().toString();
+
+
+        category = transactionCategory.getText().toString();
 
         transViewModel.saveTransaction(amount, note, date, number, cleared);
+        transViewModel.savePayee(payee);
+        transViewModel.saveCategory(category);
 
         finish();
 

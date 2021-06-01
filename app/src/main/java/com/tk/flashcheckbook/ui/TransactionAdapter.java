@@ -23,6 +23,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
+import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
@@ -76,8 +78,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             @Override
             public void onClick(View v) {
 
+                //TODO: Resume here
                 Intent intent = new Intent(tContext, TransactionEditorActivity.class);
                 intent.putExtra(TRANSACTION_ID_KEY, transaction.getId());
+                intent.putExtra(PAYEE_ID_KEY, transaction.getPayeeId());
+                intent.putExtra(CATEGORY_ID_KEY, transaction.getCategoryId());
                 tContext.startActivity(intent);
             }
         });

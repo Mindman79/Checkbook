@@ -47,6 +47,8 @@ public class AppRepository {
             public void run() {
 
                 db.transactionDao().insertAllTransactions(SampleData.getTestTransactions());
+                db.payeeDao().insertAllPayees(SampleData.getTestPayees());
+                db.categoryDao().insertAllCategories(SampleData.getTestCategories());
             }
         });
 
@@ -56,6 +58,18 @@ public class AppRepository {
     private LiveData<List<Transaction>> getAllTransactions() {
 
         return db.transactionDao().getAllTransactions();
+
+    }
+
+    private LiveData<List<Payee>> getAllPayees() {
+
+        return db.payeeDao().getAllPayees();
+
+    }
+
+    private LiveData<List<Category>> getAllCategories() {
+
+        return db.categoryDao().getAllCategories();
 
     }
 
@@ -86,6 +100,41 @@ public class AppRepository {
                 db.transactionDao(). insertTransaction(transaction);
             }
         });
+
+    }
+
+    public Payee getPayeeById(int payeeId) {
+
+        return db.payeeDao().getPayeeById(payeeId);
+
+    }
+
+    public void insertPayee(final Payee payee) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.payeeDao(). insertPayee(payee);
+            }
+        });
+
+    }
+
+    public Category getCategoryById(int categoryId) {
+
+        return db.categoryDao().getCategoryById(categoryId);
+
+    }
+
+    public void insertCategory(final Category category) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.categoryDao().insertCategory(category);
+            }
+        });
+
 
     }
 }
