@@ -64,7 +64,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         final Transaction transaction = tTransactions.get(position);
         final Payee payee = tPayees.get(position);
-        final Category category = tCategories.get(position);
+
+        //TODO: Fix this when ready to show the category
+        //final Category category = tCategories.get(position);
 
 
         //Currency

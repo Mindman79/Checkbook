@@ -43,7 +43,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             public void run() {
                 Transaction transaction = repository.getTransById(transId);
 
-                //TODO: Is this actually needed?
                 Payee payee = repository.getPayeeById(payeeId);
                 Category category = repository.getCategoryById(categoryId);
 
@@ -58,8 +57,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
     //Convert strings to appropriate Entity types in this method
-    public void saveTransaction(String amount, String note, Date date, String number, Integer cleared) throws ParseException {
+    public void saveTransaction(String amount, String note, Date date, String number, String payee, String category, Integer cleared) throws ParseException {
 
+
+        //TODO: This is not saving a CategoryID or PayeeID, top priority
         Transaction transaction = liveTransaction.getValue();
 
 
@@ -74,6 +75,8 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         transaction = new Transaction();
 
 
+            int payeeId = savePayee(payee, 6);
+            int categoryId = saveCategory(category);
 
             Integer numberToDB = Integer.valueOf(number);
             BigDecimal amountToDB = new BigDecimal(amount);
@@ -81,8 +84,8 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());
-            transaction.setPayeeId(livePayee.getValue().getId());
-            transaction.setCategoryId(liveCategory.getValue().getId());
+            transaction.setPayeeId(payeeId);
+            transaction.setCategoryId(categoryId);
             transaction.setNumber(numberToDB);
             transaction.setNote(note.trim());
             transaction.setCleared(cleared);
@@ -123,10 +126,11 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 }
 
-    public void savePayee(String name) {
+    public int savePayee(String name, int categoryId) {
 
 
         Payee payee = livePayee.getValue();
+        int payeeId = payee.getId();
 
 
         if (payee == null) {
@@ -134,24 +138,30 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             payee = new Payee();
 
             payee.setName(name);
-            payee.setCategoryId(liveCategory.getValue().getId());
+            payee.setCategoryId(categoryId);
 
         } else {
 
             payee.setName(name);
+            payee.setCategoryId(categoryId);
 
 
         }
 
+
         repository.insertPayee(payee);
 
+
+
+        return payeeId;
     }
 
 
-    public void saveCategory(String name) {
+    public int saveCategory(String name) {
 
 
         Category category = liveCategory.getValue();
+        int categoryId = category.getId();
 
         if (category == null) {
 
@@ -170,7 +180,11 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         repository.insertCategory(category);
 
+
+        return categoryId;
+
     }
+
 
 
 }

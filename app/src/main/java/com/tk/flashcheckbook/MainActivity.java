@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Observer<List<Transaction>> transactionObserver = transactions -> {
 
-            //TODO: Resume here
+
             transactionData.clear();
             transactionData.addAll(transactions);
 
