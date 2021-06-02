@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tk.flashcheckbook.R;
 import com.tk.flashcheckbook.TransactionEditorActivity;
+import com.tk.flashcheckbook.database.Category;
+import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 
 import java.text.NumberFormat;
@@ -32,11 +34,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
     private final List<Transaction> tTransactions;
+    private final List<Payee> tPayees;
+    private final List<Category> tCategories;
+
+
     private final Context tContext;
 
 
-    public TransactionAdapter(List<Transaction> tTransactions, Context tContext) {
+    public TransactionAdapter(List<Transaction> tTransactions, List<Payee> tPayees, List<Category> tCategories, Context tContext) {
         this.tTransactions = tTransactions;
+        this.tPayees = tPayees;
+        this.tCategories = tCategories;
         this.tContext = tContext;
     }
 
@@ -55,6 +63,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Transaction transaction = tTransactions.get(position);
+        final Payee payee = tPayees.get(position);
+        final Category category = tCategories.get(position);
 
 
         //Currency
@@ -69,16 +79,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
         //Bindings
-        holder.payee.setText("Test Payee");
+        //holder.payee.setText("Test Payee");
+        holder.payee.setText(payee.getName());
         //holder.balance.setText(transaction.);
         holder.date.setText(date);
         holder.transAmount.setText(amount);
-        //holder.category.setText(transaction.getAmount().toString());
+        //holder.category.setText(category.getName());
         holder.transFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //TODO: Resume here
                 Intent intent = new Intent(tContext, TransactionEditorActivity.class);
                 intent.putExtra(TRANSACTION_ID_KEY, transaction.getId());
                 intent.putExtra(PAYEE_ID_KEY, transaction.getPayeeId());
@@ -113,9 +123,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         @BindView(R.id.transaction_fab)
         FloatingActionButton transFab;
-//
-//        @BindView(R.id.category)
-//        TextView category;
+
+        //@BindView(R.id.cate)
+        //TextView category;
 
 
 

@@ -17,6 +17,8 @@ public class AppRepository {
 
 
     public LiveData<List<Transaction>> transactionList;
+    public LiveData<List<Payee>> payeeList;
+    public LiveData<List<Category>> categoryList;
     private AppDatabase db;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -34,6 +36,8 @@ public class AppRepository {
 
         db = AppDatabase.getInstance(context);
         transactionList = getAllTransactions();
+        payeeList = getAllPayees();
+        categoryList = getAllCategories();
 
 
     }

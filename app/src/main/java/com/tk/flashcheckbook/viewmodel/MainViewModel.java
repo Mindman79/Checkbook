@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 
 import com.tk.flashcheckbook.database.AppDatabase;
 import com.tk.flashcheckbook.database.AppRepository;
+import com.tk.flashcheckbook.database.Category;
+import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.util.SampleData;
 
@@ -19,6 +21,8 @@ import java.util.concurrent.Executors;
 public class MainViewModel extends AndroidViewModel {
 
     public LiveData<List<Transaction>> transactionsList;
+    public LiveData<List<Payee>> payeesList;
+    public LiveData<List<Category>> categoryList;
     private AppRepository repository;
 
 
@@ -27,6 +31,8 @@ public class MainViewModel extends AndroidViewModel {
 
         repository = AppRepository.getInstance(application.getApplicationContext());
         transactionsList = repository.transactionList;
+        payeesList = repository.payeeList;
+        categoryList = repository.categoryList;
 
     }
 

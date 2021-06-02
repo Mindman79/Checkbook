@@ -6,9 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tk.flashcheckbook.database.Category;
+import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
-import com.tk.flashcheckbook.util.SampleData;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
 import androidx.lifecycle.Observer;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     private List<Transaction> transactionData = new ArrayList<>();
+    private List<Payee> payeeData = new ArrayList<>();
+    private List<Category> categoryData = new ArrayList<>();
     private TransactionAdapter transAdapter;
     private MainViewModel mainViewModel;
 
@@ -92,29 +95,43 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<Transaction>> transactionObserver = new Observer<List<Transaction>>() {
-            @Override
-            public void onChanged(List<Transaction> transactions) {
+        final Observer<List<Payee>> payeeObserver = payees -> {
 
-                transactionData.clear();
-                transactionData.addAll(transactions);
+            payeeData.clear();
+            payeeData.addAll(payees);
 
-                if (transAdapter == null) {
+        };
 
-                    transAdapter = new TransactionAdapter(transactionData, MainActivity.this);
-                    rv.setAdapter(transAdapter);
+        final Observer<List<Category>> categoryObserver = categories -> {
 
-                } else {
+            categoryData.clear();
+            categoryData.addAll(categories);
 
-                    transAdapter.notifyDataSetChanged();
+        };
 
-                }
+        final Observer<List<Transaction>> transactionObserver = transactions -> {
+
+            //TODO: Resume here
+            transactionData.clear();
+            transactionData.addAll(transactions);
+
+            if (transAdapter == null) {
+
+                transAdapter = new TransactionAdapter(transactionData, payeeData, categoryData, MainActivity.this);
+                rv.setAdapter(transAdapter);
+
+            } else {
+
+                transAdapter.notifyDataSetChanged();
 
             }
+
         };
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.transactionsList.observe(this, transactionObserver);
+        mainViewModel.payeesList.observe(this, payeeObserver);
+        mainViewModel.categoryList.observe(this, categoryObserver);
 
 
 
