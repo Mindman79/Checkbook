@@ -124,8 +124,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         @BindView(R.id.transaction_fab)
         FloatingActionButton transFab;
 
-        //@BindView(R.id.cate)
-        //TextView category;
+
 
 
 

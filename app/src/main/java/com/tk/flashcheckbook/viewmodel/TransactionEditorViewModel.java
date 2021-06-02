@@ -65,29 +65,14 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         if (transaction == null) {
 
-            if (TextUtils.isEmpty(transaction.getNote().trim())) {
+            if (TextUtils.isEmpty(amount.trim())) {
 
                 return;
 
-            }
+        }
 
-            transaction = new Transaction();
+        transaction = new Transaction();
 
-
-            transaction.setAmount(transaction.getAmount());
-            transaction.setDate(transaction.getDate());
-            transaction.setClearedDate(transaction.getClearedDate());
-            transaction.setPayeeId(transaction.getPayeeId());
-            transaction.setCategoryId(transaction.getCategoryId());
-            transaction.setNumber(transaction.getNumber());
-            transaction.setNote(transaction.getNote().trim());
-            transaction.setCleared(transaction.getCleared());
-
-            //TODO: Add other fields to be captured and saved
-            //TODO: Fix bug that prevents long Strings from being saved as Ints
-            //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
-
-        } else {
 
 
             Integer numberToDB = Integer.valueOf(number);
@@ -96,17 +81,47 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());
-            transaction.setPayeeId(transaction.getPayeeId());
-            transaction.setCategoryId(transaction.getCategoryId());
+            transaction.setPayeeId(livePayee.getValue().getId());
+            transaction.setCategoryId(liveCategory.getValue().getId());
             transaction.setNumber(numberToDB);
             transaction.setNote(note.trim());
             transaction.setCleared(cleared);
 
-        }
+
+
+//        transaction.setAmount(transaction.getAmount());
+//        transaction.setDate(transaction.getDate());
+//        transaction.setClearedDate(transaction.getClearedDate());
+//        transaction.setPayeeId(transaction.getPayeeId());
+//        transaction.setCategoryId(transaction.getCategoryId());
+//        transaction.setNumber(transaction.getNumber());
+//        transaction.setNote(transaction.getNote().trim());
+//        transaction.setCleared(transaction.getCleared());
+
+        //TODO: Add other fields to be captured and saved
+        //TODO: Fix bug that prevents long Strings from being saved as Ints
+        //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
+
+    } else {
+
+
+        Integer numberToDB = Integer.valueOf(number);
+        BigDecimal amountToDB = new BigDecimal(amount);
+
+        transaction.setAmount(amountToDB);
+        transaction.setDate(date);
+        //transaction.setClearedDate(transaction.getClearedDate());
+        transaction.setPayeeId(transaction.getPayeeId());
+        transaction.setCategoryId(transaction.getCategoryId());
+        transaction.setNumber(numberToDB);
+        transaction.setNote(note.trim());
+        transaction.setCleared(cleared);
+
+    }
 
         repository.insertTransaction(transaction);
 
-    }
+}
 
     public void savePayee(String name) {
 
@@ -118,8 +133,8 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             payee = new Payee();
 
-            payee.setName(payee.getName());
-            payee.setCategoryId(payee.getCategoryId());
+            payee.setName(name);
+            payee.setCategoryId(liveCategory.getValue().getId());
 
         } else {
 
@@ -142,7 +157,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             category = new Category();
 
-            category.setName(category.getName());
+            category.setName(name);
 
 
         } else {
