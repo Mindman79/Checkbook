@@ -255,7 +255,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
 
-        //TODO: Need to somehow pass in categoryId with Payee
+
+        //TODO: Need to somehow pass in IDs here, maybe
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
@@ -263,9 +264,12 @@ public class TransactionEditorActivity extends AppCompatActivity {
         payee = transactionPayee.getText().toString();
         category = transactionCategory.getText().toString();
 
-        transViewModel.saveTransaction(amount, note, date, number, payee, category, cleared);
-//        transViewModel.savePayee(payee, 1);
-//        transViewModel.saveCategory(category);
+
+        transViewModel.saveTransaction(amount, note, date, number, cleared);
+        transViewModel.savePayee(payee);
+        transViewModel.saveCategory(category);
+
+
 
         finish();
 

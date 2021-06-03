@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.database;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import androidx.lifecycle.LiveData;
 
@@ -140,7 +141,63 @@ public class AppRepository {
         });
 
 
+
     }
+
+
+
+
+    public int getNextAutoIncrementPayeeID() {
+
+        final int[] result = {0};
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                result[0] = db.payeeDao().getNextAutoIncrementPayeeID();
+            }
+        });
+
+        int test = result[0];
+        return test;
+
+    }
+
+
+
+    public int getNextAutoIncrementCategoryID() {
+
+        final int[] result = {0};
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                result[0] = db.categoryDao().getNextAutoIncrementCategoryID();
+            }
+        });
+
+       int test = result[0];
+       return test;
+
+    }
+
+
+
+    public void printAutoIncrements(){
+        String query = "SELECT * FROM SQLITE_SEQUENCE";
+        Cursor cursor = db.query(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("payee")));
+                System.out.println("autoInc: " + cursor.getString(cursor.getColumnIndex("category")));
+
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+    }
+
 }
 
 

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.room.Update;
 
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
@@ -19,6 +18,8 @@ import java.util.Date;
 import java.text.ParseException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import static java.lang.Integer.valueOf;
 
 public class TransactionEditorViewModel extends AndroidViewModel {
 
@@ -36,6 +37,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
     public void loadData(int transId, int payeeId, int categoryId) {
+
 
 
         executor.execute(new Runnable() {
@@ -57,9 +59,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
     //Convert strings to appropriate Entity types in this method
-    public void saveTransaction(String amount, String note, Date date, String number, String payee, String category, Integer cleared) throws ParseException {
+    public void saveTransaction(String amount, String note, Date date, String number, Integer cleared) throws ParseException {
 
 
+        //repository.printAutoIncrements();
         //TODO: This is not saving a CategoryID or PayeeID, top priority
         Transaction transaction = liveTransaction.getValue();
 
@@ -75,10 +78,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         transaction = new Transaction();
 
 
-            int payeeId = savePayee(payee, 6);
-            int categoryId = saveCategory(category);
+            int payeeId = repository.getNextAutoIncrementPayeeID();
+            int categoryId = repository.getNextAutoIncrementCategoryID();
 
-            Integer numberToDB = Integer.valueOf(number);
+            Integer numberToDB = valueOf(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
             transaction.setAmount(amountToDB);
@@ -108,7 +111,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     } else {
 
 
-        Integer numberToDB = Integer.valueOf(number);
+        Integer numberToDB = valueOf(number);
         BigDecimal amountToDB = new BigDecimal(amount);
 
         transaction.setAmount(amountToDB);
@@ -126,53 +129,57 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 }
 
-    public int savePayee(String name, int categoryId) {
+    public void savePayee(String name) {
 
 
         Payee payee = livePayee.getValue();
-        int payeeId = payee.getId();
+        int payeeId = repository.getNextAutoIncrementPayeeID();
+        int categoryId = repository.getNextAutoIncrementCategoryID();
 
+        System.out.println(payeeId);
 
         if (payee == null) {
 
             payee = new Payee();
 
             payee.setName(name);
+            payee.setId(payeeId);
             payee.setCategoryId(categoryId);
 
         } else {
 
             payee.setName(name);
-            payee.setCategoryId(categoryId);
+            payee.setCategoryId(payee.getCategoryId());
 
 
         }
 
-
         repository.insertPayee(payee);
 
-
-
-        return payeeId;
     }
 
 
-    public int saveCategory(String name) {
+    public void saveCategory(String name) {
 
 
         Category category = liveCategory.getValue();
-        int categoryId = category.getId();
+        int categoryId = repository.getNextAutoIncrementCategoryID();
+
+        System.out.println(categoryId);
+
 
         if (category == null) {
 
             category = new Category();
 
             category.setName(name);
+            category.setId(categoryId);
 
 
         } else {
 
             category.setName(name);
+            category.setId(category.getId());
 
 
         }
@@ -181,10 +188,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         repository.insertCategory(category);
 
 
-        return categoryId;
-
     }
-
 
 
 }

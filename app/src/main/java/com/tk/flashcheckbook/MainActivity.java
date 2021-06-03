@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
         //transactionData.addAll(mainViewModel.transactionsList);
+
 
 
 

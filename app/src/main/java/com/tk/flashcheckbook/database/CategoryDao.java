@@ -32,6 +32,17 @@ public interface CategoryDao {
 
     @Query("SELECT COUNT(*) FROM `category`")
     int getCategoryCount();
+//
+//    @Query("SELECT AUTO_INCREMENT\n" +
+//            "FROM information_schema.TABLES\n" +
+//            "WHERE TABLE_SCHEMA = 'AppDatabase'\n" +
+//            "AND TABLE_NAME = 'category'")
+//    int getNextAutoIncrementCategoryID();
 
 
+//    @Query("SELECT last_insert_rowid() FROM category")
+//    int getLastAutoIncrementCategoryID();
+
+    @Query("SELECT * FROM SQLITE_SEQUENCE WHERE name = 'category'")
+    int getNextAutoIncrementCategoryID();
 }

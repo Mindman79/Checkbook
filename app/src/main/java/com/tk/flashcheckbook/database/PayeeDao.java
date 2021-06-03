@@ -1,5 +1,7 @@
 package com.tk.flashcheckbook.database;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -32,6 +34,22 @@ public interface PayeeDao {
 
     @Query("SELECT COUNT(*) FROM `payee`")
     int getPayeeCount();
+
+    //TODO: resume here
+//    @Query("SELECT AUTO_INCREMENT\n" +
+//            "FROM information_schema.TABLES\n" +
+//            "WHERE TABLE_SCHEMA = 'AppDatabase'\n" +
+//            "AND TABLE_NAME = 'payee'")
+//    int getNextAutoIncrementPayeeID();
+
+    @Query("SELECT * FROM SQLITE_SEQUENCE WHERE name = 'payee'")
+    int getNextAutoIncrementPayeeID();
+
+//    @Query("SELECT last_insert_rowid() FROM payee")
+//    int getLastAutoIncrementCategoryID();
+
+
+
 
 
 }
