@@ -92,6 +92,13 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private void initViewModel() {
 
         transViewModel = new ViewModelProvider(this).get(TransactionEditorViewModel.class);
+
+        transViewModel.livePayee.observe(this, payee -> {
+
+            transactionPayee.setText(payee.getName());
+
+        });
+
         transViewModel.liveTransaction.observe(this, transaction -> {
 
             String formattedDate = Formatters.dateToString(transaction.getDate());
@@ -119,11 +126,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         });
 
-        transViewModel.livePayee.observe(this, payee -> {
 
-            transactionPayee.setText(payee.getName());
-
-        });
 
         transViewModel.liveCategory.observe(this, category -> {
 
@@ -252,11 +255,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         }
 
 
-
-
-
-
-        //TODO: Need to somehow pass in IDs here, maybe
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
@@ -266,8 +264,11 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
         transViewModel.saveTransaction(amount, note, date, number, cleared);
-        transViewModel.savePayee(payee);
         transViewModel.saveCategory(category);
+        transViewModel.savePayee(payee);
+
+
+
 
 
 

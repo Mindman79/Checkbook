@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
                 transAdapter = new TransactionAdapter(transactionData, payeeData, categoryData, MainActivity.this);
                 rv.setAdapter(transAdapter);
+                transAdapter.notifyDataSetChanged();
 
             } else {
 

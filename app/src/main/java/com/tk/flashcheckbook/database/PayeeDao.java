@@ -8,6 +8,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public interface PayeeDao {
 //            "AND TABLE_NAME = 'payee'")
 //    int getNextAutoIncrementPayeeID();
 
-    @Query("SELECT * FROM SQLITE_SEQUENCE WHERE name = 'payee'")
+    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'payee'")
     int getNextAutoIncrementPayeeID();
 
 //    @Query("SELECT last_insert_rowid() FROM payee")

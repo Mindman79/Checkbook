@@ -1,5 +1,7 @@
 package com.tk.flashcheckbook.database;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -40,9 +42,9 @@ public interface CategoryDao {
 //    int getNextAutoIncrementCategoryID();
 
 
-//    @Query("SELECT last_insert_rowid() FROM category")
-//    int getLastAutoIncrementCategoryID();
+    @Query("SELECT last_insert_rowid() FROM category")
+    int getLastAutoIncrementCategoryID();
 
-    @Query("SELECT * FROM SQLITE_SEQUENCE WHERE name = 'category'")
+    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category'")
     int getNextAutoIncrementCategoryID();
 }

@@ -11,7 +11,7 @@
             android:theme="@style/Theme.FlashCheckbook">
         <activity
                 android:name=".TransactionEditorActivity"
-                android:label="@string/title_activity_transaction_editor"
+                android:label="@string/new_transaction"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/Theme.FlashCheckbook.NoActionBar"></activity>
         <activity

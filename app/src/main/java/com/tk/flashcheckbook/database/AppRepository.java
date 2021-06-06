@@ -2,9 +2,11 @@ package com.tk.flashcheckbook.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.media.AudioFocusRequest;
 
 import androidx.lifecycle.LiveData;
 
+import com.tk.flashcheckbook.util.OnValueListener;
 import com.tk.flashcheckbook.util.SampleData;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class AppRepository {
     public LiveData<List<Category>> categoryList;
     private AppDatabase db;
     private Executor executor = Executors.newSingleThreadExecutor();
+    public int payeeId;
+    public int categoryId;
 
     public static AppRepository getInstance(Context context) {
 
@@ -147,38 +151,66 @@ public class AppRepository {
 
 
 
+//    public int getNextAutoIncrementPayeeID() {
+//
+//
+//        executor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                Cursor cursor = db.payeeDao().getNextAutoIncrementPayeeID();
+//
+//                if (cursor.moveToFirst()){
+//                    do{
+////                        System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("name")));
+////                        System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("seq")));
+//
+//                        payeeId = Integer.valueOf(cursor.getString(cursor.getColumnIndex("seq")));
+//
+//                    }while (cursor.moveToNext());
+//                }
+//
+//                cursor.close();
+//
+//
+//            }
+//        });
+//
+//
+//
+//        return payeeId;
+//
+//    }
+
+
+
     public int getNextAutoIncrementPayeeID() {
 
-        final int[] result = {0};
         executor.execute(new Runnable() {
             @Override
             public void run() {
 
-                result[0] = db.payeeDao().getNextAutoIncrementPayeeID();
+                payeeId = db.payeeDao().getNextAutoIncrementPayeeID();
             }
         });
 
-        int test = result[0];
-        return test;
-
+        return payeeId;
     }
 
 
 
     public int getNextAutoIncrementCategoryID() {
 
-        final int[] result = {0};
+
         executor.execute(new Runnable() {
             @Override
             public void run() {
-
-                result[0] = db.categoryDao().getNextAutoIncrementCategoryID();
+                // Call the listener callback
+                categoryId = db.categoryDao().getNextAutoIncrementCategoryID();
             }
         });
 
-       int test = result[0];
-       return test;
-
+        return categoryId;
     }
 
 

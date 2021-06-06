@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tk.flashcheckbook.R;
 import com.tk.flashcheckbook.TransactionEditorActivity;
+import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
@@ -37,6 +38,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private final List<Payee> tPayees;
     private final List<Category> tCategories;
 
+    private AppRepository repository;
 
     private final Context tContext;
 
@@ -63,11 +65,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Transaction transaction = tTransactions.get(position);
+
+        //TODO: This is the cause of the crashes
+
         final Payee payee = tPayees.get(position);
 
         //TODO: Fix this when ready to show the category
         //final Category category = tCategories.get(position);
 
+
+//        Category category = repository.getCategoryById(transaction.getCategoryId());
 
         //Currency
         Locale locale = new Locale("en", "US");
@@ -81,8 +88,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
         //Bindings
-        //holder.payee.setText("Test Payee");
-        holder.payee.setText(payee.getName());
+        holder.payee.setText("Test Payee");
+        //holder.payee.setText(payee.getName());
         //holder.balance.setText(transaction.);
         holder.date.setText(date);
         holder.transAmount.setText(amount);
@@ -92,9 +99,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             public void onClick(View v) {
 
                 Intent intent = new Intent(tContext, TransactionEditorActivity.class);
-                intent.putExtra(TRANSACTION_ID_KEY, transaction.getId());
+
                 intent.putExtra(PAYEE_ID_KEY, transaction.getPayeeId());
                 intent.putExtra(CATEGORY_ID_KEY, transaction.getCategoryId());
+                intent.putExtra(TRANSACTION_ID_KEY, transaction.getId());
+
                 tContext.startActivity(intent);
             }
         });
@@ -104,10 +113,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     }
 
+
+
+
     @Override
     public int getItemCount() {
         return tTransactions.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
