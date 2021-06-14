@@ -31,14 +31,14 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     private AppRepository repository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    private int globalcategoryId;
-    private int globalpayeeId;
+    static int globalcategoryId;
+    static int globalpayeeId;
 
 
 
     public TransactionEditorViewModel(@NonNull Application application) {
         super(application);
-        repository = AppRepository.getInstance(getApplication());
+        repository = AppRepository.getInstance(application.getApplicationContext());
     }
 
     public void loadData(int transId, int payeeId, int categoryId) {
@@ -85,6 +85,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
         Transaction transaction = liveTransaction.getValue();
+
 
 
 
@@ -194,7 +195,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 //            }
 //        });
 
-        System.out.println(globalpayeeId);
+        System.out.println("savePayee globalPayeeId" + globalpayeeId);
 
         if (payee == null) {
 
@@ -251,7 +252,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
 
-        System.out.println(globalcategoryId);
+        System.out.println("saveCategory globalCategoryId" + globalcategoryId);
 
 
         if (category == null) {

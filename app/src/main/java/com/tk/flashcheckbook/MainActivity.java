@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             payeeData.clear();
             payeeData.addAll(payees);
 
+
         };
 
         final Observer<List<Category>> categoryObserver = categories -> {
@@ -117,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
             transactionData.clear();
             transactionData.addAll(transactions);
 
+
             if (transAdapter == null) {
 
                 transAdapter = new TransactionAdapter(transactionData, payeeData, categoryData, MainActivity.this);
                 rv.setAdapter(transAdapter);
-                transAdapter.notifyDataSetChanged();
+
 
             } else {
 

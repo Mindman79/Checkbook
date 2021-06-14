@@ -42,9 +42,9 @@ public interface CategoryDao {
 //    int getNextAutoIncrementCategoryID();
 
 
-    @Query("SELECT last_insert_rowid() FROM category")
+    @Query("SELECT last_insert_rowid()")
     int getLastAutoIncrementCategoryID();
 
-    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category'")
+    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category' LIMIT 1")
     int getNextAutoIncrementCategoryID();
 }

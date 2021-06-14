@@ -99,6 +99,14 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         });
 
+        transViewModel.liveCategory.observe(this, category -> {
+
+            transactionCategory.setText(category.getName());
+
+
+
+        });
+
         transViewModel.liveTransaction.observe(this, transaction -> {
 
             String formattedDate = Formatters.dateToString(transaction.getDate());
@@ -128,13 +136,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
 
-        transViewModel.liveCategory.observe(this, category -> {
 
-            transactionCategory.setText(category.getName());
-
-
-
-        });
 
 
         Bundle extras = getIntent().getExtras();
@@ -264,8 +266,9 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
         transViewModel.saveTransaction(amount, note, date, number, cleared);
-        transViewModel.saveCategory(category);
         transViewModel.savePayee(payee);
+        transViewModel.saveCategory(category);
+
 
 
 

@@ -1,10 +1,12 @@
 package com.tk.flashcheckbook.database;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "category")
+@Entity(tableName = "category", foreignKeys = @ForeignKey(entity = Payee.class, parentColumns = "id", childColumns = "id"))
+
 public class Category {
 
     @PrimaryKey(autoGenerate = true)
