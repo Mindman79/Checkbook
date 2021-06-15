@@ -34,7 +34,7 @@ public class AppRepository {
             ourInstance = new AppRepository(context);
         }
 
-        return  ourInstance;
+        return ourInstance;
     }
 
     private AppRepository(Context context) {
@@ -107,8 +107,7 @@ public class AppRepository {
             @Override
             public void run() {
 
-                db.transactionDao(). insertTransaction(transaction);
-
+                db.transactionDao().insertTransaction(transaction);
 
 
             }
@@ -129,9 +128,7 @@ public class AppRepository {
             public void run() {
 
 
-
-
-                db.payeeDao(). insertPayee(payee);
+                db.payeeDao().insertPayee(payee);
 
 
             }
@@ -156,29 +153,23 @@ public class AppRepository {
         });
 
 
-
     }
-
-
 
 
     public int getNextAutoIncrementPayeeID() {
 
 
-                payeeId = db.payeeDao().getNextAutoIncrementPayeeID();
+        payeeId = db.payeeDao().getNextAutoIncrementPayeeID();
 
 
         return payeeId;
     }
 
 
-
     public int getNextAutoIncrementCategoryID() {
 
 
-
-
-                categoryId = db.categoryDao().getNextAutoIncrementCategoryID();
+        categoryId = db.categoryDao().getNextAutoIncrementCategoryID();
 
 
         return categoryId;
