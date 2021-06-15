@@ -64,12 +64,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //final Transaction transaction = tTransactions.get(position);
-        final Transaction transaction = tTransactions.get(holder.getAdapterPosition());
+        final Transaction transaction = tTransactions.get(position);
+        //final Transaction transaction = tTransactions.get(holder.getAdapterPosition());
 
-        //TODO: This is the cause of the crashes
 
-        final Payee payee = tPayees.get(holder.getAdapterPosition());
+
+        final Payee payee = tPayees.get(position);
 
         //TODO: Fix this when ready to show the category
         //final Category category = tCategories.get(position);

@@ -106,7 +106,11 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
+
                 db.transactionDao(). insertTransaction(transaction);
+
+
+
             }
         });
 
@@ -123,7 +127,13 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
+
+
+
+
                 db.payeeDao(). insertPayee(payee);
+
+
             }
         });
 
@@ -141,6 +151,7 @@ public class AppRepository {
             @Override
             public void run() {
                 db.categoryDao().insertCategory(category);
+
             }
         });
 
@@ -151,48 +162,11 @@ public class AppRepository {
 
 
 
-//    public int getNextAutoIncrementPayeeID() {
-//
-//
-//        executor.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                Cursor cursor = db.payeeDao().getNextAutoIncrementPayeeID();
-//
-//                if (cursor.moveToFirst()){
-//                    do{
-////                        System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("name")));
-////                        System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("seq")));
-//
-//                        payeeId = Integer.valueOf(cursor.getString(cursor.getColumnIndex("seq")));
-//
-//                    }while (cursor.moveToNext());
-//                }
-//
-//                cursor.close();
-//
-//
-//            }
-//        });
-//
-//
-//
-//        return payeeId;
-//
-//    }
-
-
-
     public int getNextAutoIncrementPayeeID() {
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
 
                 payeeId = db.payeeDao().getNextAutoIncrementPayeeID();
-            }
-        });
+
 
         return payeeId;
     }
@@ -202,33 +176,14 @@ public class AppRepository {
     public int getNextAutoIncrementCategoryID() {
 
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                // Call the listener callback
+
+
                 categoryId = db.categoryDao().getNextAutoIncrementCategoryID();
-            }
-        });
+
 
         return categoryId;
     }
 
-
-
-    public void printAutoIncrements(){
-        String query = "SELECT * FROM SQLITE_SEQUENCE";
-        Cursor cursor = db.query(query, null);
-        if (cursor.moveToFirst()){
-            do{
-                System.out.println("tableName: " +cursor.getString(cursor.getColumnIndex("payee")));
-                System.out.println("autoInc: " + cursor.getString(cursor.getColumnIndex("category")));
-
-            }while (cursor.moveToNext());
-        }
-
-        cursor.close();
-
-    }
 
 }
 

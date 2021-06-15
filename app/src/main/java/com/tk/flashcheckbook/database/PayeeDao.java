@@ -36,7 +36,7 @@ public interface PayeeDao {
     @Query("SELECT COUNT(*) FROM `payee`")
     int getPayeeCount();
 
-    //TODO: resume here
+
 //    @Query("SELECT AUTO_INCREMENT\n" +
 //            "FROM information_schema.TABLES\n" +
 //            "WHERE TABLE_SCHEMA = 'AppDatabase'\n" +
