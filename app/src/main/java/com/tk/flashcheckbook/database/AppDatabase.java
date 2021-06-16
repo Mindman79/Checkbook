@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, exportSchema = false, version = 4)
+@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, exportSchema = false, version = 5)
 @TypeConverters({DateConverter.class, CurrencyConverter.class})
 
 public abstract class AppDatabase extends RoomDatabase {
