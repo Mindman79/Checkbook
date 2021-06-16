@@ -36,18 +36,9 @@ public interface PayeeDao {
     @Query("SELECT COUNT(*) FROM `payee`")
     int getPayeeCount();
 
-
-//    @Query("SELECT AUTO_INCREMENT\n" +
-//            "FROM information_schema.TABLES\n" +
-//            "WHERE TABLE_SCHEMA = 'AppDatabase'\n" +
-//            "AND TABLE_NAME = 'payee'")
-//    int getNextAutoIncrementPayeeID();
-
     @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'payee'")
     int getNextAutoIncrementPayeeID();
 
-//    @Query("SELECT last_insert_rowid() FROM payee")
-//    int getLastAutoIncrementCategoryID();
 
 
 

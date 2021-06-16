@@ -176,6 +176,20 @@ public class AppRepository {
     }
 
 
+    public void deleteTransaction(final Transaction transaction) {
+
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                db.transactionDao().deleteTransaction(transaction);
+
+            }
+        });
+
+
+    }
 }
 
 

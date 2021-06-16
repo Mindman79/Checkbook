@@ -286,4 +286,9 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
+    public void deleteTransaction() {
+
+        repository.deleteTransaction(liveTransaction.getValue());
+
+    }
 }

@@ -4,16 +4,16 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -35,7 +35,6 @@ import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class TransactionEditorActivity extends AppCompatActivity {
-
 
 
     @BindView(R.id.transaction_detail_note)
@@ -104,7 +103,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transactionCategory.setText(category.getName());
 
 
-
         });
 
         transViewModel.liveTransaction.observe(this, transaction -> {
@@ -135,10 +133,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
 
@@ -147,7 +141,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         } else {
 
-          
+
             setTitle(getString(R.string.edit_transaction));
             int transId = extras.getInt(TRANSACTION_ID_KEY);
             int payeeId = extras.getInt(PAYEE_ID_KEY);
@@ -161,12 +155,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick(R.id.transaction_detail_date)
     public void submitClick(View view) {
-
-
-        //Toast.makeText(this, "Click", Toast.LENGTH_LONG).show();
 
 
         final Calendar cldr = Calendar.getInstance();
@@ -191,31 +181,55 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         Toast.makeText(this, "The Switch is " + (isChecked ? "on" : "off"),
                 Toast.LENGTH_SHORT).show();
-        if(isChecked) {
+        if (isChecked) {
 
             isCleared = true;
         } else {
             isCleared = false;
         }
 
-
-
     }
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == android.R.id.home) {
 
+
             try {
                 saveAndReturn();
+                return true;
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return true;
+
+        } else if(item.getItemId() == R.id.action_delete) {
+
+            transViewModel.deleteTransaction();
+            finish();
+
+
+
+
 
         }
 
         return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (!tNewTrans) {
+
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_transaction_editor, menu);
+
+        }
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -244,8 +258,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         String category;
 
 
-
-
         if (isCleared == true) {
 
             cleared = 1;
@@ -268,11 +280,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         transViewModel.saveTransaction(amount, note, date, number, cleared);
         transViewModel.savePayee(payee);
         transViewModel.saveCategory(category);
-
-
-
-
-
 
 
         finish();
