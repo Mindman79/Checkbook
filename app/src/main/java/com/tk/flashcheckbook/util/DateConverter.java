@@ -1,4 +1,4 @@
-package com.tk.flashcheckbook.database;
+package com.tk.flashcheckbook.util;
 
 import androidx.room.TypeConverter;
 
@@ -8,14 +8,14 @@ public class DateConverter {
 
 
     @TypeConverter
-    public static Date ToDate(Long timestamp) {
+    public static Date toDateFromTimestamp(Long timestamp) {
 
         return timestamp == null ? null : new Date(timestamp);
 
     }
 
     @TypeConverter
-    public static Long toTimestamp(Date date) {
+    public static Long toTimestampFromDate(Date date) {
 
         return date == null ? null : date.getTime();
 

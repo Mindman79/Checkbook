@@ -1,4 +1,4 @@
-package com.tk.flashcheckbook.database;
+package com.tk.flashcheckbook.util;
 
 import androidx.room.TypeConverter;
 
