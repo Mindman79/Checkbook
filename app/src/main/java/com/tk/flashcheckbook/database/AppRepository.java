@@ -27,6 +27,8 @@ public class AppRepository {
     public int payeeId;
     public int categoryId;
 
+
+
     public static AppRepository getInstance(Context context) {
 
         if (ourInstance == null) {
@@ -37,7 +39,7 @@ public class AppRepository {
         return ourInstance;
     }
 
-    private AppRepository(Context context) {
+    public AppRepository(Context context) {
 
         db = AppDatabase.getInstance(context);
         transactionList = getAllTransactions();

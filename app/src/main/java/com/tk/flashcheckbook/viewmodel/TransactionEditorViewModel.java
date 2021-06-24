@@ -41,6 +41,9 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         repository = AppRepository.getInstance(application.getApplicationContext());
     }
 
+
+
+
     public void loadData(int transId, int payeeId, int categoryId) {
 
 
@@ -252,7 +255,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
 
-        System.out.println("saveCategory globalCategoryId" + globalcategoryId);
+
 
 
         if (category == null) {
@@ -289,6 +292,21 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     public void deleteTransaction() {
 
         repository.deleteTransaction(liveTransaction.getValue());
+
+    }
+
+    public Payee getPayeeById(int payeeId) {
+
+
+        //AppRepository repository = new AppRepository(getPayeeById(pay));
+
+
+        Payee payee = repository.getPayeeById(payeeId);
+        //Payee payee = repository.getPayeeById(payeeId);
+
+
+
+        return payee;
 
     }
 }

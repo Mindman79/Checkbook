@@ -1,5 +1,6 @@
 package com.tk.flashcheckbook.ui;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,7 +19,9 @@ import com.tk.flashcheckbook.TransactionEditorActivity;
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
+import com.tk.flashcheckbook.database.PayeeDao;
 import com.tk.flashcheckbook.database.Transaction;
+import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -38,9 +43,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private final List<Payee> tPayees;
     private final List<Category> tCategories;
 
-
-
     private final Context tContext;
+    private Object TransactionEditorActivity;
 
 
     public TransactionAdapter(List<Transaction> tTransactions, List<Payee> tPayees, List<Category> tCategories, Context tContext) {
@@ -64,18 +68,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final Transaction transaction = tTransactions.get(position);
-        //final Transaction transaction = tTransactions.get(holder.getAdapterPosition());
-
-
-
-        final Payee payee = tPayees.get(position);
+        //final Transaction transaction = tTransactions.get(position);
+        final Transaction transaction = tTransactions.get(holder.getAdapterPosition());
 
         //TODO: Fix this when ready to show the category
-        //final Category category = tCategories.get(position);
 
 
-//        Category category = repository.getCategoryById(transaction.getCategoryId());
+
+        AppRepository repository = new AppRepository(tContext);
+
+
+        final Payee payee = repository.getPayeeById(transaction.getPayeeId());
+
 
         //Currency
         Locale locale = new Locale("en", "US");
@@ -90,8 +94,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         //Bindings
         holder.payee.setText(payee.getName());
-        //holder.payee.setText(payee.getName());
-        //holder.balance.setText(transaction.);
+
         holder.date.setText(date);
         holder.transAmount.setText(amount);
         //holder.category.setText(category.getName());
@@ -110,11 +113,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         });
 
 
-
-
     }
-
-
 
 
     @Override

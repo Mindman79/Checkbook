@@ -27,7 +27,7 @@ public interface PayeeDao {
     @Query("SELECT * FROM `payee` WHERE id = :id")
     Payee getPayeeById(int id);
 
-    @Query("SELECT * FROM `payee` ORDER BY name desc")
+    @Query("SELECT * FROM `payee`")
     LiveData<List<Payee>> getAllPayees();
 
     @Query("DELETE FROM `payee`")
