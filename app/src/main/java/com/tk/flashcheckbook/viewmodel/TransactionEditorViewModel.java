@@ -119,7 +119,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 //                categoryId = categoryId + 1;
 //            }
 
-            Integer numberToDB = valueOf(number);
+            Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
             transaction.setAmount(amountToDB);
@@ -149,7 +149,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     } else {
 
 
-        Integer numberToDB = valueOf(number);
+        Integer numberToDB = Integer.parseInt(number);
         BigDecimal amountToDB = new BigDecimal(amount);
 
         transaction.setAmount(amountToDB);
