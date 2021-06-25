@@ -105,9 +105,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             getNextIDs();
 
-            System.out.println("Category ID:" + globalcategoryId);
-            System.out.println("Payee ID: " + globalpayeeId);
-
             //Handle PayeeID and CategoryID increases, if not 0
 //            if (payeeId == 0) {
 //                payeeId = 0;
@@ -156,7 +153,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         BigDecimal amountToDB = new BigDecimal(amount);
 
         transaction.setAmount(amountToDB);
-        transaction.setDate(date);
+        transaction.setDate(transaction.getDate());
         //transaction.setClearedDate(transaction.getClearedDate());
         transaction.setPayeeId(transaction.getPayeeId());
         transaction.setCategoryId(transaction.getCategoryId());
