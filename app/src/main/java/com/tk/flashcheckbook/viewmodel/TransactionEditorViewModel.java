@@ -85,12 +85,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     public void saveTransaction(String amount, String note, Date date, String number, Integer cleared) throws ParseException {
 
 
-
-
         Transaction transaction = liveTransaction.getValue();
-
-
-
 
 
         if (transaction == null) {
@@ -133,17 +128,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
 
-//        transaction.setAmount(transaction.getAmount());
-//        transaction.setDate(transaction.getDate());
-//        transaction.setClearedDate(transaction.getClearedDate());
-//        transaction.setPayeeId(transaction.getPayeeId());
-//        transaction.setCategoryId(transaction.getCategoryId());
-//        transaction.setNumber(transaction.getNumber());
-//        transaction.setNote(transaction.getNote().trim());
-//        transaction.setCleared(transaction.getCleared());
-
         //TODO: Add other fields to be captured and saved
-        //TODO: Fix bug that prevents long Strings from being saved as Ints
         //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
 
     } else {
@@ -153,7 +138,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         BigDecimal amountToDB = new BigDecimal(amount);
 
         transaction.setAmount(amountToDB);
-        transaction.setDate(transaction.getDate());
+        transaction.setDate(date);
         //transaction.setClearedDate(transaction.getClearedDate());
         transaction.setPayeeId(transaction.getPayeeId());
         transaction.setCategoryId(transaction.getCategoryId());
@@ -173,29 +158,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         Payee payee = livePayee.getValue();
 
 
-
-
-//        repository.getNextAutoIncrementPayeeID(new OnValueListener() {
-//            @Override
-//            public void onValue(int value) {
-//                // use "value" which is returned from Room
-//
-//                payeeId = value + 1;
-//
-//            }
-//        });
-//
-//        repository.getNextAutoIncrementCategoryID(new OnValueListener() {
-//            @Override
-//            public void onValue(int value) {
-//                // use "value" which is returned from Room
-//
-//                categoryId = value;
-//
-//            }
-//        });
-
-        System.out.println("savePayee globalPayeeId" + globalpayeeId);
 
         if (payee == null) {
 

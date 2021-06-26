@@ -200,7 +200,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
             try {
                 saveAndReturn();
                 return true;
+
             } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -237,14 +240,14 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         try {
             saveAndReturn();
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        super.onBackPressed();
+        //super.onBackPressed();
     }
 
-    private void saveAndReturn() throws ParseException {
+    private void saveAndReturn() throws Exception {
 
 
         String amount;
@@ -277,12 +280,34 @@ public class TransactionEditorActivity extends AppCompatActivity {
         category = transactionCategory.getText().toString();
 
 
-        transViewModel.saveTransaction(amount, note, date, number, cleared);
-        transViewModel.savePayee(payee);
-        transViewModel.saveCategory(category);
+        if (number.length() <= 10) {
 
 
-        finish();
+            transViewModel.saveTransaction(amount, note, date, number, cleared);
+            transViewModel.savePayee(payee);
+            transViewModel.saveCategory(category);
+
+            finish();
+
+
+
+        } else {
+
+
+            Toast.makeText(this, R.string.number_10_digits_warning,
+                    Toast.LENGTH_SHORT).show();
+
+
+
+
+            //TODO: Add possible exceptions here
+
+
+
+        }
+
+
+
 
     }
 }
