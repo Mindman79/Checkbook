@@ -10,7 +10,7 @@ import androidx.room.TypeConverters;
 import com.tk.flashcheckbook.util.CurrencyConverter;
 import com.tk.flashcheckbook.util.DateConverter;
 
-@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, exportSchema = false, version = 5)
+@Database(entities = {Account.class, Category.class, Payee.class, Transaction.class}, exportSchema = false, version = 6)
 @TypeConverters({DateConverter.class, CurrencyConverter.class})
 
 public abstract class AppDatabase extends RoomDatabase {

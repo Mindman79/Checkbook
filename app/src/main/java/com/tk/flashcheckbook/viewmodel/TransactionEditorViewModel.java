@@ -114,7 +114,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 //                categoryId = categoryId + 1;
 //            }
 
-            Integer numberToDB = Integer.parseInt(number);
+            //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
             transaction.setAmount(amountToDB);
@@ -122,7 +122,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             //transaction.setClearedDate(transaction.getClearedDate());
             transaction.setPayeeId(globalpayeeId + 1);
             transaction.setCategoryId(globalcategoryId + 1);
-            transaction.setNumber(numberToDB);
+            transaction.setNumber(number.trim());
             transaction.setNote(note.trim());
             transaction.setCleared(cleared);
 
@@ -134,7 +134,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     } else {
 
 
-        Integer numberToDB = Integer.parseInt(number);
+        //Integer numberToDB = Integer.parseInt(number);
         BigDecimal amountToDB = new BigDecimal(amount);
 
         transaction.setAmount(amountToDB);
@@ -142,7 +142,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         //transaction.setClearedDate(transaction.getClearedDate());
         transaction.setPayeeId(transaction.getPayeeId());
         transaction.setCategoryId(transaction.getCategoryId());
-        transaction.setNumber(numberToDB);
+        transaction.setNumber(number.trim());
         transaction.setNote(note.trim());
         transaction.setCleared(cleared);
 

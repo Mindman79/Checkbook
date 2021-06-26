@@ -19,12 +19,12 @@ public class Transaction {
     private Date clearedDate;
     private int payeeId;
     private int categoryId;
-    private int number;
+    private String number;
     private String note;
     private int cleared;
 
 
-    public Transaction(int id, BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, int number, String note, int cleared) {
+    public Transaction(int id, BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, String number, String note, int cleared) {
         this.id = id;
         this.amount = amount;
         this.date = date;
@@ -37,7 +37,7 @@ public class Transaction {
     }
 
     @Ignore
-    public Transaction(BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, int number, String note, int cleared) {
+    public Transaction(BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, String number, String note, int cleared) {
         this.amount = amount;
         this.date = date;
         this.clearedDate = clearedDate;
@@ -103,11 +103,11 @@ public class Transaction {
         this.categoryId = categoryId;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
