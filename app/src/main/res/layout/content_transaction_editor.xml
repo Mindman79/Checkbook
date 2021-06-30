@@ -12,24 +12,30 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete|textCapWords"
-            android:ems="10"
-            android:id="@+id/transaction_detail_category"
-            tools:layout_editor_absoluteX="0dp"
-            android:hint="Enter category"
-            app:layout_constraintBottom_toTopOf="@+id/transaction_detail_date"
-            android:layout_marginBottom="12dp" />
-
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/transaction_detail_amount"
             tools:layout_editor_absoluteX="0dp"
             android:hint="@string/enter_amount"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/transaction_detail_payee" />
+            app:layout_constraintBottom_toTopOf="@+id/transaction_detail_payee"
+
+            />
+
+
+    <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete|textCapWords"
+            android:ems="10"
+            android:id="@+id/transaction_detail_category"
+            tools:layout_editor_absoluteX="0dp"
+            android:hint="@string/enter_category"
+            app:layout_constraintBottom_toTopOf="@+id/transaction_detail_date"
+            android:layout_marginBottom="12dp" />
+
+
+
 
     <EditText
             android:layout_width="match_parent"

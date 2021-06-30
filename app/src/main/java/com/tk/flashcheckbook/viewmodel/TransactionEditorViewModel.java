@@ -32,9 +32,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     public MutableLiveData<Payee> livePayee = new MediatorLiveData<>();
     public MutableLiveData<Category> liveCategory = new MediatorLiveData<>();
 
-    public MutableLiveData<String> payeeNameQueryLiveData = new MediatorLiveData<>();
-
-
+    //public MutableLiveData<String> payeeNameQueryLiveData = new MediatorLiveData<>();
 
 
     private AppRepository repository;
@@ -43,21 +41,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     static int globalcategoryId;
     static int globalpayeeId;
 
-    public LiveData<List<String>> getPayeesWithNameLiveData() {
-        return Transformations.switchMap(
-                payeeNameQueryLiveData,
-                name -> repository.getAllPayeesByName(name));
-    }
-
-    public void setPayeeNameQuery(String name) {
-
-        this.payeeNameQueryLiveData.setValue(name);
-    }
-
-
-//    LiveData<List<Payee>> payee = Transformations.switchMap(payeeNameQueryLiveData) { payee ->
-//            repository.getAllPayeesByName(payee);
-//    }
 
 
     public TransactionEditorViewModel(@NonNull Application application) {
@@ -66,11 +49,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
-
-
     public void loadData(int transId, int payeeId, int categoryId) {
-
-
 
 
         executor.execute(new Runnable() {
@@ -87,7 +66,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             }
         });
-
 
 
     }
@@ -118,9 +96,9 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
                 return;
 
-        }
+            }
 
-        transaction = new Transaction();
+            transaction = new Transaction();
 
             getNextIDs();
 
@@ -151,36 +129,34 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             transaction.setCleared(cleared);
 
 
+            //TODO: Add other fields to be captured and saved
+            //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
 
-        //TODO: Add other fields to be captured and saved
-        //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
-
-    } else {
+        } else {
 
 
-        //Integer numberToDB = Integer.parseInt(number);
-        BigDecimal amountToDB = new BigDecimal(amount);
+            //Integer numberToDB = Integer.parseInt(number);
+            BigDecimal amountToDB = new BigDecimal(amount);
 
-        transaction.setAmount(amountToDB);
-        transaction.setDate(date);
-        //transaction.setClearedDate(transaction.getClearedDate());
-        transaction.setPayeeId(transaction.getPayeeId());
-        transaction.setCategoryId(transaction.getCategoryId());
-        transaction.setNumber(number.trim());
-        transaction.setNote(note.trim());
-        transaction.setCleared(cleared);
+            transaction.setAmount(amountToDB);
+            transaction.setDate(date);
+            //transaction.setClearedDate(transaction.getClearedDate());
+            transaction.setPayeeId(transaction.getPayeeId());
+            transaction.setCategoryId(transaction.getCategoryId());
+            transaction.setNumber(number.trim());
+            transaction.setNote(note.trim());
+            transaction.setCleared(cleared);
 
-    }
+        }
 
         repository.insertTransaction(transaction);
 
-}
+    }
 
     public void savePayee(String name) {
 
 
         Payee payee = livePayee.getValue();
-
 
 
         if (payee == null) {
@@ -222,23 +198,8 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
 
 
-//        repository.getNextAutoIncrementCategoryID(new OnValueListener() {
-//            @Override
-//            public void onValue(int value) {
-//                // use "value" which is returned from Room
-//
-//                categoryId = value + 1;
-//
-//            }
-//        });
 
         Category category = liveCategory.getValue();
-
-
-
-
-
-
 
 
         if (category == null) {
@@ -288,8 +249,31 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         //Payee payee = repository.getPayeeById(payeeId);
 
 
-
         return payee;
 
     }
+
+    public String[] getAllPayeesByName(String name) {
+
+
+        String[] list;
+
+        list = repository.getAllPayeesByName(name);
+
+
+        return list;
+    }
+
+    public String[] getAllCategoriesByName(String name) {
+
+
+        String[] list;
+
+        list = repository.getAllCategoriesByName(name);
+
+
+        return list;
+    }
+
+
 }

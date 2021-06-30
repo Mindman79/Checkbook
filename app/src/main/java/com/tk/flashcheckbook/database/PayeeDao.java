@@ -40,7 +40,7 @@ public interface PayeeDao {
     int getNextAutoIncrementPayeeID();
 
     @Query("SELECT name FROM `payee` WHERE name LIKE :name")
-    LiveData<List<String>> getAllPayeesByName(String name);
+    String[] getAllPayeesByName(String name);
 
 
 

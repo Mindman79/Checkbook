@@ -122,4 +122,5 @@
     </string-array>
 
     <string name="number_10_digits_warning">The number field cannot contain more than 10 digits. Please revise and try again.</string>
+    <string name="enter_category">Enter category</string>
 </resources>

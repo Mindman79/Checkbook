@@ -57,7 +57,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     AutoCompleteTextView transactionPayee;
 
     @BindView(R.id.transaction_detail_category)
-    TextView transactionCategory;
+    AutoCompleteTextView transactionCategory;
 
     @BindView(R.id.transaction_detail_cleared)
     Switch transactionCleared;
@@ -164,16 +164,24 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
         // Get a reference to the AutoCompleteTextView in the layout
-        //AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.transaction_detail_payee);
-        // Get the string array
-        String[] countries = getResources().getStringArray(R.array.countries_array);
+
+
+        String[] payees = transViewModel.getAllPayeesByName(transactionPayee.getText().toString());
+
         // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+        ArrayAdapter<String> pAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, payees);
+
+        transactionPayee.setAdapter(pAdapter);
 
 
-        transactionPayee.setAdapter(adapter);
+        String[] categories = transViewModel.getAllCategoriesByName(transactionCategory.getText().toString());
 
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> cAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categories);
+
+        transactionCategory.setAdapter(cAdapter);
 
     }
 

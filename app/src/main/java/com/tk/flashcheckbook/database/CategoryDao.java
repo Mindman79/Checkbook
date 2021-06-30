@@ -47,4 +47,7 @@ public interface CategoryDao {
 
     @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category' LIMIT 1")
     int getNextAutoIncrementCategoryID();
+
+    @Query("SELECT name FROM `category` WHERE name LIKE :name")
+    String[] getAllCategoriesByName(String name);
 }
