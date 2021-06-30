@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -52,7 +54,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     TextView transactionNumber;
 
     @BindView(R.id.transaction_detail_payee)
-    TextView transactionPayee;
+    AutoCompleteTextView transactionPayee;
 
     @BindView(R.id.transaction_detail_category)
     TextView transactionCategory;
@@ -65,6 +67,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private boolean isCleared;
 
     DatePickerDialog picker;
+
+
 
 
     @Override
@@ -158,6 +162,19 @@ public class TransactionEditorActivity extends AppCompatActivity {
         }
 
 
+
+        // Get a reference to the AutoCompleteTextView in the layout
+        //AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.transaction_detail_payee);
+        // Get the string array
+        String[] countries = getResources().getStringArray(R.array.countries_array);
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+
+
+        transactionPayee.setAdapter(adapter);
+
+
     }
 
 
@@ -195,6 +212,9 @@ public class TransactionEditorActivity extends AppCompatActivity {
         }
 
     }
+
+
+
 
 
     @Override

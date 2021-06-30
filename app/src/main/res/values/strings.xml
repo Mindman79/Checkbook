@@ -108,5 +108,18 @@
     <string name="enter_amount">Enter amount</string>
     <string name="enter_date">Enter date</string>
     <string name="delete_transaction">Delete Transaction</string>
+
+    <string-array name="countries_array">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+        ...
+    </string-array>
+
     <string name="number_10_digits_warning">The number field cannot contain more than 10 digits. Please revise and try again.</string>
 </resources>
