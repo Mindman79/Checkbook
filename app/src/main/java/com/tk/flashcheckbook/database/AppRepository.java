@@ -192,6 +192,14 @@ public class AppRepository {
 
 
     }
+
+    public LiveData<List<String>> getAllPayeesByName(String name) {
+
+        String searchString = "%" + name + "%";
+
+        return db.payeeDao().getAllPayeesByName(searchString);
+
+    }
 }
 
 

@@ -10,6 +10,7 @@ import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,6 +100,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         });
 
+
+
+
+
         transViewModel.liveCategory.observe(this, category -> {
 
             transactionCategory.setText(category.getName());
@@ -127,7 +133,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transactionAmount.setText(transaction.getAmount().toString());
             transactionNote.setText(transaction.getNote());
             transactionDate.setText(formattedDate);
-            transactionNumber.setText(String.valueOf(transaction.getNumber()));
+            transactionNumber.setText(transaction.getNumber());
             transactionCleared.setChecked(switchCleared);
 
         });
@@ -277,6 +283,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
         number = transactionNumber.getText().toString();
         payee = transactionPayee.getText().toString();
+
+
         category = transactionCategory.getText().toString();
 
 

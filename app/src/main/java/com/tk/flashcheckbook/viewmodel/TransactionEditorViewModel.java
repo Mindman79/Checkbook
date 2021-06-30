@@ -5,17 +5,21 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
+import com.tk.flashcheckbook.database.TransactionDao;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.text.ParseException;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -28,12 +32,32 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     public MutableLiveData<Payee> livePayee = new MediatorLiveData<>();
     public MutableLiveData<Category> liveCategory = new MediatorLiveData<>();
 
+    public MutableLiveData<String> payeeNameQueryLiveData = new MediatorLiveData<>();
+
+
+
+
     private AppRepository repository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
     static int globalcategoryId;
     static int globalpayeeId;
 
+    public LiveData<List<String>> getPayeesWithNameLiveData() {
+        return Transformations.switchMap(
+                payeeNameQueryLiveData,
+                name -> repository.getAllPayeesByName(name));
+    }
+
+    public void setPayeeNameQuery(String name) {
+
+        this.payeeNameQueryLiveData.setValue(name);
+    }
+
+
+//    LiveData<List<Payee>> payee = Transformations.switchMap(payeeNameQueryLiveData) { payee ->
+//            repository.getAllPayeesByName(payee);
+//    }
 
 
     public TransactionEditorViewModel(@NonNull Application application) {

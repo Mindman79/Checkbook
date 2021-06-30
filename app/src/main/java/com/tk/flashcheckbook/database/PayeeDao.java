@@ -39,8 +39,8 @@ public interface PayeeDao {
     @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'payee'")
     int getNextAutoIncrementPayeeID();
 
-
-
+    @Query("SELECT name FROM `payee` WHERE name LIKE :name")
+    LiveData<List<String>> getAllPayeesByName(String name);
 
 
 
