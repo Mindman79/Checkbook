@@ -276,4 +276,14 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
+    public Category getAssociatedCategoryIDByPayeeName(String name) {
+
+        int categoryId = repository.getAssociatedCategoryIDByPayeeName(name);
+
+        Category category = repository.getCategoryById(categoryId);
+
+        return category;
+
+    }
+
 }

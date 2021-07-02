@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -33,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 
 import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
@@ -69,8 +72,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
     DatePickerDialog picker;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,9 +104,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transactionPayee.setText(payee.getName());
 
         });
-
-
-
 
 
         transViewModel.liveCategory.observe(this, category -> {
@@ -149,6 +147,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             setTitle(getString(R.string.new_transaction));
             tNewTrans = true;
 
+
         } else {
 
 
@@ -160,7 +159,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
         }
-
 
 
         // Get a reference to the AutoCompleteTextView in the layout
@@ -190,6 +188,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
     public void submitClick(View view) {
 
 
+        //TODO: Resume here, fix the click thingie
+
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
@@ -205,6 +205,47 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+    @OnTouch(R.id.transaction_detail_category)
+    public boolean onTouchCropView(MotionEvent event) {
+
+        if (MotionEvent.ACTION_UP == event.getAction()) {
+
+            String payeeName = transactionPayee.getText().toString();
+            String categoryName = transactionCategory.getText().toString();
+            String[] payees = transViewModel.getAllPayeesByName(transactionPayee.getText().toString());
+
+            if (!payeeName.matches("")) {
+
+                if (payees.length != 0) {
+
+                    if (categoryName.matches("")) {
+                        Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
+
+                        Category category = transViewModel.getAssociatedCategoryIDByPayeeName(transactionPayee.getText().toString());
+
+                        transactionCategory.setThreshold(1000);
+                        //transactionCategory.setFocusable(false);
+                        transactionCategory.setText(category.getName());
+                        //transactionCategory.setFocusable(true);
+
+                        transactionCategory.setThreshold(1);
+                    }
+
+                }
+
+
+            }
+
+        }
+
+        return false;
+    }
+
+
 
     @OnCheckedChanged(R.id.transaction_detail_cleared)
     public void checkClearedSwitch(CompoundButton buttonView, boolean isChecked) {

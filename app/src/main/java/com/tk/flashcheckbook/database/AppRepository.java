@@ -209,6 +209,14 @@ public class AppRepository {
 
     }
 
+    public int getAssociatedCategoryIDByPayeeName(String name) {
+
+
+        return db.payeeDao().getAssociatedCategoryIDByPayeeName(name);
+
+
+
+    }
 }
 
 
