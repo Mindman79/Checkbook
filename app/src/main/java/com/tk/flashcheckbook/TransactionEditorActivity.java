@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook;
 
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -9,6 +10,7 @@ import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
@@ -27,6 +29,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -72,6 +80,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     DatePickerDialog picker;
 
 
+    //@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +104,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     }
 
 
+    //@RequiresApi(api = Build.VERSION_CODES.O)
     private void initViewModel() {
 
         transViewModel = new ViewModelProvider(this).get(TransactionEditorViewModel.class);
@@ -144,8 +154,15 @@ public class TransactionEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
 
+
+            Instant input = LocalDateTime.now().toInstant(OffsetDateTime.now().getOffset());
+            Date output = Date.from(input);
+
+
             setTitle(getString(R.string.new_transaction));
             tNewTrans = true;
+
+            transactionDate.setText(Formatters.dateToString(output));
 
 
         } else {
@@ -184,26 +201,69 @@ public class TransactionEditorActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.transaction_detail_date)
-    public void submitClick(View view) {
+    @OnTouch(R.id.transaction_detail_date)
+    public boolean onTouchCropView2(MotionEvent event) {
+
+        if (MotionEvent.ACTION_UP == event.getAction()) {
+
+            //TODO: Resume here, fix date format discrepancy
+
+//            Calendar mCalender = Calendar.getInstance();
+//            int year = mCalender.get(Calendar.YEAR);
+//            int month = mCalender.get(Calendar.MONTH);
+//            int dayOfMonth = mCalender.get(Calendar.DAY_OF_MONTH);
+//            return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)
+//                    getActivity(), year, month, dayOfMonth);
 
 
-        //TODO: Resume here, fix the click thingie
-
-        final Calendar cldr = Calendar.getInstance();
-        int day = cldr.get(Calendar.DAY_OF_MONTH);
-        int month = cldr.get(Calendar.MONTH);
-        int year = cldr.get(Calendar.YEAR);
-        // date picker dialog
-        picker = new DatePickerDialog(TransactionEditorActivity.this,
-                (view1, year1, monthOfYear, dayOfMonth) -> {
-
-                    transactionDate.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
-
-                }, year, month, day);
-        picker.show();
+            final Calendar cldr = Calendar.getInstance();
+            int day = cldr.get(Calendar.DAY_OF_MONTH);
+            int month = cldr.get(Calendar.MONTH);
+            int year = cldr.get(Calendar.YEAR);
 
 
+            //TODO: Resume here. Fix the year view digit count, maye try year1 variable
+
+            // date picker dialog
+            picker = new DatePickerDialog(TransactionEditorActivity.this,
+                    (view1, year1, monthOfYear, dayOfMonth) -> {
+
+
+                        String monthString = String.valueOf(monthOfYear + 1);
+                        String dayString = String.valueOf(dayOfMonth);
+                        String finalDisplayedMonth;
+                        String finalDisplayedDate;
+
+                        if(monthOfYear < 10){
+                            finalDisplayedMonth = "0" + monthString;
+                        } else {
+                            finalDisplayedMonth = monthString;
+                        }
+
+                        if(dayOfMonth < 10){
+                            finalDisplayedDate = "0" + dayString;
+                        } else {
+                            finalDisplayedDate = dayString;
+                        }
+
+
+
+
+                        String date = finalDisplayedMonth + "/" + finalDisplayedDate + "/" + year;
+
+                        //String test = Formatters.dateStringToFormattedDateString(cldr.getTime().toString());
+
+
+
+                        transactionDate.setText(date);
+
+                    }, year, month, day);
+            picker.show();
+
+
+        }
+
+        return false;
     }
 
 
