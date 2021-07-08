@@ -131,6 +131,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             //TODO: Add other fields to be captured and saved
             //TODO: Fix bug that prevents transaction window from changed from "Add" to "Edit"
+            //TODO: Fix bug that creates more than one entry for automatically populated Categories
 
         } else {
 

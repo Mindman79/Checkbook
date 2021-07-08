@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             transactionData.addAll(transactions);
 
 
+
             if (transAdapter == null) {
 
                 transAdapter = new TransactionAdapter(transactionData, payeeData, categoryData, MainActivity.this);

@@ -206,7 +206,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         if (MotionEvent.ACTION_UP == event.getAction()) {
 
-            //TODO: Resume here, fix date format discrepancy
+
 
 //            Calendar mCalender = Calendar.getInstance();
 //            int year = mCalender.get(Calendar.YEAR);
@@ -231,6 +231,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
                         String monthString = String.valueOf(monthOfYear + 1);
                         String dayString = String.valueOf(dayOfMonth);
+                        String yearString = String.valueOf(year1).substring(2);
                         String finalDisplayedMonth;
                         String finalDisplayedDate;
 
@@ -249,7 +250,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
 
 
-                        String date = finalDisplayedMonth + "/" + finalDisplayedDate + "/" + year;
+                        String date = finalDisplayedMonth + "/" + finalDisplayedDate + "/" + yearString;
 
                         //String test = Formatters.dateStringToFormattedDateString(cldr.getTime().toString());
 
