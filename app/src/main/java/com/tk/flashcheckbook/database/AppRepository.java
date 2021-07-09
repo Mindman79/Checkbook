@@ -1,12 +1,9 @@
 package com.tk.flashcheckbook.database;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.media.AudioFocusRequest;
 
 import androidx.lifecycle.LiveData;
 
-import com.tk.flashcheckbook.util.OnValueListener;
 import com.tk.flashcheckbook.util.SampleData;
 
 import java.math.BigDecimal;
@@ -222,6 +219,13 @@ public class AppRepository {
     public BigDecimal getTotalofClearedTransactions() {
 
         return db.transactionDao().getTotalofClearedTransactions();
+
+    }
+
+    public BigDecimal getTotalofAllTransactions() {
+
+
+            return db.transactionDao().getTotalofAllTransactions();
 
     }
 }

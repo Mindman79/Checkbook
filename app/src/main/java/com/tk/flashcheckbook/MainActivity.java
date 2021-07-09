@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
@@ -40,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView rv;
 
-//
     @BindView(R.id.clearedAmount)
-    TextView clearedAmount;
+    TextView clearedAmountTextView;
+
+    @BindView(R.id.balanceAmount)
+    TextView balanceAmountTextView;
 
 
     @OnClick(R.id.newtransfab)
@@ -87,8 +86,12 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
 
         //clearedAmount.invalidate();
-        String amount = String.valueOf(mainViewModel.getTotalofClearedTransactions());
-        clearedAmount.setText(amount);
+        String balanceAmount = String.valueOf(mainViewModel.getTotalofAllTransactions());
+        String clearedAmount = String.valueOf(mainViewModel.getTotalofClearedTransactions());
+
+        clearedAmountTextView.setText(clearedAmount);
+        balanceAmountTextView.setText(balanceAmount);
+
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
         //transactionData.addAll(mainViewModel.transactionsList);

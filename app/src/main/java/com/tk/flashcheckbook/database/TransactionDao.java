@@ -34,9 +34,9 @@ public interface TransactionDao {
     @Query("SELECT COUNT(*) FROM `transaction`")
     int getTransactionCount();
 
-    @Query("SELECT SUM(amount) FROM `transaction` WHERE cleared = 0")
-    BigDecimal getTotalofUnclearedTransactions();
+    @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction`")
+    BigDecimal getTotalofAllTransactions();
 
-    @Query("SELECT SUM(amount) FROM `transaction` WHERE cleared = 1")
+    @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction` WHERE cleared = 1")
     BigDecimal getTotalofClearedTransactions();
 }

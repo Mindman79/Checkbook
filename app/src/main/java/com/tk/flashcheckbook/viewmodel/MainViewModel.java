@@ -1,23 +1,18 @@
 package com.tk.flashcheckbook.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.tk.flashcheckbook.database.AppDatabase;
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
-import com.tk.flashcheckbook.util.SampleData;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -53,6 +48,12 @@ public class MainViewModel extends AndroidViewModel {
     public BigDecimal getTotalofClearedTransactions(){
 
         return repository.getTotalofClearedTransactions();
+
+    }
+
+    public BigDecimal getTotalofAllTransactions(){
+
+        return repository.getTotalofAllTransactions();
 
     }
 

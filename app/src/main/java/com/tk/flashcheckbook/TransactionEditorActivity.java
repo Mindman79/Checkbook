@@ -349,6 +349,8 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transViewModel.deleteTransaction();
             finish();
 
+            startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(0, 0);
 
 
 
