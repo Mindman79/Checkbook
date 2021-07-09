@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
@@ -37,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView rv;
 
+//
+    @BindView(R.id.clearedAmount)
+    TextView clearedAmount;
+
+
     @OnClick(R.id.newtransfab)
     void fabClickHandler() {
 
@@ -59,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //getWindow().getDecorView().findVById(R.layout.activity_main).invalidate();
+
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,15 +78,22 @@ public class MainActivity extends AppCompatActivity {
         //Binding
         ButterKnife.bind(this);
 
+
+
         //RecyclerView stuff
         initRecyclerView();
 
         //ViewModel stuff
         initViewModel();
 
+        //clearedAmount.invalidate();
+        String amount = String.valueOf(mainViewModel.getTotalofClearedTransactions());
+        clearedAmount.setText(amount);
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
         //transactionData.addAll(mainViewModel.transactionsList);
+
+
 
 
 

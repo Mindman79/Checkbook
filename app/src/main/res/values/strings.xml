@@ -123,4 +123,6 @@
 
     <string name="number_10_digits_warning">The number field cannot contain more than 10 digits. Please revise and try again.</string>
     <string name="enter_category">Enter category</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

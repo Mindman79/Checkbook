@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -222,7 +223,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
             int year = cldr.get(Calendar.YEAR);
 
 
-            //TODO: Resume here. Fix the year view digit count, maye try year1 variable
+
 
             // date picker dialog
             picker = new DatePickerDialog(TransactionEditorActivity.this,
@@ -426,6 +427,9 @@ public class TransactionEditorActivity extends AppCompatActivity {
             transViewModel.saveCategory(category);
 
             finish();
+
+            startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(0, 0);
 
 
 

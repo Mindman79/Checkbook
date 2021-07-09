@@ -92,12 +92,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         String date = dateFormat.format(transaction.getDate());
 
 
+
         //Bindings
         holder.payee.setText(payee.getName());
 
         holder.date.setText(date);
         holder.transAmount.setText(amount);
         //holder.category.setText(category.getName());
+
+
         holder.transFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,10 +141,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         @BindView(R.id.transaction_fab)
         FloatingActionButton transFab;
-
-
-
-
 
 
 

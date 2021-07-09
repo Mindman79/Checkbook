@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Dao
@@ -33,6 +34,9 @@ public interface TransactionDao {
     @Query("SELECT COUNT(*) FROM `transaction`")
     int getTransactionCount();
 
+    @Query("SELECT SUM(amount) FROM `transaction` WHERE cleared = 0")
+    BigDecimal getTotalofUnclearedTransactions();
 
-
+    @Query("SELECT SUM(amount) FROM `transaction` WHERE cleared = 1")
+    BigDecimal getTotalofClearedTransactions();
 }

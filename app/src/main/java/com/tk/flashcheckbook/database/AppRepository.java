@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.tk.flashcheckbook.util.OnValueListener;
 import com.tk.flashcheckbook.util.SampleData;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -215,6 +216,12 @@ public class AppRepository {
         return db.payeeDao().getAssociatedCategoryIDByPayeeName(name);
 
 
+
+    }
+
+    public BigDecimal getTotalofClearedTransactions() {
+
+        return db.transactionDao().getTotalofClearedTransactions();
 
     }
 }

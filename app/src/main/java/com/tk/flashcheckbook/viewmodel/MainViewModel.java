@@ -14,6 +14,7 @@ import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.util.SampleData;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -48,4 +49,12 @@ public class MainViewModel extends AndroidViewModel {
         repository.deleteAllNotes();
 
     }
+
+    public BigDecimal getTotalofClearedTransactions(){
+
+        return repository.getTotalofClearedTransactions();
+
+    }
+
+
 }
