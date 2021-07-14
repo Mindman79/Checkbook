@@ -1,5 +1,6 @@
 package com.tk.flashcheckbook.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.TransactionEditorActivity;
 
 public class SlideshowFragment extends Fragment {
 
@@ -28,8 +30,17 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+
+                Intent intent = new Intent(SlideshowFragment.this.getActivity(), TransactionEditorActivity.class);
+                startActivity(intent);
+
+
             }
         });
         return root;
+
+
+
+
     }
 }
