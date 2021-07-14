@@ -63,8 +63,8 @@ public class SampleData {
         List<Transaction> transactions = new ArrayList<>();
 
 
-        transactions.add(new Transaction(BigDecimal.valueOf(333.40), new Date(2019, 12, 5), new Date(2019, 12, 5), 1, 1, "1", "Note1", 1));
-        transactions.add(new Transaction(BigDecimal.valueOf(188.60), new Date(2018, 7, 5), new Date(2018, 7, 5), 2, 2, "1", "Note asdhjkasd", 1));
+//        transactions.add(new Transaction(BigDecimal.valueOf(333.40), new Date(2019, 12, 5), new Date(2019, 12, 5), 1, 1, "1", "Note1", 1));
+//        transactions.add(new Transaction(BigDecimal.valueOf(188.60), new Date(2018, 7, 5), new Date(2018, 7, 5), 2, 2, "1", "Note asdhjkasd", 1));
 
         return transactions;
 

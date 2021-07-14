@@ -1,23 +1,24 @@
 package com.tk.flashcheckbook.database;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Entity(tableName = "recurring")
 
-@Entity(tableName = "transaction")
 
-public class Transaction {
+public class Recurring {
+
 
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int accountId;
     private BigDecimal amount;
-    private Date date;
+    private Date startDate;
     private Date clearedDate;
+    private int repeatInterval;
     private int payeeId;
     private int categoryId;
     private String number;
@@ -26,14 +27,13 @@ public class Transaction {
     private int recurring;
 
 
-
-
-    public Transaction(int id, int accountId, BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, String number, String note, int cleared, int recurring) {
+    public Recurring(int id, int accountId, BigDecimal amount, Date startDate, Date clearedDate, int repeatInterval, int payeeId, int categoryId, String number, String note, int cleared, int recurring) {
         this.id = id;
         this.accountId = accountId;
         this.amount = amount;
-        this.date = date;
+        this.startDate = startDate;
         this.clearedDate = clearedDate;
+        this.repeatInterval = repeatInterval;
         this.payeeId = payeeId;
         this.categoryId = categoryId;
         this.number = number;
@@ -42,12 +42,12 @@ public class Transaction {
         this.recurring = recurring;
     }
 
-
-    public Transaction(int accountId, BigDecimal amount, Date date, Date clearedDate, int payeeId, int categoryId, String number, String note, int cleared, int recurring) {
+    public Recurring(int accountId, BigDecimal amount, Date startDate, Date clearedDate, int repeatInterval, int payeeId, int categoryId, String number, String note, int cleared, int recurring) {
         this.accountId = accountId;
         this.amount = amount;
-        this.date = date;
+        this.startDate = startDate;
         this.clearedDate = clearedDate;
+        this.repeatInterval = repeatInterval;
         this.payeeId = payeeId;
         this.categoryId = categoryId;
         this.number = number;
@@ -56,9 +56,8 @@ public class Transaction {
         this.recurring = recurring;
     }
 
-    public Transaction() {
+    public Recurring() {
     }
-
 
     public int getId() {
         return id;
@@ -84,12 +83,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getClearedDate() {
@@ -98,6 +97,14 @@ public class Transaction {
 
     public void setClearedDate(Date clearedDate) {
         this.clearedDate = clearedDate;
+    }
+
+    public int getRepeatInterval() {
+        return repeatInterval;
+    }
+
+    public void setRepeatInterval(int repeatInterval) {
+        this.repeatInterval = repeatInterval;
     }
 
     public int getPayeeId() {
