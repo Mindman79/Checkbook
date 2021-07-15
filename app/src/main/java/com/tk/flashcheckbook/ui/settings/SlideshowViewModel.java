@@ -1,12 +1,8 @@
-package com.tk.flashcheckbook.ui.slideshow;
-
-import android.content.Intent;
+package com.tk.flashcheckbook.ui.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.tk.flashcheckbook.TransactionEditorActivity;
 
 public class SlideshowViewModel extends ViewModel {
 

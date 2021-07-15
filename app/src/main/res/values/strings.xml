@@ -9,7 +9,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_settings">Settings</string>
     <string name="title_activity_transaction_editor">Add Transaction</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -125,4 +125,20 @@
     <string name="enter_category">Enter category</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="transaction_header">Transactions</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Enable Decimal Separator</string>
+    <string name="attachment_title">Enable Predictive Category Selection</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">When a Payee exists, the last used Category is saved. When enabled, this setting will pull the most recent Category name into a transaction, based upon the entered Payee name.</string>
 </resources>

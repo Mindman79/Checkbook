@@ -19,7 +19,7 @@
 
     <fragment
             android:id="@+id/nav_slideshow"
-            android:name="com.tk.flashcheckbook.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow" />
+            android:name="com.tk.flashcheckbook.ui.settings.SettingsFragment"
+            android:label="@string/menu_settings"
+            tools:layout="@layout/fragment_settings" />
 </navigation>
