@@ -13,8 +13,8 @@
 
     <fragment
             android:id="@+id/nav_gallery"
-            android:name="com.tk.flashcheckbook.ui.account.GalleryFragment"
-            android:label="@string/menu_gallery"
+            android:name="com.tk.flashcheckbook.ui.account.AccountFragment"
+            android:label="@string/menu_account"
             tools:layout="@layout/fragment_gallery" />
 
     <fragment
