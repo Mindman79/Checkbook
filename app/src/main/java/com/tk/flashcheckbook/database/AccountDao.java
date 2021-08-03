@@ -24,7 +24,7 @@ public interface AccountDao {
     void deleteAccount(Account account);
 
     @Query("SELECT * FROM `account` WHERE id = :id")
-    Account getAccountById(int id);
+    Account getAccountByID(int id);
 
     @Query("SELECT * FROM `account` ORDER BY name desc")
     LiveData<List<Account>> getAllAccounts();

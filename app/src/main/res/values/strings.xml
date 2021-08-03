@@ -141,4 +141,9 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">When a Payee exists, the last used Category is saved. When enabled, this setting will pull the most recent Category name into a transaction, based upon the entered Payee name.</string>
+    <string name="enter_account_name">Enter account name</string>
+    <string name="enter_account_starting_date">Enter account starting date</string>
+    <string name="enter_account_starting_balance">Enter account starting balance</string>
+    <string name="new_account">New account</string>
+    <string name="edit_account">Edit Account</string>
 </resources>

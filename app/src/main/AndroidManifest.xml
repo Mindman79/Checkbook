@@ -9,9 +9,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.FlashCheckbook">
+        <activity android:name=".ui.account.AccountActivity"></activity>
         <activity
                 android:name=".ui.settings.SettingsActivity"
-                android:label="@string/title_activity_settings"></activity>
+                android:label="@string/title_activity_settings" />
         <activity
                 android:name=".TransactionEditorActivity"
                 android:label="@string/new_transaction"

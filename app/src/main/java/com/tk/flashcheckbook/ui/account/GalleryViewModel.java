@@ -1,4 +1,4 @@
-package com.tk.flashcheckbook.ui.gallery;
+package com.tk.flashcheckbook.ui.account;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

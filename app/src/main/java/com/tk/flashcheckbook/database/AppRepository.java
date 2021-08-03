@@ -20,6 +20,10 @@ public class AppRepository {
     public LiveData<List<Transaction>> transactionList;
     public LiveData<List<Payee>> payeeList;
     public LiveData<List<Category>> categoryList;
+    public LiveData<List<Account>> accountList;
+    public LiveData<List<PayPeriod>> payPeriodList;
+    public LiveData<List<Recurring>> recurringList;
+
     private AppDatabase db;
     private Executor executor = Executors.newSingleThreadExecutor();
     public int payeeId;
@@ -43,6 +47,7 @@ public class AppRepository {
         transactionList = getAllTransactions();
         payeeList = getAllPayees();
         categoryList = getAllCategories();
+        accountList = getAllAccounts();
 
 
     }
@@ -79,6 +84,12 @@ public class AppRepository {
     private LiveData<List<Category>> getAllCategories() {
 
         return db.categoryDao().getAllCategories();
+
+    }
+
+    private LiveData<List<Account>> getAllAccounts() {
+
+        return db.accountDao().getAllAccounts();
 
     }
 
@@ -226,6 +237,38 @@ public class AppRepository {
 
 
             return db.transactionDao().getTotalofAllTransactions();
+
+    }
+
+    public Account getAccountById(int accountId) {
+
+        return db.accountDao().getAccountByID(accountId);
+
+    }
+
+    public void insertAccount(Account account) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.accountDao().insertAccount(account);
+
+            }
+        });
+
+
+    }
+
+    public void deleteAccount(Account account) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                db.accountDao().deleteAccount(account);
+
+            }
+        });
 
     }
 }

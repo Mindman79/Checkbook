@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_account_editor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.account.AccountEditorActivity"
+        android:id="@+id/nestedScrollView2">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/account_detail_name"
+            tools:layout_editor_absoluteX="0dp"
+            android:hint="@string/enter_account_name"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/account_detail_starting_date"
+
+            />
+
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:ems="10"
+            android:id="@+id/account_detail_starting_date"
+            tools:layout_editor_absoluteX="0dp"
+            android:hint="@string/enter_account_starting_date"
+            app:layout_constraintTop_toBottomOf="@+id/account_detail_name"
+            android:focusable="true"
+            android:layout_marginTop="16dp" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:ems="10"
+            android:id="@+id/account_detail_starting_balance"
+            tools:layout_editor_absoluteX="0dp"
+            android:hint="@string/enter_account_starting_balance"
+            app:layout_constraintTop_toBottomOf="@+id/account_detail_starting_date"
+            android:focusable="true"
+            android:layout_marginTop="16dp" />
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

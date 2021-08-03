@@ -1,4 +1,4 @@
-package com.tk.flashcheckbook.ui.gallery;
+package com.tk.flashcheckbook.ui.account;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
