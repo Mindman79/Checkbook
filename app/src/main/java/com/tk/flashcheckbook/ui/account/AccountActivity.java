@@ -55,6 +55,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
+
         setContentView(R.layout.activity_account);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

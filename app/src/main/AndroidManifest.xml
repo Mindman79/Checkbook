@@ -9,7 +9,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.FlashCheckbook">
-        <activity android:name=".ui.account.AccountActivity"></activity>
+        <activity
+
+                android:name=".ui.account.AccountActivity"
+                android:theme="@style/Theme.FlashCheckbook.NoActionBar" />
+
+
         <activity
                 android:name=".ui.settings.SettingsActivity"
                 android:label="@string/title_activity_settings" />
