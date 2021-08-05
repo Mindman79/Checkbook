@@ -102,9 +102,11 @@ public class AccountEditorViewModel extends AndroidViewModel {
 
         } else {
 
-            account.setName(account.getName());
-            account.setStartBal(account.getStartBal());
-            account.setStartDate(account.getStartDate());
+            BigDecimal amountToDB = new BigDecimal(startBal);
+
+            account.setName(name);
+            account.setStartBal(amountToDB);
+            account.setStartDate(startDate);
 
 
         }

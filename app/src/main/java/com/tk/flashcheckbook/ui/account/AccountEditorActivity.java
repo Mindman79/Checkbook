@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.tk.flashcheckbook.MainActivity;
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.TransactionEditorActivity;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.AccountEditorViewModel;
@@ -47,11 +48,16 @@ import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 public class AccountEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.transaction_detail_note)
+    @BindView(R.id.account_detail_name)
     TextView accountName;
+
+    @BindView(R.id.account_detail_starting_date)
     TextView accountStartDate;
+
+    @BindView(R.id.account_detail_starting_balance)
     TextView accountStartBalance;
 
+    DatePickerDialog picker;
 
 
     private AccountEditorViewModel accountViewModel;
@@ -226,7 +232,7 @@ public class AccountEditorActivity extends AppCompatActivity {
 
         //TODO: Add more checks
 
-        if (name.length() < 1) {
+        if (!name.isEmpty() && !amount.isEmpty()) {
 
 
             accountViewModel.saveAccount(name, amount, date);
@@ -234,7 +240,7 @@ public class AccountEditorActivity extends AppCompatActivity {
 
             finish();
 
-            startActivity(new Intent(this, AccountEditorActivity.class));
+            startActivity(new Intent(this, AccountActivity.class));
             overridePendingTransition(0, 0);
 
 
@@ -259,4 +265,62 @@ public class AccountEditorActivity extends AppCompatActivity {
 
 
     }
+
+    @OnTouch(R.id.account_detail_starting_date)
+    public boolean onTouchCropView2(MotionEvent event) {
+
+        if (MotionEvent.ACTION_UP == event.getAction()) {
+
+
+            final Calendar cldr = Calendar.getInstance();
+            int day = cldr.get(Calendar.DAY_OF_MONTH);
+            int month = cldr.get(Calendar.MONTH);
+            int year = cldr.get(Calendar.YEAR);
+
+
+
+
+            // date picker dialog
+            picker = new DatePickerDialog(AccountEditorActivity.this,
+                    (view1, year1, monthOfYear, dayOfMonth) -> {
+
+
+                        String monthString = String.valueOf(monthOfYear + 1);
+                        String dayString = String.valueOf(dayOfMonth);
+                        String yearString = String.valueOf(year1).substring(2);
+                        String finalDisplayedMonth;
+                        String finalDisplayedDate;
+
+                        if(monthOfYear < 10){
+                            finalDisplayedMonth = "0" + monthString;
+                        } else {
+                            finalDisplayedMonth = monthString;
+                        }
+
+                        if(dayOfMonth < 10){
+                            finalDisplayedDate = "0" + dayString;
+                        } else {
+                            finalDisplayedDate = dayString;
+                        }
+
+
+
+
+                        String date = finalDisplayedMonth + "/" + finalDisplayedDate + "/" + yearString;
+
+
+                        accountStartDate.setText(date);
+
+                    }, year, month, day);
+            picker.show();
+
+
+        }
+
+        return false;
+    }
+
+
+
+
 }

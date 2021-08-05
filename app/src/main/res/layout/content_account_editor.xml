@@ -12,7 +12,6 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/account_detail_name"
             tools:layout_editor_absoluteX="0dp"
@@ -38,6 +37,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:clickable="true"
             android:ems="10"
             android:id="@+id/account_detail_starting_balance"
