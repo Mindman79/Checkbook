@@ -34,7 +34,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.main_recycler_view)
     RecyclerView rv;
 
     @BindView(R.id.clearedAmount)

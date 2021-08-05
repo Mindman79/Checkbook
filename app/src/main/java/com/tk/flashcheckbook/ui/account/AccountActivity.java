@@ -1,5 +1,6 @@
 package com.tk.flashcheckbook.ui.account;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -15,7 +16,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.tk.flashcheckbook.R;
 import com.tk.flashcheckbook.database.Account;
@@ -27,12 +27,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 public class AccountActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.account_recycler_view)
-    RecyclerView rv;
+
+    @BindView(R.id.account_recycler_view_test)
+    RecyclerView rv2;
 
 
     @OnClick(R.id.new_account_fab)
@@ -70,17 +72,6 @@ public class AccountActivity extends AppCompatActivity {
         initViewModel();
 
 
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-//                .setDrawerLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     private void initViewModel() {
@@ -97,7 +88,7 @@ public class AccountActivity extends AppCompatActivity {
             if (accountAdapter == null) {
 
                 accountAdapter = new AccountAdapter(accountData, AccountActivity.this);
-                rv.setAdapter(accountAdapter);
+                rv2.setAdapter(accountAdapter);
 
 
             } else {
@@ -118,9 +109,9 @@ public class AccountActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
 
-        rv.setHasFixedSize(true);
+        rv2.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(layoutManager);
+        rv2.setLayoutManager(layoutManager);
 
 
     }

@@ -25,11 +25,11 @@
             android:background="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
             />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/main_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:clickable="true"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/balance"
             android:layout_marginBottom="39dp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/balance"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
             app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="60dp"
             android:layout_marginBottom="37dp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.933"
             app:layout_constraintVertical_bias="0.0" />
@@ -91,7 +91,7 @@
             android:id="@+id/clearedAmount"
             app:layout_constraintTop_toBottomOf="@+id/balanceAmount"
             android:layout_marginBottom="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cleared"
             app:layout_constraintHorizontal_bias="0.944"

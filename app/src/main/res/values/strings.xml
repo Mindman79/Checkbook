@@ -146,4 +146,6 @@
     <string name="enter_account_starting_balance">Enter account starting balance</string>
     <string name="new_account">New account</string>
     <string name="edit_account">Edit Account</string>
+    <string name="title_activity_account">Accounts</string>
+    <string name="title_activity_account_editor">Account Editor</string>
 </resources>
