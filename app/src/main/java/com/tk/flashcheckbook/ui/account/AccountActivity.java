@@ -1,6 +1,5 @@
 package com.tk.flashcheckbook.ui.account;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -27,14 +26,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 
 public class AccountActivity extends AppCompatActivity {
 
 
 
-    @BindView(R.id.account_recycler_view_test)
-    RecyclerView rv2;
+    @BindView(R.id.account_recycler_view)
+    RecyclerView rv;
 
 
     @OnClick(R.id.new_account_fab)
@@ -88,7 +86,7 @@ public class AccountActivity extends AppCompatActivity {
             if (accountAdapter == null) {
 
                 accountAdapter = new AccountAdapter(accountData, AccountActivity.this);
-                rv2.setAdapter(accountAdapter);
+                rv.setAdapter(accountAdapter);
 
 
             } else {
@@ -109,9 +107,9 @@ public class AccountActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
 
-        rv2.setHasFixedSize(true);
+        rv.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rv2.setLayoutManager(layoutManager);
+        rv.setLayoutManager(layoutManager);
 
 
     }

@@ -9,7 +9,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/account_recycler_view_test"
+            android:id="@+id/account_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:clickable="true"

@@ -42,6 +42,7 @@ import butterknife.OnTouch;
 
 import static com.tk.flashcheckbook.util.Constants.ACCOUNT_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
+import static com.tk.flashcheckbook.util.Constants.EDITING_KEY;
 import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
@@ -62,7 +63,7 @@ public class AccountEditorActivity extends AppCompatActivity {
 
     private AccountEditorViewModel accountViewModel;
     private boolean isNewAccount;
-    private boolean isCleared;
+    private boolean isEditing;
 
 
 
@@ -84,6 +85,12 @@ public class AccountEditorActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //Handling device orientation switches
+        if (savedInstanceState != null) {
+
+            isEditing = savedInstanceState.getBoolean(EDITING_KEY);
+
+        }
 
         initViewModel();
 
@@ -95,12 +102,25 @@ public class AccountEditorActivity extends AppCompatActivity {
 
         accountViewModel = new ViewModelProvider(this).get(AccountEditorViewModel.class);
 
-
+        //TODO: Investigate what to do about picking dates with in landscape mode
 
         accountViewModel.liveAccount.observe(this, account -> {
 
             String formattedDate = Formatters.dateToString(account.getStartDate());
 
+            if (account != null && isEditing == true) {
+
+                accountName.setText(accountName.getText());
+                accountStartDate.setText(accountStartDate.getText().toString());
+                accountStartBalance.setText(accountStartBalance.getText());
+
+            } else {
+
+                accountName.setText(account.getName());
+                accountStartDate.setText(formattedDate);
+                accountStartBalance.setText(account.getStartBal().toString());
+
+            }
 
             //TODO: Maybe reuse this code for setting the switch of the account balance to positive or negative
 
@@ -117,9 +137,7 @@ public class AccountEditorActivity extends AppCompatActivity {
 //            }
 
 
-            accountName.setText(account.getName());
-            accountStartDate.setText(formattedDate);
-            accountStartBalance.setText(account.getStartBal().toString());
+
             
 
         });
@@ -321,6 +339,9 @@ public class AccountEditorActivity extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(EDITING_KEY, true);
+        super.onSaveInstanceState(outState);
+    }
 }

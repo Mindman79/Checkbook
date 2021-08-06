@@ -19,21 +19,19 @@
 
     <TextView
             android:text="Account"
-            android:layout_width="100dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:id="@+id/account_name"
-            android:maxLines="2"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textSize="@dimen/trans_list_text_size"
             android:textColor="@color/trans_list_text_color"
             app:layout_constraintStart_toEndOf="@+id/account_fab"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.113" />
-
-
+            app:layout_constraintVertical_bias="0.615"
+            android:layout_marginStart="8dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
