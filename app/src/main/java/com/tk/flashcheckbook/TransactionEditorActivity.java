@@ -47,6 +47,7 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 
 import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
+import static com.tk.flashcheckbook.util.Constants.EDITING_KEY;
 import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
@@ -77,6 +78,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private TransactionEditorViewModel transViewModel;
     private boolean tNewTrans;
     private boolean isCleared;
+    private boolean isEditing;
 
     DatePickerDialog picker;
 
@@ -99,6 +101,13 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //Handling device orientation switches
+        if (savedInstanceState != null) {
+
+            isEditing = savedInstanceState.getBoolean(EDITING_KEY);
+
+        }
+
 
         initViewModel();
 
@@ -112,23 +121,42 @@ public class TransactionEditorActivity extends AppCompatActivity {
 
         transViewModel.livePayee.observe(this, payee -> {
 
-            transactionPayee.setText(payee.getName());
+
+            if (payee != null && isEditing == true) {
+
+                transactionPayee.setText(transactionPayee.getText());
+
+            } else {
+
+                transactionPayee.setText(payee.getName());
+
+            }
+
 
         });
 
 
         transViewModel.liveCategory.observe(this, category -> {
 
-            transactionCategory.setText(category.getName());
 
+            if (category != null && isEditing == true) {
+
+                transactionCategory.setText(transactionCategory.getText());
+
+            } else {
+
+                transactionCategory.setText(category.getName());
+
+            }
 
         });
+
+
+        //TODO: Figure out how to do drop down selections when existing payees are present in landscape mode
 
         transViewModel.liveTransaction.observe(this, transaction -> {
 
             String formattedDate = Formatters.dateToString(transaction.getDate());
-            //String payee = transViewModel.;
-            String category;
 
             boolean switchCleared;
 
@@ -142,12 +170,31 @@ public class TransactionEditorActivity extends AppCompatActivity {
                 switchCleared = false;
             }
 
+            if (transaction != null && isEditing == true) {
 
-            transactionAmount.setText(transaction.getAmount().toString());
-            transactionNote.setText(transaction.getNote());
-            transactionDate.setText(formattedDate);
-            transactionNumber.setText(transaction.getNumber());
-            transactionCleared.setChecked(switchCleared);
+
+                transactionAmount.setText(transactionAmount.getText());
+                transactionNote.setText(transactionNote.getText());
+                transactionDate.setText(transactionDate.getText());
+                transactionNumber.setText(transactionNumber.getText());
+                transactionCleared.setChecked(transactionCleared.isChecked());
+
+
+            } else {
+
+                transactionAmount.setText(transaction.getAmount().toString());
+                transactionNote.setText(transaction.getNote());
+                transactionDate.setText(formattedDate);
+                transactionNumber.setText(transaction.getNumber());
+                transactionCleared.setChecked(switchCleared);
+
+            }
+
+
+
+
+
+
 
         });
 
@@ -416,8 +463,6 @@ public class TransactionEditorActivity extends AppCompatActivity {
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
         number = transactionNumber.getText().toString();
         payee = transactionPayee.getText().toString();
-
-
         category = transactionCategory.getText().toString();
 
 
@@ -451,7 +496,13 @@ public class TransactionEditorActivity extends AppCompatActivity {
         }
 
 
-
-
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(EDITING_KEY, true);
+        super.onSaveInstanceState(outState);
+    }
+
 }

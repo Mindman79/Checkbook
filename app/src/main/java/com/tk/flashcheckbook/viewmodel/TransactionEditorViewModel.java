@@ -218,6 +218,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             category.setName(name);
             category.setId(globalcategoryId + 1);
 
+            //TODO: Fix category and payee saving bug here
 
         } else {
 
