@@ -8,6 +8,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -110,6 +111,11 @@ public class AccountActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(rv.getContext(), layoutManager.getOrientation());
+
+        rv.addItemDecoration(divider);
+
 
 
     }

@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -169,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(rv.getContext(), layoutManager.getOrientation());
+
+        rv.addItemDecoration(divider);
 
 
     }
