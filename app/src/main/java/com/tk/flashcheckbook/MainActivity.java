@@ -11,6 +11,7 @@ import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
+import com.tk.flashcheckbook.ui.account.FirstTimeSetup;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
 import androidx.lifecycle.Observer;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
         //getWindow().getDecorView().findVById(R.layout.activity_main).invalidate();
 
 
@@ -85,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
         //ViewModel stuff
         initViewModel();
+
+        if (mainViewModel.getAccountCount() == 0) {
+
+            Intent intent = new Intent(this, FirstTimeSetup.class);
+            startActivity(intent);
+
+        }
 
         //clearedAmount.invalidate();
         String balanceAmount = String.valueOf(mainViewModel.getTotalofAllTransactions());

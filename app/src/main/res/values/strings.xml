@@ -148,4 +148,5 @@
     <string name="edit_account">Edit Account</string>
     <string name="title_activity_account">Accounts</string>
     <string name="title_activity_account_editor">Account Editor</string>
+    <string name="welcome_to_flash_checkbook">Welcome to Flash Checkbook! It appears you are using the app for the first time. Congratulations to you! In order to proceed, you need to add at least one account to track, usually a checking account. Click the button below to proceed - you can add or remove accounts at any time after this step.</string>
 </resources>

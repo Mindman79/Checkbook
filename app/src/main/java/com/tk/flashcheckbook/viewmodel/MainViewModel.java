@@ -58,4 +58,9 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    public int getAccountCount() {
+
+        return repository.getAccountCount();
+
+    }
 }

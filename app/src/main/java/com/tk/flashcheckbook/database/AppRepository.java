@@ -271,6 +271,12 @@ public class AppRepository {
         });
 
     }
+
+    public int getAccountCount() {
+
+        return db.accountDao().getAccountCount();
+
+    }
 }
 
 
