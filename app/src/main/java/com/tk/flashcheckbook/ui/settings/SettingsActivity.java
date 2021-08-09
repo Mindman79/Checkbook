@@ -1,12 +1,19 @@
 package com.tk.flashcheckbook.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.tk.flashcheckbook.MainActivity;
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.ui.account.AccountActivity;
+
+import java.text.ParseException;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -32,4 +39,20 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+
+            startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(0, 0);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }

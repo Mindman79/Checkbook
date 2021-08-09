@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tk.flashcheckbook.MainActivity;
 import com.tk.flashcheckbook.R;
 import com.tk.flashcheckbook.database.Account;
 import com.tk.flashcheckbook.ui.AccountAdapter;
@@ -57,9 +58,12 @@ public class AccountActivity extends AppCompatActivity {
 
 
 
+
         setContentView(R.layout.activity_account);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Binding
         ButterKnife.bind(this);
@@ -144,6 +148,14 @@ public class AccountActivity extends AppCompatActivity {
 
 
             return true;
+        } else if (id == android.R.id.home){
+
+            startActivity(new Intent(this, MainActivity.class));
+
+            return true;
+
+
+
         }
 
 
