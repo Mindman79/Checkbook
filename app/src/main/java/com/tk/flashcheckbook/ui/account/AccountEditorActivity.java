@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,7 +40,9 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import butterknife.OnTouch;
+import butterknife.Optional;
 
 import static com.tk.flashcheckbook.util.Constants.ACCOUNT_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
@@ -58,12 +62,16 @@ public class AccountEditorActivity extends AppCompatActivity {
     @BindView(R.id.account_detail_starting_balance)
     TextView accountStartBalance;
 
+    @BindView(R.id.account_save_button)
+    Button addAccountButton;
+
     DatePickerDialog picker;
 
 
     private AccountEditorViewModel accountViewModel;
     private boolean isNewAccount;
     private boolean isEditing;
+    private boolean isFirstAccount;
 
 
 
@@ -77,7 +85,6 @@ public class AccountEditorActivity extends AppCompatActivity {
 
         //TODO: Change graphic for back button
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_gallery);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -93,6 +100,27 @@ public class AccountEditorActivity extends AppCompatActivity {
         }
 
         initViewModel();
+
+
+
+        if (accountViewModel.getAccountCount() == 0) {
+
+            isFirstAccount = true;
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            addAccountButton.setVisibility(View.VISIBLE);
+            setTitle(getString(R.string.add_initial_account));
+
+
+        } else {
+
+            isFirstAccount = false;
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            addAccountButton.setVisibility(View.INVISIBLE);
+            //addAccountButton.setEnabled(false);
+
+
+        }
+
 
     }
 
@@ -258,7 +286,17 @@ public class AccountEditorActivity extends AppCompatActivity {
 
             finish();
 
-            startActivity(new Intent(this, AccountActivity.class));
+            if (isFirstAccount == true ) {
+
+                startActivity(new Intent(this, MainActivity.class));
+
+            } else {
+
+                startActivity(new Intent(this, AccountActivity.class));
+
+            }
+
+
             overridePendingTransition(0, 0);
 
 
@@ -338,6 +376,19 @@ public class AccountEditorActivity extends AppCompatActivity {
         return false;
     }
 
+
+    @Optional
+    @OnClick(R.id.account_save_button)
+    public void submit(View view)  {
+
+        try {
+            saveAndReturn();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

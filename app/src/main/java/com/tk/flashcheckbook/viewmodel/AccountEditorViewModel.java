@@ -127,4 +127,9 @@ public class AccountEditorViewModel extends AndroidViewModel {
     }
 
 
+    public int getAccountCount() {
+
+        return repository.getAccountCount();
+
+    }
 }
