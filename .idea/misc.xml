@@ -4,13 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/account_list_item.xml" value="0.3292806484295846" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/account_spinner.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_account_editor.xml" value="0.23328267477203649" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_first_time_setup.xml" value="0.31476449275362317" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_main.xml" value="0.3485309017223911" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_transaction_editor.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/app_bar_main.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_account_editor.xml" value="0.3292806484295846" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_first_time_setup.xml" value="0.31476449275362317" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_transaction_editor.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/fragment_home.xml" value="0.3292806484295846" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/menu/activity_main_drawer.xml" value="0.43948717948717947" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/menu/main_menu.xml" value="0.264" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/menu/menu_test.xml" value="0.43796296296296294" />
       </map>
     </option>
   </component>

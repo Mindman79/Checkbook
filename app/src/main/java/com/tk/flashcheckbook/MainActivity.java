@@ -1,9 +1,16 @@
 package com.tk.flashcheckbook;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -14,6 +21,7 @@ import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.ui.account.FirstTimeSetup;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -45,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.balanceAmount)
     TextView balanceAmountTextView;
 
+    @BindView(R.id.account_spinner)
+    Spinner accountSelectSpinner;
+
 
     @OnClick(R.id.newtransfab)
     void fabClickHandler() {
@@ -69,18 +80,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-        //getWindow().getDecorView().findVById(R.layout.activity_main).invalidate();
-
-
-
-        setContentView(R.layout.activity_main);
+                setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Set custom view for spinner in Action Bar
+        ActionBar actionBar = getSupportActionBar();
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.account_spinner, null);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setCustomView(v);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+
+
+
+
+
         //Binding
         ButterKnife.bind(this);
+
+        String[] arraySpinner = new String[] {
+                "1", "2", "3", "4", "5", "6", "7"
+        };
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        accountSelectSpinner.setAdapter(adapter);
 
 
 
@@ -107,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
         //transactionData.addAll(mainViewModel.transactionsList);
-
-
-
 
 
 
@@ -194,8 +220,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+
+
+
         return true;
     }
+
+
 
 
     @Override

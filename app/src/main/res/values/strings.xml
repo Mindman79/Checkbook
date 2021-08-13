@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Checking!!</string>
     <string name="menu_account">Accounts</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_transaction_editor">Add Transaction</string>
@@ -151,4 +151,5 @@
     <string name="welcome_to_flash_checkbook">Welcome to Flash Checkbook! It appears you are using the app for the first time. Congratulations to you! In order to proceed, you need to add at least one account to track, usually a checking account. Click the button below to proceed - you can add or remove accounts at any time after this step.</string>
     <string name="save_and_begin">Save and Begin</string>
     <string name="add_initial_account">Add Initial Account</string>
+    <string name="transaction_editor_title">Edit Transaction</string>
 </resources>
