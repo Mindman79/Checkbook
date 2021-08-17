@@ -26,7 +26,7 @@ public interface AccountDao {
     @Query("SELECT * FROM `account` WHERE id = :id")
     Account getAccountByID(int id);
 
-    @Query("SELECT * FROM `account` ORDER BY name desc")
+    @Query("SELECT * FROM `account` ORDER BY name DESC")
     LiveData<List<Account>> getAllAccounts();
 
     @Query("DELETE FROM `account`")
@@ -35,5 +35,6 @@ public interface AccountDao {
     @Query("SELECT COUNT(*) FROM `account`")
     int getAccountCount();
 
-
+    @Query("SELECT name FROM 'account' ORDER BY name DESC")
+    String[] getAccountNames();
 }

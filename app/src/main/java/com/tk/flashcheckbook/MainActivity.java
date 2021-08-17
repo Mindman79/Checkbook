@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,6 +39,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
+import butterknife.OnItemSelected;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.balanceAmount)
     TextView balanceAmountTextView;
 
-    @BindView(R.id.account_spinner)
+    @BindView(R.id.account_select_spinner)
     Spinner accountSelectSpinner;
 
 
@@ -93,23 +93,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
 
 
-
-
-
-
         //Binding
         ButterKnife.bind(this);
-
-        String[] arraySpinner = new String[] {
-                "1", "2", "3", "4", "5", "6", "7"
-        };
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        accountSelectSpinner.setAdapter(adapter);
 
 
 
@@ -118,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
         //ViewModel stuff
         initViewModel();
+
+        initSpinner();
 
         if (mainViewModel.getAccountCount() == 0) {
 
@@ -152,6 +139,32 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    private void initSpinner() {
+
+        String[] accountNames = mainViewModel.getAccountNames();
+
+        String[] arraySpinner = new String[] {
+                "1", "2", "3", "4", "5", "6", "7"
+        };
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountNames);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        accountSelectSpinner.setAdapter(adapter);
+
+
+    }
+
+    @OnItemSelected(R.id.account_select_spinner)
+    public void updateViewUsingSpinner() {
+
+
+
+
     }
 
     private void initViewModel() {

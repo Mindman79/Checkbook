@@ -63,4 +63,10 @@ public class MainViewModel extends AndroidViewModel {
         return repository.getAccountCount();
 
     }
+
+    public String[] getAccountNames() {
+
+        return repository.getAccountNames();
+
+    }
 }
