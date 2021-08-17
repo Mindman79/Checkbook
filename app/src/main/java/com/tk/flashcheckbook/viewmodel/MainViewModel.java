@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.tk.flashcheckbook.database.Account;
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
@@ -67,6 +68,12 @@ public class MainViewModel extends AndroidViewModel {
     public String[] getAccountNames() {
 
         return repository.getAccountNames();
+
+    }
+
+    public Account getAccountByName(String name) {
+
+        return repository.getAccountByName(name);
 
     }
 }

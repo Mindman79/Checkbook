@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tk.flashcheckbook.database.Account;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
@@ -163,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
     public void updateViewUsingSpinner() {
 
 
+        String name = accountSelectSpinner.getSelectedItem().toString();
+
+        Account account = mainViewModel.getAccountByName(name);
 
 
     }

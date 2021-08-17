@@ -282,6 +282,12 @@ public class AppRepository {
 
         return db.accountDao().getAccountNames();
     }
+
+    public Account getAccountByName(String name) {
+
+        return db.accountDao().getAccountByName(name);
+
+    }
 }
 
 
