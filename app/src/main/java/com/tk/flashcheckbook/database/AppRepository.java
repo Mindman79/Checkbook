@@ -1,9 +1,15 @@
 package com.tk.flashcheckbook.database;
 
+//import static android.app.PendingIntent.getActivity;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.preference.PreferenceManager;
 
+import com.tk.flashcheckbook.R;
 import com.tk.flashcheckbook.util.SampleData;
 
 import java.math.BigDecimal;
@@ -11,8 +17,17 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class AppRepository {
 
+//TODO: See if this extends is needed
+public class AppRepository extends AppCompatActivity {
+
+
+//    private final String MY_PREFS = "myPrefs";
+//    SharedPreferences preferences = getSharedPreferences(MY_PREFS,Context.MODE_PRIVATE);
+//
+//
+//    int defaultValue = getResources().getInteger(R.integer.selected_account_id_default_key);
+//    int accountId = preferences.getInt(getString(R.integer.selected_account_id), defaultValue);
 
     private static AppRepository ourInstance;
 
@@ -31,6 +46,10 @@ public class AppRepository {
 
 
 
+
+
+
+
     public static AppRepository getInstance(Context context) {
 
         if (ourInstance == null) {
@@ -44,6 +63,10 @@ public class AppRepository {
     public AppRepository(Context context) {
 
         db = AppDatabase.getInstance(context);
+
+
+
+
         transactionList = getAllTransactions();
         payeeList = getAllPayees();
         categoryList = getAllCategories();
@@ -69,11 +92,19 @@ public class AppRepository {
     }
 
     //Method that determines if the data is local or remote
+    private LiveData<List<Transaction>> getAllTransactionsByAccountID(int id) {
+
+        return db.transactionDao().getAllTransactionsByAccountID(id);
+
+    }
+
+    //Method that determines if the data is local or remote
     private LiveData<List<Transaction>> getAllTransactions() {
 
         return db.transactionDao().getAllTransactions();
 
     }
+
 
     private LiveData<List<Payee>> getAllPayees() {
 

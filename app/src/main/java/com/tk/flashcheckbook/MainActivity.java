@@ -2,6 +2,7 @@ package com.tk.flashcheckbook;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.ui.account.FirstTimeSetup;
+import com.tk.flashcheckbook.util.MyProperties;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
 import androidx.appcompat.app.ActionBar;
@@ -30,6 +32,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.account_select_spinner)
     Spinner accountSelectSpinner;
 
+    int accountId = MyProperties.getInstance().accountId;
+
 
     @OnClick(R.id.newtransfab)
     void fabClickHandler() {
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
                 setContentView(R.layout.activity_main);
@@ -164,9 +170,15 @@ public class MainActivity extends AppCompatActivity {
     public void updateViewUsingSpinner() {
 
 
+
+
         String name = accountSelectSpinner.getSelectedItem().toString();
 
         Account account = mainViewModel.getAccountByName(name);
+
+        int acctId = account.getId();
+
+        accountId = acctId;
 
 
     }
@@ -209,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
+
+
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.transactionsList.observe(this, transactionObserver);

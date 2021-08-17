@@ -25,6 +25,9 @@ public interface TransactionDao {
     @Query("SELECT * FROM `transaction` WHERE id = :id")
     Transaction getTransactionById(int id);
 
+    @Query("SELECT * FROM `transaction` where accountId = :id ORDER BY date DESC")
+    LiveData<List<Transaction>> getAllTransactionsByAccountID(int id);
+
     @Query("SELECT * FROM `transaction` ORDER BY date DESC")
     LiveData<List<Transaction>> getAllTransactions();
 

@@ -152,4 +152,6 @@
     <string name="save_and_begin">Save and Begin</string>
     <string name="add_initial_account">Add Initial Account</string>
     <string name="transaction_editor_title">Edit Transaction</string>
+    <string name="selected_account_id">selected_account_id</string>
+    <string name="preference_file_key">preference_file_key</string>
 </resources>

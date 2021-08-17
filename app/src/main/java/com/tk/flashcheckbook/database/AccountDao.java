@@ -40,4 +40,5 @@ public interface AccountDao {
 
     @Query("SELECT name FROM 'account' ORDER BY name DESC")
     String[] getAccountNames();
+
 }
