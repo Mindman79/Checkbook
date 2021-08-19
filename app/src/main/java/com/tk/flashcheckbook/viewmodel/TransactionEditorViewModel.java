@@ -84,7 +84,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     //Convert strings to appropriate Entity types in this method
 
 
-    public void saveTransaction(String amount, String note, Date date, String number, Integer cleared) throws ParseException {
+    public void saveTransaction(Integer accountId, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
 
 
         Transaction transaction = liveTransaction.getValue();
@@ -119,6 +119,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
+            transaction.setAccountId(accountId);
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());
@@ -139,6 +140,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
+            transaction.setAccountId(accountId);
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());

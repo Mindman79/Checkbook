@@ -8,6 +8,8 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.util.Formatters;
+import com.tk.flashcheckbook.util.Globals;
+import com.tk.flashcheckbook.util.MyProperties;
 import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import androidx.annotation.NonNull;
@@ -81,6 +83,10 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private boolean isEditing;
 
     DatePickerDialog picker;
+
+    Globals sharedData = Globals.getInstance();
+
+    private int accountId = sharedData.getAccountId();
 
 
     //@RequiresApi(api = Build.VERSION_CODES.O)
@@ -436,6 +442,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
     private void saveAndReturn() throws Exception {
 
 
+        Integer acctId;
         String amount;
         String note;
         Date date;
@@ -458,6 +465,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         }
 
 
+        acctId = accountId;
         amount = transactionAmount.getText().toString();
         note = transactionNote.getText().toString();
         date = Formatters.fullDateFormat.parse(transactionDate.getText().toString());
@@ -469,7 +477,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         if (number.length() <= 10) {
 
 
-            transViewModel.saveTransaction(amount, note, date, number, cleared);
+            transViewModel.saveTransaction(acctId, amount, note, date, number, cleared);
             transViewModel.savePayee(payee);
             transViewModel.saveCategory(category);
 

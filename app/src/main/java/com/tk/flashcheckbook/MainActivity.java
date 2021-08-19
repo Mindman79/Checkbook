@@ -19,6 +19,7 @@ import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.ui.account.FirstTimeSetup;
+import com.tk.flashcheckbook.util.Globals;
 import com.tk.flashcheckbook.util.MyProperties;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.account_select_spinner)
     Spinner accountSelectSpinner;
 
-    int accountId = MyProperties.getInstance().accountId;
+    Globals sharedData = Globals.getInstance();
+
 
 
     @OnClick(R.id.newtransfab)
@@ -178,7 +180,8 @@ public class MainActivity extends AppCompatActivity {
 
         int acctId = account.getId();
 
-        accountId = acctId;
+        sharedData.setAccountId(acctId);
+
 
 
     }
