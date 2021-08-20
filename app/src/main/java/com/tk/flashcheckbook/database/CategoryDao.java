@@ -3,6 +3,7 @@ package com.tk.flashcheckbook.database;
 import android.database.Cursor;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,7 +28,7 @@ public interface CategoryDao {
     Category getCategoryById(int id);
 
     @Query("SELECT * FROM `category` ORDER BY name desc")
-    LiveData<List<Category>> getAllCategories();
+    List<Category> getAllCategories();
 
     @Query("DELETE FROM `category`")
     int deleteAllCategories();

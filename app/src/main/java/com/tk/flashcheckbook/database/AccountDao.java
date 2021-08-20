@@ -3,6 +3,7 @@ package com.tk.flashcheckbook.database;
 import android.widget.Adapter;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -30,7 +31,7 @@ public interface AccountDao {
     Account getAccountByName(String name);
 
     @Query("SELECT * FROM `account` ORDER BY name DESC")
-    LiveData<List<Account>> getAllAccounts();
+    List<Account> getAllAccounts();
 
     @Query("DELETE FROM `account`")
     int deleteAllAccounts();

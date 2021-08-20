@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.tk.flashcheckbook.database.Account;
 import com.tk.flashcheckbook.database.AppRepository;
@@ -17,9 +18,9 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public LiveData<List<Transaction>> transactionsList;
-    public LiveData<List<Payee>> payeesList;
-    public LiveData<List<Category>> categoryList;
+    public MutableLiveData<List<Transaction>> transactionsList;
+    public MutableLiveData<List<Payee>> payeesList;
+    public MutableLiveData<List<Category>> categoryList;
     private AppRepository repository;
 
 
@@ -27,12 +28,19 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
 
         repository = AppRepository.getInstance(application.getApplicationContext());
-        transactionsList = repository.transactionList;
         payeesList = repository.payeeList;
         categoryList = repository.categoryList;
 
     }
 
+
+    public MutableLiveData<List<Transaction>> getAllTransactionsByAccountId(int accountId) {
+
+        MutableLiveData transactions = repository.getAllTransactionsByAccountID(accountId);
+
+        return transactions;
+
+    }
 
     public void addSampleData() {
         repository.addSampleData();
@@ -76,6 +84,7 @@ public class MainViewModel extends AndroidViewModel {
         return repository.getAccountByName(name);
 
     }
+
 
 
 }

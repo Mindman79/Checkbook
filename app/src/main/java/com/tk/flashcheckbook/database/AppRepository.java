@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.preference.PreferenceManager;
 
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.util.Globals;
 import com.tk.flashcheckbook.util.SampleData;
 
 import java.math.BigDecimal;
@@ -31,11 +33,9 @@ public class AppRepository extends AppCompatActivity {
 
     private static AppRepository ourInstance;
 
-
-    public LiveData<List<Transaction>> transactionList;
-    public LiveData<List<Payee>> payeeList;
-    public LiveData<List<Category>> categoryList;
-    public LiveData<List<Account>> accountList;
+    public MutableLiveData<List<Payee>> payeeList;
+    public MutableLiveData<List<Category>> categoryList;
+    public MutableLiveData<List<Account>> accountList;
     public LiveData<List<PayPeriod>> payPeriodList;
     public LiveData<List<Recurring>> recurringList;
 
@@ -43,11 +43,6 @@ public class AppRepository extends AppCompatActivity {
     private Executor executor = Executors.newSingleThreadExecutor();
     public int payeeId;
     public int categoryId;
-
-
-
-
-
 
 
     public static AppRepository getInstance(Context context) {
@@ -65,9 +60,6 @@ public class AppRepository extends AppCompatActivity {
         db = AppDatabase.getInstance(context);
 
 
-
-
-        transactionList = getAllTransactions();
         payeeList = getAllPayees();
         categoryList = getAllCategories();
         accountList = getAllAccounts();
@@ -92,9 +84,13 @@ public class AppRepository extends AppCompatActivity {
     }
 
     //Method that determines if the data is local or remote
-    private LiveData<List<Transaction>> getAllTransactionsByAccountID(int id) {
+    public MutableLiveData<List<Transaction>> getAllTransactionsByAccountID(int id) {
 
-        return db.transactionDao().getAllTransactionsByAccountID(id);
+        final MutableLiveData<List<Transaction>> data = new MutableLiveData<>();
+
+        data.setValue(db.transactionDao().getAllTransactionsByAccountID(id));
+
+        return data;
 
     }
 
@@ -106,21 +102,33 @@ public class AppRepository extends AppCompatActivity {
     }
 
 
-    private LiveData<List<Payee>> getAllPayees() {
+    private MutableLiveData<List<Payee>> getAllPayees() {
 
-        return db.payeeDao().getAllPayees();
+        final MutableLiveData<List<Payee>> data = new MutableLiveData<>();
 
-    }
+        data.setValue(db.payeeDao().getAllPayees());
 
-    private LiveData<List<Category>> getAllCategories() {
-
-        return db.categoryDao().getAllCategories();
+        return data;
 
     }
 
-    private LiveData<List<Account>> getAllAccounts() {
+    private MutableLiveData<List<Category>> getAllCategories() {
 
-        return db.accountDao().getAllAccounts();
+        final MutableLiveData<List<Category>> data = new MutableLiveData<>();
+
+        data.setValue(db.categoryDao().getAllCategories());
+
+        return data;
+
+    }
+
+    private MutableLiveData<List<Account>> getAllAccounts() {
+
+        final MutableLiveData<List<Account>> data = new MutableLiveData<>();
+
+        data.setValue(db.accountDao().getAllAccounts());
+
+        return data;
 
     }
 
@@ -319,6 +327,8 @@ public class AppRepository extends AppCompatActivity {
         return db.accountDao().getAccountByName(name);
 
     }
+
+
 }
 
 

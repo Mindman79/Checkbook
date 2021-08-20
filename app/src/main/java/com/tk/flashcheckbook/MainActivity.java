@@ -2,7 +2,6 @@ package com.tk.flashcheckbook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +19,6 @@ import com.tk.flashcheckbook.database.Transaction;
 import com.tk.flashcheckbook.ui.TransactionAdapter;
 import com.tk.flashcheckbook.ui.account.FirstTimeSetup;
 import com.tk.flashcheckbook.util.Globals;
-import com.tk.flashcheckbook.util.MyProperties;
 import com.tk.flashcheckbook.viewmodel.MainViewModel;
 
 import androidx.appcompat.app.ActionBar;
@@ -33,7 +31,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +41,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     Spinner accountSelectSpinner;
 
     Globals sharedData = Globals.getInstance();
+
+    public int accountId = 6;
+
+
 
 
 
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sharedData.setAccountId(accountId);
 
 
                 setContentView(R.layout.activity_main);
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         accountSelectSpinner.setAdapter(adapter);
 
 
+
     }
 
     @OnItemSelected(R.id.account_select_spinner)
@@ -180,7 +182,18 @@ public class MainActivity extends AppCompatActivity {
 
         int acctId = account.getId();
 
-        sharedData.setAccountId(acctId);
+
+
+        if(acctId != accountId) {
+
+            sharedData.setAccountId(acctId);
+
+            accountId = acctId;
+
+            initViewModel();
+
+
+        }
 
 
 
@@ -210,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
             transactionData.addAll(transactions);
 
 
-
             if (transAdapter == null) {
 
                 transAdapter = new TransactionAdapter(transactionData, payeeData, categoryData, MainActivity.this);
@@ -218,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else {
+
 
                 transAdapter.notifyDataSetChanged();
 
@@ -228,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        mainViewModel.transactionsList.observe(this, transactionObserver);
+        mainViewModel.getAllTransactionsByAccountId(accountId).observe(this, transactionObserver);
         mainViewModel.payeesList.observe(this, payeeObserver);
         mainViewModel.categoryList.observe(this, categoryObserver);
 

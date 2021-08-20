@@ -3,6 +3,7 @@ package com.tk.flashcheckbook.database;
 import android.database.Cursor;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -28,7 +29,7 @@ public interface PayeeDao {
     Payee getPayeeById(int id);
 
     @Query("SELECT * FROM `payee`")
-    LiveData<List<Payee>> getAllPayees();
+    List<Payee> getAllPayees();
 
     @Query("DELETE FROM `payee`")
     int deleteAllPayees();

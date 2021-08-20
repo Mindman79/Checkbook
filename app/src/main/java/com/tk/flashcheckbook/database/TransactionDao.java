@@ -1,6 +1,7 @@
 package com.tk.flashcheckbook.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -26,7 +27,7 @@ public interface TransactionDao {
     Transaction getTransactionById(int id);
 
     @Query("SELECT * FROM `transaction` where accountId = :id ORDER BY date DESC")
-    LiveData<List<Transaction>> getAllTransactionsByAccountID(int id);
+    List<Transaction> getAllTransactionsByAccountID(int id);
 
     @Query("SELECT * FROM `transaction` ORDER BY date DESC")
     LiveData<List<Transaction>> getAllTransactions();
