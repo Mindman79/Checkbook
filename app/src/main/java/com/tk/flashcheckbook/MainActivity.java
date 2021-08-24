@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
     @OnClick(R.id.newtransfab)
     void fabClickHandler() {
 
@@ -116,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
         initSpinner();
 
+        initBalances();
+
         if (mainViewModel.getAccountCount() == 0) {
 
             Intent intent = new Intent(this, FirstTimeSetup.class);
@@ -123,12 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        //clearedAmount.invalidate();
-        String balanceAmount = String.valueOf(mainViewModel.getTotalofAllTransactions());
-        String clearedAmount = String.valueOf(mainViewModel.getTotalofClearedTransactions());
 
-        clearedAmountTextView.setText(clearedAmount);
-        balanceAmountTextView.setText(balanceAmount);
+
 
 
         //View Sample data. Actual data displayed is configured below in the initRecyclerView
@@ -151,14 +147,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private void initBalances() {
+
+        String balanceAmount = String.valueOf(mainViewModel.getTotalofAllTransactionsByAccountId(accountId));
+        String clearedAmount = String.valueOf(mainViewModel.getTotalofClearedTransactionsByAccountId(accountId));
+
+        clearedAmountTextView.setText(clearedAmount);
+        balanceAmountTextView.setText(balanceAmount);
+
+
+    }
+
     private void initSpinner() {
 
         String[] accountNames = mainViewModel.getAccountNames();
-
-        String[] arraySpinner = new String[] {
-                "1", "2", "3", "4", "5", "6", "7"
-        };
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountNames);
 
@@ -189,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
             sharedData.setAccountId(acctId);
 
             accountId = acctId;
+
+            initBalances();
 
             initViewModel();
 

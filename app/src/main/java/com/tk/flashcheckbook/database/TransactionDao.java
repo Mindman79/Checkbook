@@ -43,4 +43,10 @@ public interface TransactionDao {
 
     @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction` WHERE cleared = 1")
     BigDecimal getTotalofClearedTransactions();
+
+    @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction` WHERE accountId = :accountId")
+    BigDecimal getTotalofAllTransactionsByAccountId(int accountId);
+
+    @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction` WHERE accountId = :accountId AND cleared = 1")
+    BigDecimal getTotalofAllClearedTransactionsByAccountId(int accountId);
 }

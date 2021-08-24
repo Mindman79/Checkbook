@@ -67,6 +67,14 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    public BigDecimal getTotalofAllTransactionsByAccountId(int accountId){
+
+        return repository.getTotalofAllTransactionsByAccountId(accountId);
+
+    }
+
+
+
     public int getAccountCount() {
 
         return repository.getAccountCount();
@@ -86,5 +94,12 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    public BigDecimal getTotalofClearedTransactionsByAccountId(int accountId) {
 
+
+        return repository.getTotalofAllClearedTransactionsByAccountId(accountId);
+
+
+
+    }
 }

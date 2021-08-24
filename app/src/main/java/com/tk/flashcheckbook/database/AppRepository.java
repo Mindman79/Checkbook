@@ -329,6 +329,18 @@ public class AppRepository extends AppCompatActivity {
     }
 
 
+    public BigDecimal getTotalofAllTransactionsByAccountId(int accountId) {
+
+        return db.transactionDao().getTotalofAllTransactionsByAccountId(accountId);
+
+
+    }
+
+    public BigDecimal getTotalofAllClearedTransactionsByAccountId(int accountId) {
+
+        return db.transactionDao().getTotalofAllClearedTransactionsByAccountId(accountId);
+
+    }
 }
 
 
