@@ -30,6 +30,11 @@
                 app:summaryOff="@string/attachment_summary_off"
                 app:dependency="sync" />
 
+        <EditTextPreference
+                app:key="lastusedaccountname"
+                app:isPreferenceVisible="false"
+                />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

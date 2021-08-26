@@ -2,6 +2,7 @@ package com.tk.flashcheckbook;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,8 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
     Globals sharedData = Globals.getInstance();
 
-    public int accountId = 6;
+    SharedPreferences sharedPrefs;
+    //public static final String MyPREFERENCES = "myprefs";
+    public static final String lastusedaccountname = "lastusedaccount";
 
+
+    public int accountId;
+    public String accountName;
 
 
     @OnClick(R.id.newtransfab)
@@ -85,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedData.setAccountId(accountId);
+
+        sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+
+        accountName = sharedPrefs.getString(lastusedaccountname, "Default Account");
 
 
                 setContentView(R.layout.activity_main);
@@ -160,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSpinner() {
 
+        String acctName = sharedPrefs.getString(lastusedaccountname, getString(R.string.default_account));
+
         String[] accountNames = mainViewModel.getAccountNames();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountNames);
@@ -168,12 +182,28 @@ public class MainActivity extends AppCompatActivity {
 
         accountSelectSpinner.setAdapter(adapter);
 
+        accountSelectSpinner.setSelection(getSpinnerIndex(accountSelectSpinner, acctName));
+
 
 
     }
 
+    private int getSpinnerIndex(Spinner spinner, String myString) {
+
+        int index = 0;
+
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+
+        return index;
+    }
+
     @OnItemSelected(R.id.account_select_spinner)
     public void updateViewUsingSpinner() {
+
 
 
 
@@ -184,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
         int acctId = account.getId();
 
+        String acctName = account.getName();
+
 
 
         if(acctId != accountId) {
@@ -191,6 +223,10 @@ public class MainActivity extends AppCompatActivity {
             sharedData.setAccountId(acctId);
 
             accountId = acctId;
+
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString(lastusedaccountname, acctName);
+            editor.apply();
 
             initBalances();
 
