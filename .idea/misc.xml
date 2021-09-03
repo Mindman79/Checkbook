@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/drawable/ic_baseline_account_balance_24.xml" value="0.39814814814814814" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/account_list_item.xml" value="0.3292806484295846" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/account_spinner.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_account_editor.xml" value="0.23328267477203649" />
@@ -10,7 +11,7 @@
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_main.xml" value="0.3485309017223911" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/activity_transaction_editor.xml" value="0.1480978260869565" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/app_bar_main.xml" value="0.21422101449275363" />
-        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_account_editor.xml" value="0.3292806484295846" />
+        <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_account_editor.xml" value="0.4" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_first_time_setup.xml" value="0.31476449275362317" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/mindm/OneDrive/Projects/Programs/Android/FlashCheckbook/app/src/main/res/layout/content_transaction_editor.xml" value="0.1480978260869565" />
