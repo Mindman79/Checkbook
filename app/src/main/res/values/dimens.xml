@@ -15,4 +15,6 @@
     <dimen name="constraint_layout_margin">10dp</dimen>
     <dimen name="image_layout_marginTop">11dp</dimen>
     <dimen name="image_layout_marginRight">4dp</dimen>
+    <dimen name="TextView_sub_textSize">12sp</dimen>
+    <dimen name="TextView_sub_left_margin">8dp</dimen>
 </resources>

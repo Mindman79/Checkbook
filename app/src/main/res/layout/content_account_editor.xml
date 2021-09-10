@@ -22,6 +22,7 @@
             app:layout_constraintLeft_toRightOf="@id/icon_account_name"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/text_layout_marginTop"
+            app:backgroundTint="@color/black"
 
 
 
@@ -39,6 +40,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:focusable="true"
             android:layout_marginTop="17dp"
+            app:backgroundTint="@color/black"
 
             />
 
@@ -54,7 +56,9 @@
             app:layout_constraintLeft_toRightOf="@id/icon_account_starting_balance"
             app:layout_constraintRight_toRightOf="parent"
             android:focusable="true"
-            android:layout_marginTop="@dimen/text_layout_marginTop" />
+            android:layout_marginTop="@dimen/text_layout_marginTop"
+            app:backgroundTint="@color/black"
+            />
 
     <Button
             android:text="@string/save_and_begin"
@@ -119,6 +123,43 @@
 
             />
 
+
+
+    <TextView
+            android:text="@string/account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_account_name"
+            android:layout_marginLeft="@dimen/TextView_sub_left_margin"
+            app:layout_constraintTop_toBottomOf="@+id/account_detail_name"
+            app:layout_constraintLeft_toRightOf="@+id/icon_account_name"
+            android:textSize="@dimen/TextView_sub_textSize"
+            android:textColor="@color/design_default_color_primary"
+            />
+
+    <TextView
+            android:text="@string/account_starting_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_account_starting_date"
+            android:layout_marginLeft="@dimen/TextView_sub_left_margin"
+            app:layout_constraintTop_toBottomOf="@+id/account_detail_starting_date"
+            app:layout_constraintLeft_toRightOf="@+id/icon_account_starting_date"
+            android:textSize="@dimen/TextView_sub_textSize"
+            android:textColor="@color/design_default_color_primary"
+            />
+
+    <TextView
+            android:text="@string/account_starting_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_account_starting_balance"
+            android:layout_marginLeft="@dimen/TextView_sub_left_margin"
+            app:layout_constraintTop_toBottomOf="@+id/account_detail_starting_balance"
+            app:layout_constraintLeft_toRightOf="@+id/icon_account_starting_date"
+            android:textSize="@dimen/TextView_sub_textSize"
+            android:textColor="@color/design_default_color_primary"
+            />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

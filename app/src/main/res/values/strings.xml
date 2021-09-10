@@ -107,7 +107,7 @@
     <string name="edit_transaction">Edit Transaction</string>
     <string name="enter_amount">Enter amount</string>
     <string name="enter_date">Enter date</string>
-    <string name="delete_transaction">Delete Transaction</string>
+    <string name="delete_account">Delete Transaction</string>
 
     <string-array name="countries_array">
         <item>Afghanistan</item>
@@ -155,4 +155,7 @@
     <string name="selected_account_id">selected_account_id</string>
     <string name="preference_file_key">preference_file_key</string>
     <string name="default_account">Default Account</string>
+    <string name="account_name">Account Name</string>
+    <string name="account_starting_date">Account Starting Date</string>
+    <string name="account_starting_balance">Account Starting Balance</string>
 </resources>

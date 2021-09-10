@@ -8,11 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.tk.flashcheckbook.MainActivity;
 import com.tk.flashcheckbook.R;
-import com.tk.flashcheckbook.TransactionEditorActivity;
-import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.util.Formatters;
 import com.tk.flashcheckbook.viewmodel.AccountEditorViewModel;
-import com.tk.flashcheckbook.viewmodel.TransactionEditorViewModel;
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -39,16 +32,12 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 import butterknife.Optional;
 
 import static com.tk.flashcheckbook.util.Constants.ACCOUNT_ID_KEY;
-import static com.tk.flashcheckbook.util.Constants.CATEGORY_ID_KEY;
 import static com.tk.flashcheckbook.util.Constants.EDITING_KEY;
-import static com.tk.flashcheckbook.util.Constants.PAYEE_ID_KEY;
-import static com.tk.flashcheckbook.util.Constants.TRANSACTION_ID_KEY;
 
 public class AccountEditorActivity extends AppCompatActivity {
 
@@ -220,7 +209,7 @@ public class AccountEditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        } else if(item.getItemId() == R.id.action_delete) {
+        } else if(item.getItemId() == R.id.action_delete_account) {
 
             accountViewModel.deleteAccount();
             finish();
@@ -229,6 +218,8 @@ public class AccountEditorActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
 
 
+
+            //TODO: Fix bug with account deletion not refreshing the RecyclerView
 
 
         }
