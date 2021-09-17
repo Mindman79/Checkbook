@@ -102,7 +102,7 @@ public class AppRepository extends AppCompatActivity {
     }
 
 
-    private MutableLiveData<List<Payee>> getAllPayees() {
+    public MutableLiveData<List<Payee>> getAllPayees() {
 
         final MutableLiveData<List<Payee>> data = new MutableLiveData<>();
 

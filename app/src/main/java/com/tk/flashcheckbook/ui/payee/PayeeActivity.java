@@ -104,7 +104,7 @@ public class PayeeActivity extends AppCompatActivity {
         };
 
         payeeViewModel = new ViewModelProvider(this).get(PayeeViewModel.class);
-        payeeViewModel.payeeList.observe(this, payeeObserver);
+        payeeViewModel.getAllPayees().observe(this, payeeObserver);
 
 
 
