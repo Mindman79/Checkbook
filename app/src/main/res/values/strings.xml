@@ -158,4 +158,12 @@
     <string name="account_name">Account Name</string>
     <string name="account_starting_date">Account Starting Date</string>
     <string name="account_starting_balance">Account Starting Balance</string>
+    <string name="enter_payee_name">Enter payee name</string>
+    <string name="new_payee">New Payee</string>
+    <string name="edit_payee">Edit Payee</string>
+    <string name="delete_payee">Delete Payee</string>
+    <string name="payee_name">Payee</string>
+    <string name="nav_payees">Payees</string>
+    <string name="title_payee_activity">Payees</string>
+    <string name="title_payee_editor">Edit Payee</string>
 </resources>

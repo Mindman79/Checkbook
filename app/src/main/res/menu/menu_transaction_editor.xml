@@ -9,7 +9,7 @@
             app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_delete_account"
+        android:id="@+id/action_delete_payee"
         android:title="@string/delete_account"
         android:orderInCategory="100"
         android:icon="@drawable/ic_menu_gallery"

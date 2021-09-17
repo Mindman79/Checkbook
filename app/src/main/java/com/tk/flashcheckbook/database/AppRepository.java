@@ -341,6 +341,20 @@ public class AppRepository extends AppCompatActivity {
         return db.transactionDao().getTotalofAllClearedTransactionsByAccountId(accountId);
 
     }
+
+    public void deletePayee(Payee value) {
+
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                db.payeeDao().deletePayee(value);
+
+            }
+        });
+
+    }
 }
 
 

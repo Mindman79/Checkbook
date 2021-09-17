@@ -209,7 +209,7 @@ public class AccountEditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        } else if(item.getItemId() == R.id.action_delete_account) {
+        } else if(item.getItemId() == R.id.action_delete_payee) {
 
             accountViewModel.deleteAccount();
             finish();

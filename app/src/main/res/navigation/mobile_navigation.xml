@@ -12,14 +12,23 @@
             tools:layout="@layout/fragment_home" />
 
     <fragment
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_accounts"
             android:name="com.tk.flashcheckbook.ui.account.AccountFragment"
             android:label="@string/menu_account"
-            tools:layout="@layout/fragment_gallery" />
+            tools:layout="@layout/fragment_accounts" />
 
     <fragment
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_payees"
+            android:name="com.tk.flashcheckbook.ui.payee.PayeeFragment"
+            android:label="@string/nav_payees"
+            tools:layout="@layout/fragment_payees" />
+
+
+    <fragment
+            android:id="@+id/nav_settings"
             android:name="com.tk.flashcheckbook.ui.settings.SettingsFragment"
             android:label="@string/menu_settings"
             tools:layout="@layout/fragment_settings" />
+
+
 </navigation>

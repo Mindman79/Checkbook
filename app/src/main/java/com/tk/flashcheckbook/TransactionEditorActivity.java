@@ -387,7 +387,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        } else if(item.getItemId() == R.id.action_delete_account) {
+        } else if(item.getItemId() == R.id.action_delete_payee) {
 
             transViewModel.deleteTransaction();
             finish();

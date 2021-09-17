@@ -17,6 +17,18 @@
                 android:name=".ui.account.AccountActivity"
                 android:label="@string/title_activity_account"
                 android:theme="@style/Theme.FlashCheckbook.NoActionBar" />
+
+        <activity
+                android:name=".ui.payee.PayeeActivity"
+                android:label="@string/title_payee_activity"
+                android:theme="@style/Theme.FlashCheckbook.NoActionBar" />
+
+        <activity
+                android:name=".ui.payee.PayeeEditorActivity"
+                android:label="@string/title_payee_editor"
+                android:theme="@style/Theme.FlashCheckbook.NoActionBar" />
+
+
         <activity
                 android:name=".ui.account.AccountEditorActivity"
                 android:label="@string/title_activity_account_editor"
