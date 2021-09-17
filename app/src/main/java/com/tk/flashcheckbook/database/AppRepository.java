@@ -122,7 +122,7 @@ public class AppRepository extends AppCompatActivity {
 
     }
 
-    private MutableLiveData<List<Account>> getAllAccounts() {
+    public MutableLiveData<List<Account>> getAllAccounts() {
 
         final MutableLiveData<List<Account>> data = new MutableLiveData<>();
 

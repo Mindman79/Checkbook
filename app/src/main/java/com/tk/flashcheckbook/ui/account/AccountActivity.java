@@ -103,7 +103,7 @@ public class AccountActivity extends AppCompatActivity {
         };
 
         accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-        accountViewModel.accountList.observe(this, accountObserver);
+        accountViewModel.getAllAccounts().observe(this, accountObserver);
 
 
 
