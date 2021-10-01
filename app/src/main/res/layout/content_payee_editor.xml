@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_account_editor"
+        tools:showIn="@layout/activity_payee_editor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/constraint_layout_margin"
@@ -37,14 +37,13 @@
             app:layout_constraintTop_toBottomOf="@+id/icon_payee_name"
             android:layout_marginTop="@dimen/image_layout_marginTop"
             android:layout_marginRight="@dimen/image_layout_marginRight"
-
             app:tint="@color/design_default_color_primary"
 
             />
 
 
     <TextView
-            android:text="Payee Name"
+            android:text="@string/payee_editor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview_payee_name"
@@ -54,6 +53,49 @@
             android:textSize="@dimen/TextView_sub_textSize"
             android:textColor="@color/design_default_color_primary"
             />
+
+
+    <EditText
+            android:layout_width="@dimen/text_layout_width"
+            android:layout_height="@dimen/text_layout_height"
+            android:id="@+id/payee_detail_default_category"
+            android:hint="@string/enter_or_select_default_category_for_payee"
+            app:layout_constraintLeft_toRightOf="@id/icon_payee_category"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/payee_detail_name"
+            android:layout_marginTop="@dimen/text_layout_marginTop"
+            app:backgroundTint="@color/black"
+
+            />
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_account_balance_24"
+            android:id="@+id/icon_payee_category"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/payee_detail_default_category"
+            app:layout_constraintTop_toTopOf="@id/payee_detail_default_category"
+            app:layout_constraintTop_toBottomOf="@+id/icon_payee_name"
+            android:layout_marginTop="@dimen/image_layout_marginTop"
+            android:layout_marginRight="@dimen/image_layout_marginRight"
+            app:tint="@color/design_default_color_primary"
+
+            />
+
+
+    <TextView
+            android:text="@string/default_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_payee_default_category"
+            android:layout_marginLeft="@dimen/TextView_sub_left_margin"
+            app:layout_constraintTop_toBottomOf="@+id/payee_detail_default_category"
+            app:layout_constraintLeft_toRightOf="@+id/icon_payee_category"
+            android:textSize="@dimen/TextView_sub_textSize"
+            android:textColor="@color/design_default_color_primary"
+            />
+
 
 
 

@@ -166,4 +166,7 @@
     <string name="nav_payees">Payees</string>
     <string name="title_payee_activity">Payees</string>
     <string name="title_payee_editor">Edit Payee</string>
+    <string name="enter_or_select_default_category_for_payee">Enter or select default category for payee</string>
+    <string name="default_category">Default Category</string>
+    <string name="payee_editor_name">Payee Name</string>
 </resources>
