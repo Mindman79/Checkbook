@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.tk.flashcheckbook.MainActivity;
 import com.tk.flashcheckbook.R;
+import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.viewmodel.PayeeEditorViewModel;
 
 import java.text.ParseException;
@@ -31,6 +32,9 @@ public class PayeeEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.payee_detail_name)
     TextView payeeName;
+
+    @BindView(R.id.payee_detail_default_category)
+    TextView payeeDefaultCategory;
 
 
 
@@ -80,15 +84,20 @@ public class PayeeEditorActivity extends AppCompatActivity {
         payeeEditorViewModel.livePayee.observe(this, payee -> {
 
 
+            Category category = payeeEditorViewModel.getCategoryById(payee.getCategoryId());
+
+            String categoryName = category.getName();
 
             if (payee != null && isEditing == true) {
 
                 payeeName.setText(payeeName.getText());
+                payeeDefaultCategory.setText(payeeDefaultCategory.getText());
 
 
             } else {
 
                 payeeName.setText(payee.getName());
+                payeeDefaultCategory.setText(categoryName);
 
 
             }
@@ -189,8 +198,6 @@ public class PayeeEditorActivity extends AppCompatActivity {
 
         name = payeeName.getText().toString();
 
-
-        //TODO: Resume here 9/15
 
         if (!name.isEmpty()) {
 

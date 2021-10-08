@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.tk.flashcheckbook.database.Account;
 import com.tk.flashcheckbook.database.AppRepository;
+import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 
 import java.math.BigDecimal;
@@ -96,7 +97,9 @@ public class PayeeEditorViewModel extends AndroidViewModel {
     }
 
 
+    public Category getCategoryById(int categoryId) {
 
+        return repository.getCategoryById(categoryId);
 
-
+    }
 }
