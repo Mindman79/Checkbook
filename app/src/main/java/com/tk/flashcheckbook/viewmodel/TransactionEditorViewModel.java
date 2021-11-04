@@ -28,9 +28,9 @@ import static java.lang.Integer.valueOf;
 public class TransactionEditorViewModel extends AndroidViewModel {
 
 
-    public MutableLiveData<Transaction> liveTransaction = new MediatorLiveData<>();
-    public MutableLiveData<Payee> livePayee = new MediatorLiveData<>();
-    public MutableLiveData<Category> liveCategory = new MediatorLiveData<>();
+    public MutableLiveData<Transaction> liveTransaction = new MutableLiveData<>();
+    public MutableLiveData<Payee> livePayee = new MutableLiveData<>();
+    public MutableLiveData<Category> liveCategory = new MutableLiveData<>();
 
     //public MutableLiveData<String> payeeNameQueryLiveData = new MediatorLiveData<>();
 
@@ -84,7 +84,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     //Convert strings to appropriate Entity types in this method
 
 
-    public void saveTransaction(Integer accountId, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
+    public void saveTransaction(Integer accountId, String payee, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
 
 
         Transaction transaction = liveTransaction.getValue();
@@ -137,6 +137,21 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         } else {
 
 
+            int initialPayeeID = transaction.getPayeeId();
+            int checkedPayeeID = repository.getPayeeIDByName(payee);
+
+            if (checkedPayeeID != initialPayeeID) {
+
+
+                transaction.setPayeeId(checkedPayeeID);
+
+
+            } else {
+
+                transaction.setPayeeId(transaction.getPayeeId());
+
+            }
+
             //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
@@ -185,8 +200,27 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         } else {
 
-            payee.setName(payee.getName());
-            payee.setId(payee.getId());
+
+            int initialPayeeID = payee.getId();
+            int checkedPayeeID = repository.getPayeeIDByName(name);
+
+                if (checkedPayeeID != initialPayeeID) {
+
+
+                    payee.setId(checkedPayeeID);
+
+
+                } else {
+
+                    payee.setId(payee.getId());
+
+
+
+
+                }
+
+            payee.setName(name);
+            //payee.setId(checkedPayeeID);
             payee.setCategoryId(payee.getCategoryId());
 
 

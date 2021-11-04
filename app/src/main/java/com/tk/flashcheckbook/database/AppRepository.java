@@ -342,6 +342,17 @@ public class AppRepository extends AppCompatActivity {
 
     }
 
+
+    public int getPayeeIDByName(String name) {
+
+        String searchString = "%" + name + "%";
+
+        return db.payeeDao().getPayeeIDByName(searchString);
+
+    }
+
+
+
     public void deletePayee(Payee value) {
 
 

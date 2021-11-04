@@ -46,5 +46,9 @@ public interface PayeeDao {
     @Query("SELECT categoryId FROM `payee` WHERE name = :name")
     int getAssociatedCategoryIDByPayeeName(String name);
 
+    @Query("SELECT id FROM `payee` WHERE name LIKE :name")
+    int getPayeeIDByName(String name);
+
+
 
 }

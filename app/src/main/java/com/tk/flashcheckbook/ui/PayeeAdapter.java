@@ -64,8 +64,6 @@ public class PayeeAdapter extends RecyclerView.Adapter<PayeeAdapter.ViewHolder> 
 
                 Intent intent = new Intent(context, PayeeEditorActivity.class);
 
-               //TODO: Resume here
-
                 intent.putExtra(PAYEE_ID_KEY, payee.getId());
 
                 context.startActivity(intent);

@@ -467,7 +467,7 @@ public class TransactionEditorActivity extends AppCompatActivity {
         if (number.length() <= 10) {
 
 
-            transViewModel.saveTransaction(acctId, amount, note, date, number, cleared);
+            transViewModel.saveTransaction(acctId, payee, amount, note, date, number, cleared);
             transViewModel.savePayee(payee);
             transViewModel.saveCategory(category);
 

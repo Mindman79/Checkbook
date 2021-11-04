@@ -82,8 +82,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
 
                 Intent intent = new Intent(tContext, com.tk.flashcheckbook.ui.account.AccountEditorActivity.class);
 
-               //TODO: Resume here
-
                 intent.putExtra(ACCOUNT_ID_KEY, account.getId());
 
                 tContext.startActivity(intent);
