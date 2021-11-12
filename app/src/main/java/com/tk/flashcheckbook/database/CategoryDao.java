@@ -52,4 +52,6 @@ public interface CategoryDao {
     @Query("SELECT name FROM `category` WHERE name LIKE :name")
     String[] getAllCategoriesByName(String name);
 
+    @Query("SELECT id FROM `category` WHERE name LIKE :name")
+    int getCategoryIDByName(String name);
 }

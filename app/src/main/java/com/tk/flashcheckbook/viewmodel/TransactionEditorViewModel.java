@@ -84,7 +84,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     //Convert strings to appropriate Entity types in this method
 
 
-    public void saveTransaction(Integer accountId, String payee, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
+    public void saveTransaction(Integer accountId, String payee, String category, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
+
+        int payeeId = savePayee(payee);
+        int categoryId = saveCategory(category);
 
 
         Transaction transaction = liveTransaction.getValue();
@@ -100,31 +103,14 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             transaction = new Transaction();
 
-            getNextIDs();
-
-            //Handle PayeeID and CategoryID increases, if not 0
-//            if (payeeId == 0) {
-//                payeeId = 0;
-//            } else {
-//                payeeId = payeeId + 1;
-//            }
-//
-//            if (categoryId == 0) {
-//                categoryId = 0;
-//
-//            } else {
-//                categoryId = categoryId + 1;
-//            }
-
-            //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
             transaction.setAccountId(accountId);
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());
-            transaction.setPayeeId(globalpayeeId + 1);
-            transaction.setCategoryId(globalcategoryId + 1);
+            transaction.setPayeeId(payeeId);
+            transaction.setCategoryId(categoryId);
             transaction.setNumber(number.trim());
             transaction.setNote(note.trim());
             transaction.setCleared(cleared);
@@ -137,21 +123,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         } else {
 
 
-            int initialPayeeID = transaction.getPayeeId();
-            int checkedPayeeID = repository.getPayeeIDByName(payee);
-
-            if (checkedPayeeID != initialPayeeID) {
-
-
-                transaction.setPayeeId(checkedPayeeID);
-
-
-            } else {
-
-                transaction.setPayeeId(transaction.getPayeeId());
-
-            }
-
             //Integer numberToDB = Integer.parseInt(number);
             BigDecimal amountToDB = new BigDecimal(amount);
 
@@ -159,8 +130,8 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             transaction.setAmount(amountToDB);
             transaction.setDate(date);
             //transaction.setClearedDate(transaction.getClearedDate());
-            transaction.setPayeeId(transaction.getPayeeId());
-            transaction.setCategoryId(transaction.getCategoryId());
+            transaction.setPayeeId(payeeId);
+            transaction.setCategoryId(categoryId);
             transaction.setNumber(number.trim());
             transaction.setNote(note.trim());
             transaction.setCleared(cleared);
@@ -171,8 +142,13 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
     }
 
-    public void savePayee(String name) {
+    public int savePayee(String name) {
 
+        globalpayeeId = repository.getNextAutoIncrementPayeeID();
+        globalcategoryId = repository.getNextAutoIncrementCategoryID();
+
+
+        int payeeId = 0;
 
         Payee payee = livePayee.getValue();
 
@@ -180,61 +156,72 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         if (payee == null) {
 
             payee = new Payee();
-//
-//            if (payeeId == 0) {
-//                payeeId = 0;
-//            } else {
-//                payeeId = payeeId + 1;
-//            }
-
-//            if (categoryId == 0) {
-//                categoryId = 0;
-//            } else {
-//                categoryId = categoryId + 1;
-//            }
-
 
             payee.setName(name);
             payee.setId(globalpayeeId + 1);
             payee.setCategoryId(globalcategoryId + 1);
 
-        } else {
+            payeeId = globalpayeeId + 1;
 
+        } else {
 
             int initialPayeeID = payee.getId();
             int checkedPayeeID = repository.getPayeeIDByName(name);
 
-                if (checkedPayeeID != initialPayeeID) {
+            //New payee
+            if (checkedPayeeID == 0) {
+
+                payee.setName(name);
+                payee.setId(globalpayeeId + 1);
+                payee.setCategoryId(payee.getCategoryId());
+
+                payeeId = globalpayeeId + 1;
+
+            //Exiting payee, but different from initial one
+            } else if (initialPayeeID != checkedPayeeID) {
+
+                payee.setName(name);
+                payee.setId(checkedPayeeID);
+                payee.setCategoryId(payee.getCategoryId());
+
+                payeeId = checkedPayeeID;
 
 
-                    payee.setId(checkedPayeeID);
+            //Same payee
+            } else {
+
+                payee.setName(name);
+                payee.setId(initialPayeeID);
+                payee.setCategoryId(payee.getCategoryId());
+
+                payeeId = initialPayeeID;
+
+            }
 
 
-                } else {
-
-                    payee.setId(payee.getId());
 
 
-
-
-                }
-
-            payee.setName(name);
-            //payee.setId(checkedPayeeID);
-            payee.setCategoryId(payee.getCategoryId());
 
 
         }
 
+
         repository.insertPayee(payee);
+
+        return payeeId;
+
 
     }
 
 
-    public void saveCategory(String name) {
 
 
+    public int saveCategory(String name) {
 
+
+        globalcategoryId = repository.getNextAutoIncrementCategoryID();
+
+        int categoryId = 0;
 
         Category category = liveCategory.getValue();
 
@@ -242,31 +229,40 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         if (category == null) {
 
             category = new Category();
-//
-//            if (categoryId == 0) {
-//
-//                categoryId = 0;
-//            } else {
-//
-//                categoryId = categoryId + 1;
-//            }
+
 
             category.setName(name);
             category.setId(globalcategoryId + 1);
-
-            //TODO: Fix category and payee saving bug here
+            categoryId = globalcategoryId + 1;
 
         } else {
 
-            category.setName(category.getName());
-            category.setId(category.getId());
+            int initialCategoryID = category.getId();
+            int checkedCategoryID = repository.getCategoryIDByName(name);
 
+
+
+            if (initialCategoryID != checkedCategoryID) {
+                category.setName(name);
+                category.setId(checkedCategoryID);
+                categoryId = checkedCategoryID;
+
+            } else {
+
+
+                category.setName(name);
+                category.setId(initialCategoryID);
+                categoryId = initialCategoryID;
+
+
+            }
 
         }
 
 
         repository.insertCategory(category);
 
+        return categoryId;
 
     }
 
@@ -308,7 +304,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         String[] list;
 
         list = repository.getAllCategoriesByName(name);
-
 
         return list;
     }

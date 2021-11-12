@@ -366,6 +366,14 @@ public class AppRepository extends AppCompatActivity {
         });
 
     }
+
+    public int getCategoryIDByName(String name) {
+
+        String searchString = "%" + name + "%";
+
+        return db.categoryDao().getCategoryIDByName(searchString);
+
+    }
 }
 
 
