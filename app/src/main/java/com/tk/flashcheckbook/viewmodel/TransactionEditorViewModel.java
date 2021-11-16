@@ -38,8 +38,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     private AppRepository repository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    static int globalcategoryId;
-    static int globalpayeeId;
+
 
 
 
@@ -71,17 +70,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     }
 
 
-    public void getNextIDs() {
-
-
-        globalpayeeId = repository.getNextAutoIncrementPayeeID();
-
-
-        globalcategoryId = repository.getNextAutoIncrementCategoryID();
-
-    }
-
-    //Convert strings to appropriate Entity types in this method
 
 
     public void saveTransaction(Integer accountId, String payee, String category, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
@@ -144,8 +132,11 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
     public int savePayee(String name) {
 
-        globalpayeeId = repository.getNextAutoIncrementPayeeID();
-        globalcategoryId = repository.getNextAutoIncrementCategoryID();
+
+        //TODO: Fix multiple instances of Payee screen being opened when clicking it more than once
+        int globalcategoryId = repository.getNextAutoIncrementCategoryID();
+        int globalpayeeId = repository.getNextAutoIncrementPayeeID();
+
 
 
         int payeeId = 0;
@@ -199,10 +190,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             }
 
 
-
-
-
-
         }
 
 
@@ -219,7 +206,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
     public int saveCategory(String name) {
 
 
-        globalcategoryId = repository.getNextAutoIncrementCategoryID();
+        int globalcategoryId = repository.getNextAutoIncrementCategoryID();
 
         int categoryId = 0;
 
@@ -230,7 +217,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             category = new Category();
 
-
             category.setName(name);
             category.setId(globalcategoryId + 1);
             categoryId = globalcategoryId + 1;
@@ -240,20 +226,28 @@ public class TransactionEditorViewModel extends AndroidViewModel {
             int initialCategoryID = category.getId();
             int checkedCategoryID = repository.getCategoryIDByName(name);
 
+            //New category
+            if (checkedCategoryID == 0) {
 
+                category.setName(name);
+                category.setId(globalcategoryId + 1);
 
-            if (initialCategoryID != checkedCategoryID) {
+                categoryId = globalcategoryId + 1;
+
+                //Exiting category, but different from initial one
+            } else if (initialCategoryID != checkedCategoryID) {
                 category.setName(name);
                 category.setId(checkedCategoryID);
+
                 categoryId = checkedCategoryID;
 
+            //Same category
             } else {
-
 
                 category.setName(name);
                 category.setId(initialCategoryID);
-                categoryId = initialCategoryID;
 
+                categoryId = initialCategoryID;
 
             }
 
