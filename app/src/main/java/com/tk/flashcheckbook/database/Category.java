@@ -5,7 +5,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "category", foreignKeys = @ForeignKey(entity = Payee.class, parentColumns = "id", childColumns = "id"))
+@Entity(tableName = "category")
 
 public class Category {
 

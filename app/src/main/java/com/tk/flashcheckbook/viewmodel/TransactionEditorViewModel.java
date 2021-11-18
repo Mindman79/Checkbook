@@ -5,21 +5,16 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.tk.flashcheckbook.database.AppRepository;
 import com.tk.flashcheckbook.database.Category;
 import com.tk.flashcheckbook.database.Payee;
 import com.tk.flashcheckbook.database.Transaction;
-import com.tk.flashcheckbook.database.TransactionDao;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.text.ParseException;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -74,8 +69,10 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
     public void saveTransaction(Integer accountId, String payee, String category, String amount, String note, Date date, String number, Integer cleared) throws ParseException {
 
-        int payeeId = savePayee(payee);
-        int categoryId = saveCategory(category);
+        int[] payeeIDAndCategoryID = savePayeeAndAssocCategory(payee, category);
+
+        int payeeId = payeeIDAndCategoryID[0];
+        int categoryId = payeeIDAndCategoryID[1];
 
 
         Transaction transaction = liveTransaction.getValue();
@@ -130,16 +127,17 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
     }
 
-    public int savePayee(String name) {
+    public int[] savePayeeAndAssocCategory(String payeeName, String categoryName) {
 
 
         //TODO: Fix multiple instances of Payee screen being opened when clicking it more than once
-        int globalcategoryId = repository.getNextAutoIncrementCategoryID();
+        int globalcategoryId = saveCategory(categoryName);
         int globalpayeeId = repository.getNextAutoIncrementPayeeID();
 
+        int[] result = {0, 1};
 
+        result[1] = globalcategoryId;
 
-        int payeeId = 0;
 
         Payee payee = livePayee.getValue();
 
@@ -148,44 +146,44 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
             payee = new Payee();
 
-            payee.setName(name);
+            payee.setName(payeeName);
             payee.setId(globalpayeeId + 1);
-            payee.setCategoryId(globalcategoryId + 1);
+            payee.setCategoryId(globalcategoryId);
 
-            payeeId = globalpayeeId + 1;
+            result[0] = globalpayeeId + 1;
 
         } else {
 
             int initialPayeeID = payee.getId();
-            int checkedPayeeID = repository.getPayeeIDByName(name);
+            int checkedPayeeID = repository.getPayeeIDByName(payeeName);
 
             //New payee
             if (checkedPayeeID == 0) {
 
-                payee.setName(name);
+                payee.setName(payeeName);
                 payee.setId(globalpayeeId + 1);
-                payee.setCategoryId(payee.getCategoryId());
+                payee.setCategoryId(globalcategoryId);
 
-                payeeId = globalpayeeId + 1;
+                result[0] = globalpayeeId + 1;
 
             //Exiting payee, but different from initial one
             } else if (initialPayeeID != checkedPayeeID) {
 
-                payee.setName(name);
+                payee.setName(payeeName);
                 payee.setId(checkedPayeeID);
-                payee.setCategoryId(payee.getCategoryId());
+                payee.setCategoryId(globalcategoryId);
 
-                payeeId = checkedPayeeID;
+                result[0] = checkedPayeeID;
 
 
             //Same payee
             } else {
 
-                payee.setName(name);
+                payee.setName(payeeName);
                 payee.setId(initialPayeeID);
-                payee.setCategoryId(payee.getCategoryId());
+                payee.setCategoryId(globalcategoryId);
 
-                payeeId = initialPayeeID;
+                result[0] = initialPayeeID;
 
             }
 
@@ -195,7 +193,7 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         repository.insertPayee(payee);
 
-        return payeeId;
+        return result;
 
 
     }

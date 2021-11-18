@@ -46,7 +46,7 @@ public interface CategoryDao {
     @Query("SELECT last_insert_rowid()")
     int getLastAutoIncrementCategoryID();
 
-    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category' LIMIT 1")
+    @Query("SELECT seq FROM SQLITE_SEQUENCE WHERE name = 'category'")
     int getNextAutoIncrementCategoryID();
 
     @Query("SELECT name FROM `category` WHERE name LIKE :name")
