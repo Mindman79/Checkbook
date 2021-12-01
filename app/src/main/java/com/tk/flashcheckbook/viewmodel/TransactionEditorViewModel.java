@@ -142,6 +142,9 @@ public class TransactionEditorViewModel extends AndroidViewModel {
         Payee payee = livePayee.getValue();
 
 
+        int initialPayeeID = payee.getId();
+        int checkedPayeeID = repository.getPayeeIDByName(payeeName);
+
         if (payee == null) {
 
             payee = new Payee();
@@ -154,8 +157,6 @@ public class TransactionEditorViewModel extends AndroidViewModel {
 
         } else {
 
-            int initialPayeeID = payee.getId();
-            int checkedPayeeID = repository.getPayeeIDByName(payeeName);
 
             //New payee
             if (checkedPayeeID == 0) {
